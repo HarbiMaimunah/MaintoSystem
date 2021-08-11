@@ -1,0 +1,63 @@
+[
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/add-comments.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/edit-building.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/edit-building.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/view-tickets.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/view-tickets.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/view-building.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/view-building.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/view-status.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/view-ticket-status.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  }
+]

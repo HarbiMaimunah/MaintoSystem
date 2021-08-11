@@ -44,5 +44,14 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    section Scripts2 {
+    <script src="~/js/BuildingManager/bundle.min.js"></script>
+    <script src="~/js/BuildingManager/edit-building.bundle.min.js"></script>
+    <script src="~/js/BuildingManager/view-tickets.bundle.min.js"></script>
+    <script src="~/js/BuildingManager/view-building.bundle.min.js"></script>
+    <script src="~/js/BuildingManager/view-status.bundle.min.js"></script>
+    }
+    @RenderSection("Scripts2", required: false)
 </body>
 </html>
