@@ -27,19 +27,9 @@ namespace BeneficiaryPortal.Controllers
             var buildingsList = await ListBuildings();
             var floorsList = await ListFloors();
 
-            List<SelectListItem> buildingsSelectList = new List<SelectListItem>();
-            List<SelectListItem> floorsSelectList = new List<SelectListItem>();
-            foreach (var temp in buildingsList)
-            {
-                buildingsSelectList.Add(new SelectListItem() { Text = temp.Number.ToString(), Value = temp.Id.ToString() });
-            }
-            foreach (var temp in floorsList)
-            {
-                floorsSelectList.Add(new SelectListItem() { Text = temp.Number.ToString(), Value = temp.Id.ToString() });
-            }
-            ViewBag.buildingsList = buildingsSelectList;
-            ViewBag.floorsList = floorsSelectList;
-
+            ViewBag.buildingsList = new SelectList(buildingsList, "Id", "Number");
+            ViewBag.floorsList = new SelectList(floorsList, "Id", "Number");
+                                  
             return View();
         }
 
