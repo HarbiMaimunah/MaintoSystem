@@ -1,0 +1,62 @@
+﻿@model BeneficiaryPortal.Models.BeneficiaryRegistration
+@{
+    ViewData["Title"] = "Sign up";
+}
+
+<h1>Sign Up</h1>
+<p class="text-danger">@TempData["SignupError"]</p>
+@using (Html.BeginForm("Register", "Beneficiary", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-3">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-3">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label class="control-label col-md-2">Building</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(model => model.BuildingNumber, ViewBag.buildingsList as List<SelectListItem>)
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label class="control-label col-md-2">Floor</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(model => model.FloorNumber, ViewBag.floorsList as List<SelectListItem>)
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-3">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-3">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sign up" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+}
