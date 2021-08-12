@@ -13,6 +13,7 @@ namespace BackOfficePortal.Controllers
     public class BuildingManagerController : Controller
     {
         HttpClient client = new HttpClient();
+        public static string baseUrl = "http://localhost:16982/api/BuildingManagerAPI/";
 
 
         public ActionResult AddComments()
@@ -25,8 +26,7 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
-                client.BaseAddress = new Uri("http://localhost:16982/api/");
-                var httpResponse = await client.PostAsJsonAsync("BuildingManagerAPI/AddComments"+ id, comment);
+                var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments/{id}" , comment);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
@@ -46,8 +46,7 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
-                client.BaseAddress = new Uri("http://localhost:16982/api/");
-                var httpResponse = await client.PutAsJsonAsync("BuildingManagerAPI/EditBuilding"+ buildingID,  Updatedbuilding);
+                var httpResponse = await client.PutAsJsonAsync(baseUrl + "EditBuilding" + buildingID,  Updatedbuilding);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
@@ -64,11 +63,12 @@ namespace BackOfficePortal.Controllers
         [HttpGet]
         public async Task<ActionResult> GetTickets()
         {
+            HttpClient client = new HttpClient();
+
             List<Ticket> TicketList = new List<Ticket>();
             using (client)
             {
-                client.BaseAddress = new Uri("http://localhost:16982/api/");
-                var httpResponse = await client.GetAsync("BuildingManagerAPI/ViewTickets");
+                var httpResponse = await client.GetAsync(baseUrl + "ViewTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     TicketList = await httpResponse.Content.ReadAsAsync<List<Ticket>>();
@@ -88,8 +88,7 @@ namespace BackOfficePortal.Controllers
             Building building = new Building();
             using (client)
             {
-                client.BaseAddress = new Uri("http://localhost:16982/api/");
-                var httpResponse = await client.GetAsync("BuildingManagerAPI/ViewBuilding");
+                var httpResponse = await client.GetAsync(baseUrl + "ViewBuilding");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     building = await httpResponse.Content.ReadAsAsync<Building>();
@@ -109,8 +108,7 @@ namespace BackOfficePortal.Controllers
             List<string> StatusList = new List<string>();
             using (client)
             {
-                client.BaseAddress = new Uri("http://localhost:16982/api/");
-                var httpResponse = await client.GetAsync("BuildingManagerAPI/ViewTicketsStatus");
+                var httpResponse = await client.GetAsync(baseUrl + "ViewTicketsStatus");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     StatusList = await httpResponse.Content.ReadAsAsync<List<string>>();

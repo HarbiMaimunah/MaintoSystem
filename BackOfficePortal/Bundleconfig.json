@@ -59,5 +59,39 @@
       "renameLocals": true
     }
 
+  },
+  {
+    "outputFileName": "wwwroot/js/MaintenanceManager/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/MaintenanceManager/respond-to-ticket.js",
+      "wwwroot/js/MaintenanceManager/view-tickets.js",
+      "wwwroot/js/MaintenanceManager/view-ticket.js",
+      "wwwroot/js/MaintenanceManager/view-new-tickets.js",
+      "wwwroot/js/MaintenanceManager/view-workers.js",
+      "wwwroot/js/MaintenanceManager/view-worker.js"
+
+
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/MaintenanceWorker/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/MaintenanceManager/accept-ticket.js",
+      "wwwroot/js/MaintenanceManager/view-tickets.js",
+      "wwwroot/js/MaintenanceManager/view-ticket.js"
+
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
   }
 ]

@@ -1,13 +1,13 @@
 ﻿function ViewTickets() {
-        debugger
+    debugger
 
-        $.ajax({
-            url: 'https://localhost:44370/BuildingManager/GetTickets',
-            type: 'GET',
-            dataType: 'JSON',
-            success: OnSuccess
-        });
-    }
+    $.ajax({
+        url: 'https://localhost:44370/MaintenanceWorker/GetTickets',
+        type: 'GET',
+        dataType: 'JSON',
+        success: OnSuccess
+    });
+}
 
 function OnSuccess(response) {
 

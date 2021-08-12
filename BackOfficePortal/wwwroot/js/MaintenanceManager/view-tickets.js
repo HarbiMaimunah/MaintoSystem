@@ -1,8 +1,9 @@
-﻿function ViewTickets() {
+﻿
+    function ViewTickets() {
         debugger
 
         $.ajax({
-            url: 'https://localhost:44370/BuildingManager/GetTickets',
+            url: 'https://localhost:44370/MaintenanceManager/GetTickets',
             type: 'GET',
             dataType: 'JSON',
             success: OnSuccess
