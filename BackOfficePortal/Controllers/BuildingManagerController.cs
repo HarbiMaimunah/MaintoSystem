@@ -1,4 +1,6 @@
 ﻿using BackOfficePortal.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using BackOfficePortal.ModelsLanguage;
+
 //using System.Web.Mvc;
 
 namespace BackOfficePortal.Controllers
@@ -115,6 +119,17 @@ namespace BackOfficePortal.Controllers
                 }
             }
             return Json(StatusList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+        }
+
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public IActionResult ChangeLanguage(string culture)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
     }

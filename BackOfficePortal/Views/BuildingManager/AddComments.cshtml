@@ -1,19 +1,26 @@
-﻿<h1> Add Comments </h1>
+﻿@using BackOfficePortal.ModelsLanguage;
+@inject LanguageService language
+
+<h1> @language.Getkey("Comments")</h1>
+
 @section Scripts2{
+    <h1 class="display-4">@language.Getkey("Welcome")</h1>
+
     <script src="~/js/BuildingManager/bundle.min.js"></script>
     <body>
-        <label>Ticket ID to add comments:</label>
-        <input type="number" id="updateId" name="updateId" placeholder="Id" />
+        <label>
+            @language.Getkey("EnterId")</label>
+                <input type="number" id="updateId" name="updateId" placeholder= @language.Getkey("Id") />
 
 
-        <label>comments:</label>
-        <input type="text" id="comments" name="comments" placeholder="comments" />
+                <label>@language.Getkey("AddComment")</label>
+                <input type="text" id="comments" name="comments" placeholder=@language.Getkey("Comments") />
 
 
 
-        <button type="button" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" onclick="AddComments()"> Add Comments </button>
-    </body>
+                <button type="button" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" onclick="AddComments()">@language.Getkey("Submit")</button>
+</body>
 
 
-   
+
 }
