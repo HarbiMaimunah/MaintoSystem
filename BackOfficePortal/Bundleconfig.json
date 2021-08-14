@@ -1,0 +1,97 @@
+[
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/add-comments.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/edit-building.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/edit-building.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/view-tickets.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/view-tickets.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/view-building.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/view-building.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/BuildingManager/view-status.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/BuildingManager/view-ticket-status.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/MaintenanceManager/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/MaintenanceManager/respond-to-ticket.js",
+      "wwwroot/js/MaintenanceManager/view-tickets.js",
+      "wwwroot/js/MaintenanceManager/view-ticket.js",
+      "wwwroot/js/MaintenanceManager/view-new-tickets.js",
+      "wwwroot/js/MaintenanceManager/view-workers.js",
+      "wwwroot/js/MaintenanceManager/view-worker.js"
+
+
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/MaintenanceWorker/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/MaintenanceManager/accept-ticket.js",
+      "wwwroot/js/MaintenanceManager/view-tickets.js",
+      "wwwroot/js/MaintenanceManager/view-ticket.js"
+
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  }
+]
