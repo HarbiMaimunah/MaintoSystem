@@ -31,8 +31,7 @@ namespace BackOfficePortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<appsettings>(Configuration.GetSection("MyConfig"));
-            ///////////////////////////////////////
+            /////////////////////////////////////// Change Language /////////////////////////////////////////
             services.AddSingleton<LanguageService>();
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -52,8 +51,6 @@ namespace BackOfficePortal
 
                 });
 
-
-
             services.Configure<RequestLocalizationOptions>(
                 options =>
                 {
@@ -63,8 +60,6 @@ namespace BackOfficePortal
                             new CultureInfo("ar-SA"),
                         };
 
-
-
                     options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
 
                     options.SupportedCultures = supportedCultures;
@@ -72,7 +67,8 @@ namespace BackOfficePortal
                     options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
 
                 });
-            //////////////////////////////////////
+            ////////////////////////////////////// Change Language /////////////////////////////////////////
+            
             services.AddControllersWithViews();
 
         }

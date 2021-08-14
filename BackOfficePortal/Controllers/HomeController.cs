@@ -61,21 +61,6 @@ namespace BackOfficePortal.Controllers
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
-        /*[HttpPost]
-        public ActionResult SaveFile()
-        {
-            string path = Path.Combine(ConfigurationManager.AppSettings["StoragePath"], "Files");
-            if (Request.Files.Count > 0)
-            {
-                HttpFileCollectionBase files = Request.Files;
-                for (int i = 0; i < files.Count; i++)
-                {
-                    HttpPostedFileBase file = files[i];
-                    file.SaveAs(path);
-                }
-            }
-            return View();
-        }*/
         public IActionResult SaveFile()
         {
             return View();

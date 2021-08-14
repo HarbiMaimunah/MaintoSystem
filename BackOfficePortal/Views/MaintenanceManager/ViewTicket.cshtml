@@ -1,9 +1,12 @@
-﻿<h1> View Ticket </h1>
+﻿@using BackOfficePortal.ModelsLanguage;
+@inject LanguageService language
+
+<h1> @language.Getkey("View") @language.Getkey("Ticket")</h1>
 @section Scripts2{
     <script src="~/js/MaintenanceManager/bundle.min.js"></script>
     <body>
 
-        <button type="button" id="btnView" name="btnView" data-name="ViewButton" onclick="ViewTicket()"> View Tickets </button>
+        <button type="button" id="btnView" name="btnView" data-name="ViewButton" onclick="ViewTicket()"> @language.Getkey("View") @language.Getkey("Ticket") </button>
 
         <label id="TicketId" name="TicketId">  </label>
         <label id="BuildingManagerComment" name="BuildingManagerComment">  </label>

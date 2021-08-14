@@ -1,11 +1,14 @@
-﻿<h1> Accept the Ticket </h1>
+﻿@using BackOfficePortal.ModelsLanguage;
+@inject LanguageService language
+
+<h1> @language.Getkey("Accept") @language.Getkey("Ticket")</h1>
 @section Scripts2{
     <script src="~/js/MaintenanceWorker/bundle.min.js"></script>
     <body>
-        <label>Ticket ID:</label>
+        <label>@language.Getkey("Ticket") @language.Getkey("Id"):</label>
         <input type="number" id="TicketId" name="TicketId" placeholder="Id" />
 
-        <button type="button" id="btnPost" name="btnPost" data-name="btnPost" onclick="AcceptTicket()"> Accept the Ticket </button>
+        <button type="button" id="btnPost" name="btnPost" data-name="btnPost" onclick="AcceptTicket()"> @language.Getkey("Accept") @language.Getkey("Ticket") </button>
     </body>
 
 
