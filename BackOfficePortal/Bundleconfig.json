@@ -93,5 +93,18 @@
       "renameLocals": true
     }
 
+  },
+  {
+    "outputFileName": "wwwroot/js/SaveFile.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/upload-file.js"
+
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
   }
 ]

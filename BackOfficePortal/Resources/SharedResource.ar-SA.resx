@@ -120,14 +120,38 @@
   <data name="AddComment" xml:space="preserve">
     <value>من فضلك ادخل توصياتك:</value>
   </data>
+  <data name="Attachment" xml:space="preserve">
+    <value>المرفقات</value>
+  </data>
+  <data name="Building" xml:space="preserve">
+    <value>المبنى</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="CancelationReason" xml:space="preserve">
+    <value>سبب الالغاء</value>
+  </data>
   <data name="Comments" xml:space="preserve">
     <value>توصياتك:</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Discription" xml:space="preserve">
+    <value>الوصف</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>الايميل</value>
   </data>
   <data name="EnterId" xml:space="preserve">
     <value>من فضلك ادخل رقم البطاقه: </value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>الطابق</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>نسيت كلمة المرور؟</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>الصفحة الرئيسية</value>
@@ -138,8 +162,20 @@
   <data name="Login" xml:space="preserve">
     <value>تسجيل دخول</value>
   </data>
+  <data name="MaintenanceType" xml:space="preserve">
+    <value>نوع الصيانة</value>
+  </data>
+  <data name="MyRequests" xml:space="preserve">
+    <value>طلباتي</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>الاسم</value>
+  </data>
+  <data name="NewRequest" xml:space="preserve">
+    <value>طلب صيانة جديد</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة السر</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>الهاتف المحمول</value>
@@ -150,8 +186,20 @@
   <data name="Registration" xml:space="preserve">
     <value>مستخدم جديد</value>
   </data>
+  <data name="Request" xml:space="preserve">
+    <value>طلب</value>
+  </data>
+  <data name="RequestNumber" xml:space="preserve">
+    <value>رقم الطلب</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>حالة الطلب</value>
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>ارسال</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>الوقت</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>مرحبا</value>
