@@ -9,11 +9,15 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using BackOfficePortal.ModelsLanguage;
-
-//using System.Web.Mvc;
+using BackOfficePortal.Filters;
 
 namespace BackOfficePortal.Controllers
 {
+
+    [ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(ActionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
+    [ServiceFilter(typeof(ResultFilter))]
     public class BuildingManagerController : Controller
     {
         HttpClient client = new HttpClient();

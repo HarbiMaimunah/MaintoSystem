@@ -16,20 +16,28 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using FluentAssertions.Common;
+using BackOfficePortal.Filters;
+using Microsoft.Extensions.Configuration;
 
 namespace BackOfficePortal.Controllers
 {
+    [ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(ActionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
+    [ServiceFilter(typeof(ResultFilter))]
     public class HomeController : Controller
     {
 
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _config;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
-           
-        }
+            _config = configuration;
 
+        }
+     
         public IActionResult Index()
         {
             
@@ -68,14 +76,12 @@ namespace BackOfficePortal.Controllers
         [HttpPost]
         public async Task<IActionResult> PostFile(IList<IFormFile> files)
         {
-            
-            // string path = Path.Combine(ConfigurationManager.AppSettings["StoragePath"], "Files");
+            string path = _config.GetValue<string>("StoragePath");
             foreach (var file in files)
             {
-                var filePath = Path.Combine("C:/Users/abc/Desktop/Summer training/MaintenanceManagementSystem/UploudedFiles", file.FileName);
+                var filePath = Path.Combine(path, file.FileName);
                 if (file.Length > 0)
                 {
-                    
                     var stream = new FileStream(filePath, FileMode.Append);
                     await file.CopyToAsync(stream);
                 }

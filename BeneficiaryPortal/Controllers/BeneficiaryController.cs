@@ -1,4 +1,5 @@
-﻿using BeneficiaryPortal.Models;
+﻿using BackOfficePortal.Filters;
+using BeneficiaryPortal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +15,10 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
+    [ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(ActionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
+    [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryController : Controller
     {
         public IActionResult Index()

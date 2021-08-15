@@ -1,4 +1,5 @@
-﻿using BackOfficePortal.Models;
+﻿using BackOfficePortal.Filters;
+using BackOfficePortal.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace BackOfficePortal.Controllers
 {
+    [ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(ActionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
+    [ServiceFilter(typeof(ResultFilter))]
     public class MaintenanceManagerController : Controller
     {
         HttpClient client = new HttpClient();
