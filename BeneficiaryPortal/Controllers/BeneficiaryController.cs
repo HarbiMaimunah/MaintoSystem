@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,14 +23,8 @@ namespace BeneficiaryPortal.Controllers
 
         public static string baseUrl = "http://localhost:16982/api/BeneficiaryEntry/";
 
-        public async Task<IActionResult> Signup()
-        {
-            var buildingsList = await ListBuildings();
-            var floorsList = await ListFloors();
-
-            ViewBag.buildingsList = new SelectList(buildingsList, "Id", "Number");
-            ViewBag.floorsList = new SelectList(floorsList, "Id", "Number");
-                                  
+        public IActionResult Signup()
+        {               
             return View();
         }
 
@@ -112,10 +107,10 @@ namespace BeneficiaryPortal.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Floor>> ListFloors()
+        public async Task<List<Floor>> ListFloors(int buildingID)
         {
             var accessToken = HttpContext.Session.GetString("Token");
-            var url = baseUrl + "ListFloors";
+            var url = baseUrl + "ListFloors/" + buildingID.ToString();
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             string jsonStr = await client.GetStringAsync(url);
@@ -123,12 +118,12 @@ namespace BeneficiaryPortal.Controllers
             return res;
         }
 
-        /*public IActionResult NewTicket()
+        public IActionResult NewTicket()
         {
             return View();
         }
 
-        public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
+        /*public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
         {
             using (var httpClient = new HttpClient())
             {

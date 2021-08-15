@@ -30,5 +30,9 @@ namespace BeneficiaryPortal.Models
 
         [Required]
         public char FloorNumber { get; set; }
+
+        public List<Building> Buildings { get; set; }
+
+        public List<Floor> Floors { get; set; }
     }
 }

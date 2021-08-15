@@ -1,0 +1,38 @@
+﻿@model MaintenanceManagementSystem.MVC.Models.NewTicket
+@{
+    ViewData["Title"] = "New Ticket";
+}
+<div id="newRequestPage">
+
+    <form asp-controller="Beneficiary" method="post" enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h2>New Request</h2>
+            <hr />
+            <p class="text-danger">@TempData["NewTicketError"]</p>
+            <p class="text-success">@TempData["NewTicketConfirmation"]</p>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ticket.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.TextAreaFor(model => model.Ticket.Description, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control col-md-5", @accept = "image/*" } })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" value="Request" formaction="RequestNewTicket" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>
