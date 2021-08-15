@@ -32,4 +32,8 @@
     <None Include="wwwroot\images\padlock.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BackOfficePortal\BackOfficePortal.csproj" />
+  </ItemGroup>
+
 </Project>
