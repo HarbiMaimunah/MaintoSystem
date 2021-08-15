@@ -1,0 +1,25 @@
+﻿@using BackOfficePortal.ModelsLanguage;
+@inject LanguageService language
+
+<h1> @language.Getkey("Respond")@language.Getkey("To")@language.Getkey("Ticket")</h1>
+@section Scripts2{
+    <script src="~/js/MaintenanceManager/bundle.min.js"></script>
+    <body>
+        <label>@language.Getkey("Ticket")@language.Getkey("Id"):</label>
+        <input type="number" id="TicketId" name="TicketId" placeholder=@language.Getkey("Id") />
+
+        <label>@language.Getkey("Status")</label>
+        <select name="Status" id="Status">
+            <option value="Pending">@language.Getkey("Pending")</option>
+            <option value="Rejected">@language.Getkey("Rejected")</option>
+        </select>
+
+        <label>@language.Getkey("Reason")</label>
+        <input type="text" id="reason" name="reason" placeholder=@language.Getkey("Reason") />
+
+        <button type="button" id="btnPost" name="btnPost" data-name="btnPost" onclick="RespondToTicket()"> @language.Getkey("Submit") </button>
+    </body>
+
+
+
+}

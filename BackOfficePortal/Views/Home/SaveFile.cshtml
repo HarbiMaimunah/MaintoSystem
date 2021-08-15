@@ -1,0 +1,10 @@
+﻿@using BackOfficePortal.ModelsLanguage;
+@inject LanguageService language
+
+
+@section Scripts2{
+    <script src="~/js/SaveFile.bundle.min.js"></script>
+    <input type="file" id="File" name="File" />
+    <button type="button" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" onclick="UploadFile()">@language.Getkey("Submit")</button>
+
+}

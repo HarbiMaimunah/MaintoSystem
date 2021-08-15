@@ -1,0 +1,22 @@
+﻿@using BackOfficePortal.ModelsLanguage;
+@inject LanguageService language
+
+
+<h1> @language.Getkey("EditBuilding ")</h1>
+@section Scripts2{
+    <script src="~/js/BuildingManager/edit-building.bundle.min.js"></script>
+    <body>
+        <label> @language.Getkey("Floor"):</label>
+        <input type="text" id="updatefloor" name="updatefloor" placeholder=@language.Getkey("Floor") />
+
+
+        <select name="Owned" id="Owned">
+            <option value="Owned">@language.Getkey("Owned")</option>
+            <option value="Rented">@language.Getkey("Rented")</option>
+        </select>
+
+        <button type="button" id="btnUpdate" name="btnUpdate" data-name="UpdateButton"> @language.Getkey("Submit") </button>
+    </body>
+
+
+}
