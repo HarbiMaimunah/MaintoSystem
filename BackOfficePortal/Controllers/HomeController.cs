@@ -16,9 +16,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using FluentAssertions.Common;
+using BackOfficePortal.Filters;
 
 namespace BackOfficePortal.Controllers
 {
+    [ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(ActionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
+    [ServiceFilter(typeof(ResultFilter))]
     public class HomeController : Controller
     {
 

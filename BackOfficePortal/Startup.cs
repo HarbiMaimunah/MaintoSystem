@@ -1,3 +1,4 @@
+using BackOfficePortal.Filters;
 using BackOfficePortal.ModelsLanguage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,11 @@ namespace BackOfficePortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<AuthorizeFilter>();
+            services.AddScoped<ActionFilter>();
+            services.AddScoped<ExceptionFilter>();
+            services.AddScoped<ResultFilter>();
+
             /////////////////////////////////////// Change Language /////////////////////////////////////////
             services.AddSingleton<LanguageService>();
 
