@@ -72,16 +72,16 @@ namespace BeneficiaryPortal.Controllers
 
                     HttpContext.Session.SetString("Token", token);
 
-                    var url = baseUrl + "GetRole";
+                   /* var url = baseUrl + "GetRole";
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     string jsonStr = await client.GetStringAsync(url);
 
                     HttpContext.Session.SetString("Role", jsonStr);
-                    var Role = HttpContext.Session.GetString("Role");
+                    var Role = HttpContext.Session.GetString("Role");*/
 
 
-                    return RedirectToAction("Profile", "Beneficiary");
+                    return RedirectToAction("NewTicket", "Beneficiary");
 
 
                 }
