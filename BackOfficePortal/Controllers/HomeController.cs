@@ -18,6 +18,7 @@ using System.Net.Http.Headers;
 using FluentAssertions.Common;
 using BackOfficePortal.Filters;
 using Microsoft.Extensions.Configuration;
+using System.Net.Http;
 
 namespace BackOfficePortal.Controllers
 {
@@ -27,6 +28,8 @@ namespace BackOfficePortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class HomeController : Controller
     {
+        HttpClient client = new HttpClient();
+        public static string baseUrl = "http://localhost:16982/api/SystemUser/";
 
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
@@ -84,6 +87,27 @@ namespace BackOfficePortal.Controllers
                 {
                     var stream = new FileStream(filePath, FileMode.Append);
                     await file.CopyToAsync(stream);
+                }
+            }
+            return View();
+        }
+
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public IActionResult UpdateUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> PutUser(User user)
+        {
+            string response;
+            using (client)
+            {
+                var httpResponse = await client.PutAsJsonAsync(baseUrl + "UpdateUser", user);
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync();
                 }
             }
             return View();
