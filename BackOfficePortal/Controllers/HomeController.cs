@@ -19,6 +19,8 @@ using FluentAssertions.Common;
 using BackOfficePortal.Filters;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace BackOfficePortal.Controllers
 {
@@ -28,11 +30,10 @@ namespace BackOfficePortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class HomeController : Controller
     {
-        HttpClient client = new HttpClient();
-        public static string baseUrl = "http://localhost:16982/api/SystemUser/";
 
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
+        public static string baseUrl = "http://localhost:16982/api/BackOfficeEntry/";
 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
@@ -92,25 +93,60 @@ namespace BackOfficePortal.Controllers
             return View();
         }
 
-        //------------------------------------------------------------------------------------------------------------------------------------------------
-
-        public IActionResult UpdateUser()
+        public IActionResult Signin()
         {
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> PutUser(User user)
+
+        public async Task<IActionResult> Login(Login Login)
         {
-            string response;
-            using (client)
+            using (var httpClient = new HttpClient())
             {
-                var httpResponse = await client.PutAsJsonAsync(baseUrl + "UpdateUser", user);
-                if (httpResponse.IsSuccessStatusCode)
+                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(Login), Encoding.UTF8, "application/json");
+                using (var response = await httpClient.PostAsync(baseUrl + "Login", stringContent))
                 {
-                    response = await httpResponse.Content.ReadAsStringAsync();
+                    string token = await response.Content.ReadAsStringAsync();
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        string error = await response.Content.ReadAsStringAsync();
+                        TempData["LoginError"] = error;
+                        return RedirectToAction("Signin");
+                    }
+
+                    HttpContext.Session.SetString("Token", token);
+
+                     var url = baseUrl + "GetRole";
+                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                     string roleTypeString = await httpClient.GetStringAsync(url);
+                     HttpContext.Session.SetString("Role", roleTypeString);
+                     var Role = HttpContext.Session.GetString("Role");
+
+                    if (Role == "SystemAdmin")
+                    {
+                        return RedirectToAction();
+                    }
+                    else if (Role == "BuildingManager")
+                    {
+                        return RedirectToAction("ViewTickets", "BuildingManager");
+                    }
+                     else if(Role == "MaintenanceManager")
+                    {
+                        return RedirectToAction("ViewTickets", "MaintenanceManager");
+                    }
+                     else
+                    {
+                        return RedirectToAction("ListTickets", "MaintenanceWorker");
+                    }
+                     
                 }
             }
-            return View();
+        }
+
+        public IActionResult SignOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Beneficiary");
         }
     }
 }
