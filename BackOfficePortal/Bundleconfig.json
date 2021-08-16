@@ -106,5 +106,18 @@
       "renameLocals": true
     }
 
+  },
+  {
+    "outputFileName": "wwwroot/js/updateUser.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/update-user.js"
+
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
   }
 ]

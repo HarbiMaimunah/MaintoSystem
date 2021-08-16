@@ -195,11 +195,17 @@
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
   </data>
+  <data name="Please" xml:space="preserve">
+    <value>Please</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>Privacy</value>
   </data>
   <data name="Reason" xml:space="preserve">
     <value>Reason</value>
+  </data>
+  <data name="ReEnter" xml:space="preserve">
+    <value>ReEnter</value>
   </data>
   <data name="Registration" xml:space="preserve">
     <value>Registration</value>
@@ -236,6 +242,9 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>To</value>
+  </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>Update User</value>
   </data>
   <data name="View" xml:space="preserve">
     <value>View</value>

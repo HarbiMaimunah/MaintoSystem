@@ -127,7 +127,28 @@ namespace BeneficiaryPortal.Controllers
         {
             return View();
         }
+        //------------------------------------------------------------------------------------------------------------------
+        public IActionResult UpdateUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> PutUser(BackOfficePortal.Models.User user)
+        {
+            string response;
+            
+            using (HttpClient client = new HttpClient())
+            {
+                var httpResponse = await client.PutAsJsonAsync("http://localhost:16982/api/SystemUser/" + "UpdateUser", user);
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
+            return View();
+        }
 
+        //--------------------------------------------------------------------------------------------------------------------
         /*public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
         {
             using (var httpClient = new HttpClient())
@@ -172,5 +193,7 @@ namespace BeneficiaryPortal.Controllers
             TempData["NewTicketConfirmation"] = "Your ticket has been sent successfully";
             return RedirectToAction("NewTicket");
         }*/
+
+
     }
 }

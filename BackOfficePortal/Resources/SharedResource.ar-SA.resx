@@ -195,11 +195,17 @@
   <data name="Phone" xml:space="preserve">
     <value>الهاتف المحمول</value>
   </data>
+  <data name="Please" xml:space="preserve">
+    <value>من فضلك</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>الخصوصية</value>
   </data>
   <data name="Reason" xml:space="preserve">
     <value>السبب</value>
+  </data>
+  <data name="ReEnter" xml:space="preserve">
+    <value>اعد ادخال</value>
   </data>
   <data name="Registration" xml:space="preserve">
     <value>مستخدم جديد</value>
@@ -236,6 +242,9 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>على</value>
+  </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>تحديث البيانات</value>
   </data>
   <data name="View" xml:space="preserve">
     <value>عرض</value>
