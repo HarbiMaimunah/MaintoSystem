@@ -139,5 +139,27 @@ namespace BackOfficePortal.Controllers
             return Json(UsersList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
 
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult ViewUnderReviewTickets()
+        {
+            return View();
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetUnderReviewTickets()
+        {
+            List<Ticket> TicketList = new List<Ticket>();
+            using (client)
+            {
+                var httpResponse = await client.GetAsync("ViewUnderReviewTickets");
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    TicketList = await httpResponse.Content.ReadAsAsync<List<Ticket>>();
+                }
+            }
+            return Json(TicketList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+
     }
 }

@@ -243,6 +243,9 @@
   <data name="To" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="UnderReview" xml:space="preserve">
+    <value>Under Review</value>
+  </data>
   <data name="UpdateUser" xml:space="preserve">
     <value>Update User</value>
   </data>

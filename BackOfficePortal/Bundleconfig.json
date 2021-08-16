@@ -68,7 +68,8 @@
       "wwwroot/js/MaintenanceManager/view-ticket.js",
       "wwwroot/js/MaintenanceManager/view-new-tickets.js",
       "wwwroot/js/MaintenanceManager/view-workers.js",
-      "wwwroot/js/MaintenanceManager/view-worker.js"
+      "wwwroot/js/MaintenanceManager/view-worker.js",
+      "wwwroot/js/MaintenanceManager/view-under-review-tickets.js"
 
 
     ],

@@ -243,6 +243,9 @@
   <data name="To" xml:space="preserve">
     <value>على</value>
   </data>
+  <data name="UnderReview" xml:space="preserve">
+    <value>تحت المراجعة</value>
+  </data>
   <data name="UpdateUser" xml:space="preserve">
     <value>تحديث البيانات</value>
   </data>
