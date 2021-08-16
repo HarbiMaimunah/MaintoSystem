@@ -1,10 +1,10 @@
-﻿@using BackOfficePortal.ModelsLanguage;
+﻿@using BeneficiaryPortal.ModelsLanguage;
 @inject LanguageService language
 
 
-<h1> @language.Getkey("UpdateUser ")</h1>
+<h1> @language.Getkey("UpdateUser")</h1>
 @section Scripts2{
-    <script src="~/js/updateUser.bundle.min.js"></script>
+    <script src="~/js/Beneficiary/updateUser.bundle.min.js"></script>
     <body>
         <label> @language.Getkey("Name"):</label>
         <input type="text" id="updateName" name="updateName" placeholder=@language.Getkey("Name") />

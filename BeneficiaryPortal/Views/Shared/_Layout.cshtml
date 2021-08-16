@@ -6,6 +6,14 @@
     <title>@ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <ul class="language">
+
+        <li><a asp-controller="Beneficiary" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"> English</a></li>
+
+        <li><a asp-controller="Beneficiary" asp-action="ChangeLanguage" asp-route-culture="ar-SA" class="nav-link"> Arabic</a></li>
+
+
+    </ul>
 </head>
 <body>
     <div class="container">
@@ -13,6 +21,10 @@
             @RenderBody()
         </main>
     </div>
+    @section Scripts2 {
+        <script src="~/js/Beneficiary/updateUser.bundle.min.js"></script>
+    }
+    @RenderSection("Scripts2", required: false)
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

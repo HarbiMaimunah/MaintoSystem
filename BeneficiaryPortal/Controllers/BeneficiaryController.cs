@@ -1,6 +1,7 @@
-﻿using BackOfficePortal.Filters;
+﻿using BeneficiaryPortal.Filters;
 using BeneficiaryPortal.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -15,10 +16,10 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
-    /*[ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]*/
+    [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryController : Controller
     {
         public IActionResult Index()
@@ -102,13 +103,13 @@ namespace BeneficiaryPortal.Controllers
             return res;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public JsonResult ListFloors(int buildingID)
         {
             var url = baseUrl + "ListFloors/" + buildingID.ToString();
             
             
-        }
+        }*/
 
         public IActionResult NewTicket()
         {
@@ -135,7 +136,19 @@ namespace BeneficiaryPortal.Controllers
             return View();
         }
 
-        //--------------------------------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public IActionResult ChangeLanguage(string culture)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+
+
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+
         /*public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
         {
             using (var httpClient = new HttpClient())

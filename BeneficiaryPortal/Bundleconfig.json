@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "wwwroot/js/Beneficiary/updateUser.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/Beneficiary/update-user.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  }
+]
