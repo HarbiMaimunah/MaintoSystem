@@ -15,10 +15,10 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
-    [ServiceFilter(typeof(AuthorizeFilter))]
+    /*[ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]
+    [ServiceFilter(typeof(ResultFilter))]*/
     public class BeneficiaryController : Controller
     {
         public IActionResult Index()
@@ -28,8 +28,10 @@ namespace BeneficiaryPortal.Controllers
 
         public static string baseUrl = "http://localhost:16982/api/BeneficiaryEntry/";
 
-        public IActionResult Signup()
-        {               
+        public async Task<IActionResult> Signup()
+        {
+            var buildings = await ListBuildings();
+            ViewBag.BuildingsList = new SelectList(buildings, "Id", "Number");
             return View();
         }
 
@@ -77,15 +79,6 @@ namespace BeneficiaryPortal.Controllers
 
                     HttpContext.Session.SetString("Token", token);
 
-                   /* var url = baseUrl + "GetRole";
-                    HttpClient client = new HttpClient();
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                    string jsonStr = await client.GetStringAsync(url);
-
-                    HttpContext.Session.SetString("Role", jsonStr);
-                    var Role = HttpContext.Session.GetString("Role");*/
-
-
                     return RedirectToAction("NewTicket", "Beneficiary");
 
 
@@ -102,25 +95,19 @@ namespace BeneficiaryPortal.Controllers
         [HttpGet]
         public async Task<List<Building>> ListBuildings()
         {
-            var accessToken = HttpContext.Session.GetString("Token");
             var url = baseUrl + "ListBuildings";
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             string jsonStr = await client.GetStringAsync(url);
             var res = JsonConvert.DeserializeObject<List<Building>>(jsonStr).ToList();
             return res;
         }
 
         [HttpGet]
-        public async Task<List<Floor>> ListFloors(int buildingID)
+        public JsonResult ListFloors(int buildingID)
         {
-            var accessToken = HttpContext.Session.GetString("Token");
             var url = baseUrl + "ListFloors/" + buildingID.ToString();
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            string jsonStr = await client.GetStringAsync(url);
-            var res = JsonConvert.DeserializeObject<List<Floor>>(jsonStr).ToList();
-            return res;
+            
+            
         }
 
         public IActionResult NewTicket()
