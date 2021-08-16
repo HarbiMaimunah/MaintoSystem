@@ -92,6 +92,27 @@ namespace BackOfficePortal.Controllers
             }
             return View();
         }
+        //-------------------------------------------------------------------------------------------------------------------------------------
+        public IActionResult UpdateUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> PutUser(User user)
+        {
+            string response;
+            using (HttpClient client = new HttpClient())
+            {
+                var httpResponse = await client.PutAsJsonAsync("http://localhost:16982/api/SystemUser/" + "UpdateUser", user);
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
+            return View();
+        }
+
+        //-------------------------------------------------------------------------------------------------------------------------------------
 
         public IActionResult Signin()
         {
