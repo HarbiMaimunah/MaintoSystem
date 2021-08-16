@@ -119,13 +119,26 @@ namespace BackOfficePortal.Controllers
                      var url = baseUrl + "GetRole";
                      httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                      string roleTypeString = await httpClient.GetStringAsync(url);
-
                      HttpContext.Session.SetString("Role", roleTypeString);
                      var Role = HttpContext.Session.GetString("Role");
 
-                    return RedirectToAction("NewTicket", "Beneficiary");
-
-
+                    if (Role == "SystemAdmin")
+                    {
+                        return RedirectToAction();
+                    }
+                    else if (Role == "BuildingManager")
+                    {
+                        return RedirectToAction("ViewTickets", "BuildingManager");
+                    }
+                     else if(Role == "MaintenanceManager")
+                    {
+                        return RedirectToAction("ViewTickets", "MaintenanceManager");
+                    }
+                     else
+                    {
+                        return RedirectToAction("ListTickets", "MaintenanceWorker");
+                    }
+                     
                 }
             }
         }
