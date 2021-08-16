@@ -1,0 +1,36 @@
+﻿@using BeneficiaryPortal.ModelsLanguage;
+@inject LanguageService language
+
+
+<h1> @language.Getkey("UpdateUser")</h1>
+@section Scripts2{
+    <script src="~/js/Beneficiary/updateUser.bundle.min.js"></script>
+    <body>
+        <label> @language.Getkey("Name"):</label>
+        <input type="text" id="updateName" name="updateName" placeholder=@language.Getkey("Name") />
+
+        <label> @language.Getkey("Phone"):</label>
+        <input type="text" id="updatePhone" name="updatePhone" placeholder=@language.Getkey("Phone") />
+
+        <label> @language.Getkey("Email"):</label>
+        <input type="text" id="updateEmail" name="updateEmail" placeholder=@language.Getkey("Email") />
+
+        <label> @language.Getkey("Floor"):</label>
+        <input type="text" id="updateFloor" name="updateFloor" placeholder=@language.Getkey("Floor") />
+
+        <label> @language.Getkey("Building"):</label>
+        <input type="text" id="updateBuilding" name="updateBuilding" placeholder=@language.Getkey("Building") />
+
+
+        <label> @language.Getkey("Password"):</label>
+        <input type="text" id="updatePassword" name="updatePassword" placeholder=@language.Getkey("Password") />
+
+        <label> @language.Getkey("ReEnter")@language.Getkey("Password"):</label>
+        <input type="text" id="RewritePassword" name="RewritePassword" placeholder=@language.Getkey("Password") />
+
+
+        <button type="button" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" onclick="UpdateUser()"> @language.Getkey("Submit") </button>
+    </body>
+
+
+}

@@ -118,147 +118,144 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accept" xml:space="preserve">
-    <value>Accept</value>
+    <value>قبول</value>
   </data>
   <data name="AddComment" xml:space="preserve">
-    <value>Enter your comments:</value>
+    <value>من فضلك ادخل توصياتك:</value>
   </data>
   <data name="Attachment" xml:space="preserve">
-    <value>Attachment</value>
+    <value>المرفقات</value>
   </data>
   <data name="Building" xml:space="preserve">
-    <value>Building </value>
+    <value>المبنى</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>الغاء</value>
   </data>
   <data name="CancelationReason" xml:space="preserve">
-    <value>Cancelation Reason</value>
+    <value>سبب الالغاء</value>
   </data>
   <data name="Comments" xml:space="preserve">
-    <value>Comments</value>
+    <value>توصياتك</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>التاريخ</value>
   </data>
   <data name="Discription" xml:space="preserve">
-    <value>Discription</value>
+    <value>الوصف</value>
   </data>
   <data name="EditBuilding" xml:space="preserve">
-    <value>Edit Building</value>
+    <value>تحديث المبنى</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>الايميل</value>
   </data>
   <data name="EnterId" xml:space="preserve">
-    <value>Enter Ticket ID to add comments:</value>
+    <value>من فضلك ادخل رقم التذكرة</value>
   </data>
   <data name="Floor" xml:space="preserve">
-    <value>Floor</value>
+    <value>الطابق</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Forgot Your Password?</value>
+    <value>نسيت كلمة المرور؟</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>الصفحة الرئيسية</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>Id</value>
+    <value>الرقم </value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>تسجيل دخول</value>
   </data>
   <data name="MaintenanceType" xml:space="preserve">
-    <value>Maintenance Type</value>
+    <value>نوع الصيانة</value>
   </data>
   <data name="MyRequests" xml:space="preserve">
-    <value>My Requests</value>
+    <value>طلباتي</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>الاسم</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value>New</value>
+    <value>الجديدة</value>
   </data>
   <data name="NewRequest" xml:space="preserve">
-    <value>Order New Request</value>
+    <value>طلب صيانة جديد</value>
   </data>
   <data name="Owned" xml:space="preserve">
-    <value>Owned</value>
+    <value>مملوك</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>كلمة السر</value>
   </data>
   <data name="Pending" xml:space="preserve">
-    <value>Pending</value>
+    <value>في الانتظار</value>
   </data>
   <data name="Phone" xml:space="preserve">
-    <value>Phone</value>
+    <value>الهاتف المحمول</value>
   </data>
   <data name="Please" xml:space="preserve">
-    <value>Please</value>
+    <value>من فضلك</value>
   </data>
   <data name="Privacy" xml:space="preserve">
-    <value>Privacy</value>
+    <value>الخصوصية</value>
   </data>
   <data name="Reason" xml:space="preserve">
-    <value>Reason</value>
+    <value>السبب</value>
   </data>
   <data name="ReEnter" xml:space="preserve">
-    <value>ReEnter</value>
+    <value>اعد ادخال</value>
   </data>
   <data name="Registration" xml:space="preserve">
-    <value>Registration</value>
+    <value>مستخدم جديد</value>
   </data>
   <data name="Rejected" xml:space="preserve">
-    <value>Rejected</value>
+    <value>مرفوضة</value>
   </data>
   <data name="Rented" xml:space="preserve">
-    <value>Rented</value>
+    <value>مستأجر</value>
   </data>
   <data name="Request" xml:space="preserve">
-    <value>Request</value>
+    <value>طلب</value>
   </data>
   <data name="RequestNumber" xml:space="preserve">
-    <value>Request Number</value>
+    <value>رقم الطلب</value>
   </data>
   <data name="Respond" xml:space="preserve">
-    <value>Respond</value>
+    <value>الرد</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>Status</value>
+    <value>حالة الطلب</value>
   </data>
   <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
+    <value>ارسال</value>
   </data>
   <data name="Ticket" xml:space="preserve">
-    <value>Ticket</value>
+    <value>التذكرة</value>
   </data>
   <data name="Tickets" xml:space="preserve">
-    <value>Tickets</value>
+    <value>التذاكر</value>
   </data>
   <data name="Time" xml:space="preserve">
-    <value>Time</value>
+    <value>الوقت</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>To</value>
-  </data>
-  <data name="UnderReview" xml:space="preserve">
-    <value>Under Review</value>
+    <value>على</value>
   </data>
   <data name="UpdateUser" xml:space="preserve">
-    <value>Update User</value>
+    <value>تحديث البيانات</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>View</value>
+    <value>عرض</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome</value>
+    <value>مرحبا</value>
   </data>
   <data name="Worker" xml:space="preserve">
-    <value>Worker</value>
+    <value>عامل</value>
   </data>
   <data name="Workers" xml:space="preserve">
-    <value>Workers</value>
+    <value>العمال</value>
   </data>
 </root>

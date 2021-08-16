@@ -68,7 +68,8 @@
       "wwwroot/js/MaintenanceManager/view-ticket.js",
       "wwwroot/js/MaintenanceManager/view-new-tickets.js",
       "wwwroot/js/MaintenanceManager/view-workers.js",
-      "wwwroot/js/MaintenanceManager/view-worker.js"
+      "wwwroot/js/MaintenanceManager/view-worker.js",
+      "wwwroot/js/MaintenanceManager/view-under-review-tickets.js"
 
 
     ],
@@ -98,6 +99,19 @@
     "outputFileName": "wwwroot/js/SaveFile.bundle.min.js",
     "inputFiles": [
       "wwwroot/js/upload-file.js"
+
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/updateUser.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/update-user.js"
 
     ],
 

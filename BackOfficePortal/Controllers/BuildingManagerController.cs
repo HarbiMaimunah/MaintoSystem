@@ -29,12 +29,12 @@ namespace BackOfficePortal.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<JsonResult> PostComment(int id, string comment)
+        public async Task<JsonResult> PostComment( string comment)
         {
             string response;
             using (client)
             {
-                var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments/{id}" , comment);
+                var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments" , comment);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
