@@ -144,11 +144,14 @@
   <data name="Discription" xml:space="preserve">
     <value>الوصف</value>
   </data>
+  <data name="DoNotHaveAccount" xml:space="preserve">
+    <value>ليس لديك حساب؟</value>
+  </data>
   <data name="EditBuilding" xml:space="preserve">
     <value>تحديث المبنى</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>الايميل</value>
+    <value>البريد الالكتروني</value>
   </data>
   <data name="EnterId" xml:space="preserve">
     <value>من فضلك ادخل رقم التذكرة</value>
@@ -157,7 +160,7 @@
     <value>الطابق</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>نسيت كلمة المرور؟</value>
+    <value>هل نسيت كلمة المرور؟</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>الصفحة الرئيسية</value>
@@ -180,14 +183,14 @@
   <data name="New" xml:space="preserve">
     <value>الجديدة</value>
   </data>
-  <data name="NewRequest" xml:space="preserve">
+  <data name="NewTicket" xml:space="preserve">
     <value>طلب صيانة جديد</value>
   </data>
   <data name="Owned" xml:space="preserve">
     <value>مملوك</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>كلمة السر</value>
+    <value>كلمة المرور</value>
   </data>
   <data name="Pending" xml:space="preserve">
     <value>في الانتظار</value>
@@ -207,9 +210,6 @@
   <data name="ReEnter" xml:space="preserve">
     <value>اعد ادخال</value>
   </data>
-  <data name="Registration" xml:space="preserve">
-    <value>مستخدم جديد</value>
-  </data>
   <data name="Rejected" xml:space="preserve">
     <value>مرفوضة</value>
   </data>
@@ -224,6 +224,9 @@
   </data>
   <data name="Respond" xml:space="preserve">
     <value>الرد</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>مستخدم جديد</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>حالة الطلب</value>

@@ -1,4 +1,5 @@
 ﻿using BackOfficePortal.Filters;
+using BackOfficePortal.Lookup;
 using BackOfficePortal.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -158,6 +159,83 @@ namespace BackOfficePortal.Controllers
                 }
             }
             return Json(TicketList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+        public ActionResult ViewMainteneceType()
+        {
+            return View();
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetMainteneceType()
+        {
+            List<MaintenanceType> TypeList = new List<MaintenanceType>();
+            using (client)
+            {
+                var httpResponse = await client.GetAsync("ViewMainteneceType");
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    TypeList = await httpResponse.Content.ReadAsAsync<List<MaintenanceType>>();
+                }
+            }
+            return Json(TypeList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+        public ActionResult AddMainteneceType()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> PostMainteneceType(MaintenanceType NewType)
+        {
+            string response;
+            using (client)
+            {
+                var httpResponse = await client.PostAsJsonAsync("AddMainteneceType", NewType);
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
+            return Json("success", System.Web.Mvc.JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+        public ActionResult UpdateMainteneceType()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> PutMainteneceType(MaintenanceType UpdatedType)
+        {
+            string response;
+            using (client)
+            {
+                var httpResponse = await client.GetAsync("UpdateMainteneceType");
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
+            return Json("success", System.Web.Mvc.JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+        public ActionResult DeleteMainteneceType()
+        {
+            return View();
+        }
+        [HttpGet]
+        public async Task<ActionResult> DeleteType(MaintenanceType DeletedType)
+        {
+            string response;
+            using (client)
+            {
+                var httpResponse = await client.GetAsync("DeleteMainteneceType");
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
+            return Json("Success", System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
