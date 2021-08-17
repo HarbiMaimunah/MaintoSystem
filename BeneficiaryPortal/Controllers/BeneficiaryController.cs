@@ -27,7 +27,7 @@ namespace BeneficiaryPortal.Controllers
             return View();
         }
 
-        public static string baseUrl = "http://localhost:16982/api/BeneficiaryEntry/";
+        public static string baseUrl = "https://localhost:16982/api/BeneficiaryEntry/";
 
         public async Task<IActionResult> Signup()
         {
@@ -102,14 +102,6 @@ namespace BeneficiaryPortal.Controllers
             var res = JsonConvert.DeserializeObject<List<Building>>(jsonStr).ToList();
             return res;
         }
-
-        /*[HttpGet]
-        public JsonResult ListFloors(int buildingID)
-        {
-            var url = baseUrl + "ListFloors/" + buildingID.ToString();
-            
-            
-        }*/
 
         public IActionResult NewTicket()
         {

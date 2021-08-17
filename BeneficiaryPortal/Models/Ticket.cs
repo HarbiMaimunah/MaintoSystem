@@ -27,6 +27,7 @@ namespace BeneficiaryPortal.Models
 
         //Date section
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         //Picture section

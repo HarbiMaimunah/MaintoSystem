@@ -21,12 +21,12 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]*/
     public class BeneficiaryEntryController : Controller
     {
-        public static string baseUrl = "http://10.6.8.91:44307/api/BeneficiaryEntry/";
+        public static string baseUrl = "https://localhost:44307/api/BeneficiaryEntry/";
 
-        public IActionResult Signup()
+        public async Task<IActionResult> Signup()
         {
-            /*var buildings = await ListBuildings();
-            ViewBag.BuildingsList = new SelectList(buildings, "Id", "Number");*/
+            var buildings = await ListBuildings();
+            ViewBag.BuildingsList = buildings;
             return View();
         }
 
@@ -90,12 +90,14 @@ namespace BeneficiaryPortal.Controllers
             return res;
         }
 
-        /*[HttpGet]
-        public JsonResult ListFloors(int buildingID)
+        
+        public async Task<JsonResult> ListFloors(int buildingID)
         {
             var url = baseUrl + "ListFloors/" + buildingID.ToString();
-            
-            
-        }*/
+            HttpClient client = new HttpClient();
+            string jsonStr = await client.GetStringAsync(url);
+            var res = JsonConvert.DeserializeObject<List<Floor>>(jsonStr).ToList();
+            return Json(new SelectList(res, "Id", "Number"));
+        }
     }
 }

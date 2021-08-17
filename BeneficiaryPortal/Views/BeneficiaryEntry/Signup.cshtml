@@ -3,19 +3,28 @@
     ViewData["Title"] = "Sign up";
 }
 
-<!--<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="~/lib/jquery/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#BuildingNumber").change(function () {
-            $.get("http://localhost:16982/api/BeneficiaryEntry/ListFloors", { buildingID: $("#BuildingNumber").val() }, function (data) {
-                $("#FloorNumber").empty();
-                $.each(data, function (index, row) {
-                    $("#FloorNumber").append("<option value='"+ row.Id +"'>"+ row.Number +"</option>")
-                });
+        $('#buildingsList').change(function () {
+            let buildingID = $('#buildingsList option:selected').val();
+            $.ajax({
+                type: 'GET',
+                data: { buildingID = buildingID },
+                url: '/BeneficiaryEntry/ListFloors',
+                success: function (data) {
+                    let items = '';
+                    $.each(data, function (i, floor) {
+                        items += '<option value="' + floor.value + '">' + floor.text + '</option>';
+                    });
+                    
+                    $("#floorsList").html(items);
+                }
             });
         });
     });
-</script>-->
+</script>
 
 <h1>Sign Up</h1>
 <p class="text-danger">@TempData["SignupError"]</p>
@@ -39,19 +48,17 @@
         </div>
     </div>
     <br />
-    <div class="form-group">
-        <label class="control-label col-md-2">Building ID (From DB)</label>
-        <div class="col-sm-3">
-            @Html.EditorFor(model => model.BuildingNumber, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "1", @step = "1" } })
-        </div>
-    </div>
+    <label>Building</label>
+    <select id="buildingsList" asp-for="@Model.BuildingNumber">
+        @foreach (var building in ViewBag.BuildingsList)
+         {
+            <option value="@building.Id">@building.Number</option>
+         }
+    </select>
     <br />
-    <div class="form-group">
-        <label class="control-label col-md-2">Floor ID (From DB)</label>
-        <div class="col-sm-3">
-            @Html.EditorFor(model => model.FloorNumber, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "1", @step = "1" } })
-        </div>
-    </div>
+    <label>Floor</label>
+    <select id="floorsList" asp-for="@Model.FloorNumber">
+    </select>
     <br />
     <div class="form-group">
         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
