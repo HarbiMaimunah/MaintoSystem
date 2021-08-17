@@ -16,10 +16,10 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
-    [ServiceFilter(typeof(AuthorizeFilter))]
-    [ServiceFilter(typeof(ActionFilter))]
-    [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]
+    //[ServiceFilter(typeof(AuthorizeFilter))]
+    //[ServiceFilter(typeof(ActionFilter))]
+    //[ServiceFilter(typeof(ExceptionFilter))]
+    //[ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryController : Controller
     {
         public IActionResult Index()
@@ -56,6 +56,7 @@ namespace BeneficiaryPortal.Controllers
 
             }
         }
+        
 
         public IActionResult Signin()
         {
@@ -193,7 +194,15 @@ namespace BeneficiaryPortal.Controllers
             TempData["NewTicketConfirmation"] = "Your ticket has been sent successfully";
             return RedirectToAction("NewTicket");
         }*/
+        public async Task<IActionResult> TicketsAsync()
+        {
+            var url = baseUrl + "ListBuildings";
+            HttpClient client = new HttpClient();
+            string jsonStr = await client.GetStringAsync(url);
+            var res = JsonConvert.DeserializeObject<List<Building>>(jsonStr).ToList();
 
+            return View();
+        }
 
     }
 }

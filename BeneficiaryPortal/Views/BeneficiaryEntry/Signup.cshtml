@@ -3,19 +3,6 @@
     ViewData["Title"] = "Sign up";
 }
 
-<!--<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        $("#BuildingNumber").change(function () {
-            $.get("http://localhost:16982/api/BeneficiaryEntry/ListFloors", { buildingID: $("#BuildingNumber").val() }, function (data) {
-                $("#FloorNumber").empty();
-                $.each(data, function (index, row) {
-                    $("#FloorNumber").append("<option value='"+ row.Id +"'>"+ row.Number +"</option>")
-                });
-            });
-        });
-    });
-</script>-->
 
 <h1>Sign Up</h1>
 <p class="text-danger">@TempData["SignupError"]</p>
@@ -42,7 +29,8 @@
     <div class="form-group">
         <label class="control-label col-md-2">Building ID (From DB)</label>
         <div class="col-sm-3">
-            @Html.EditorFor(model => model.BuildingNumber, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "1", @step = "1" } })
+            <!--Html.EditorFor(model => model.BuildingNumber, new { htmlAttributes = new { class = "form-control", type = "number", min = "1", step = "1" } })-->
+            <select class="form-control" id="Building"></select>
         </div>
     </div>
     <br />
