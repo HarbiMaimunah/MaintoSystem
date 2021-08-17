@@ -35,8 +35,26 @@ namespace BackOfficePortal.Controllers
         [HttpGet]
         public IActionResult BuildingsTable()
         {
-            var Buildings = getAllBuldingsAsync();
-            return View(Buildings);
+
+            //List<FloorTable> floorTables = new List<FloorTable> { new FloorTable { FloorId = 1, FloorNumber = 'g' } };
+            //floorTables.Add(new FloorTable { FloorId = 2, FloorNumber = '2' });
+            //floorTables.Add(new FloorTable { FloorId = 3, FloorNumber = '3' });
+            List<BuildingsTable> building = new List<BuildingsTable>();
+            //building.Add(new BuildingsTable{ 
+            //    BuildingId =1,
+            //    BuildingNumber="k", 
+            //    BuildingManagerName="shady",
+            //    BuildingManagerEmail="shady@gmail.com", 
+            //    BuildingManagerId =1,
+            //    City = "الرياض", 
+            //    CityId =1, 
+            //    Country = "السعودية", 
+            //    CountryId=1, 
+            //    IsOwned=true, 
+            //    Street = "الريان", 
+            //    FloorTables = floorTables });
+            var Building = getAllBuldingsAsync();
+            return View(Building);
         }
     }
 }

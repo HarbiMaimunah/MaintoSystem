@@ -10,7 +10,7 @@ namespace BackOfficePortal.Models
 
         //Building
         public int BuildingId { get; set; }
-        public char BuildingNumber { get; set; }
+        public string BuildingNumber { get; set; }
         public List<FloorTable> FloorTables { get; set; }
         //location
         public int CountryId { get; set; }

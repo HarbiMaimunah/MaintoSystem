@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\boy.png" />
+    <Content Remove="wwwroot\images\Buildings.png" />
+    <Content Remove="wwwroot\images\computer-cleaner.png" />
+    <Content Remove="wwwroot\images\employee.png" />
+    <Content Remove="wwwroot\images\girle.png" />
+    <Content Remove="wwwroot\images\Group 42.png" />
+    <Content Remove="wwwroot\images\Icon awesome-building.png" />
+    <Content Remove="wwwroot\images\Icon awesome-layer-group.png" />
+    <Content Remove="wwwroot\images\Icon awesome-mobile.png" />
+    <Content Remove="wwwroot\images\Icon awesome-user.png" />
+    <Content Remove="wwwroot\images\logo.png" />
+    <Content Remove="wwwroot\images\mail.png" />
+    <Content Remove="wwwroot\images\padlock.png" />
     <Content Remove="wwwroot\js\BuildingManager\view-ticket-status.js~RFf5b8e16.TMP" />
   </ItemGroup>
 
@@ -29,12 +42,27 @@
     <None Include="wwwroot\DataTable\DataTables-1.10.25\js\jquery.dataTables.min.js" />
     <None Include="wwwroot\DataTable\datatables.js" />
     <None Include="wwwroot\DataTable\datatables.min.js" />
+    <None Include="wwwroot\images\boy.png" />
+    <None Include="wwwroot\images\Buildings.png" />
+    <None Include="wwwroot\images\computer-cleaner.png" />
+    <None Include="wwwroot\images\employee.png" />
+    <None Include="wwwroot\images\girle.png" />
+    <None Include="wwwroot\images\Group 42.png" />
+    <None Include="wwwroot\images\Icon awesome-building.png" />
+    <None Include="wwwroot\images\Icon awesome-layer-group.png" />
+    <None Include="wwwroot\images\Icon awesome-mobile.png" />
+    <None Include="wwwroot\images\Icon awesome-user.png" />
+    <None Include="wwwroot\images\logo.png" />
+    <None Include="wwwroot\images\mail.png" />
+    <None Include="wwwroot\images\padlock.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.0.0" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="FluentAssertions" Version="6.0.0" />
     <PackageReference Include="GlobalResources" Version="1.0.0.9" />
+    <PackageReference Include="jQuery" Version="3.6.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Milvasoft.FormFileOperations" Version="5.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
