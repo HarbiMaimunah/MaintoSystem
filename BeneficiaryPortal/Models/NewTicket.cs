@@ -13,5 +13,6 @@ namespace BeneficiaryPortal.Models
 
         [BindProperty]
         public IFormFile Attachment { get; set; }
+
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -16,76 +17,13 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
-    [ServiceFilter(typeof(AuthorizeFilter))]
+    /*[ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]
+    [ServiceFilter(typeof(ResultFilter))]*/
     public class BeneficiaryController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public static string baseUrl = "https://localhost:16982/api/BeneficiaryEntry/";
-
-        public async Task<IActionResult> Signup()
-        {
-            var buildings = await ListBuildings();
-            ViewBag.BuildingsList = new SelectList(buildings, "Id", "Number");
-            return View();
-        }
-
-        public async Task<IActionResult> Register(BeneficiaryRegistration RegisterInfo)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(RegisterInfo), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync(baseUrl + "Register", stringContent))
-                {
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        string error = await response.Content.ReadAsStringAsync();
-                        TempData["SignupError"] = error;
-                        return RedirectToAction("Signup");
-                    }
-
-                }
-
-                return RedirectToAction("Signin");
-
-            }
-        }
-
-        public IActionResult Signin()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> Login(Login Login)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(Login), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync(baseUrl + "Login", stringContent))
-                {
-                    string token = await response.Content.ReadAsStringAsync();
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        string error = await response.Content.ReadAsStringAsync();
-                        TempData["LoginError"] = error;
-                        return RedirectToAction("Signin");
-                    }
-
-                    HttpContext.Session.SetString("Token", token);
-
-                    return RedirectToAction("NewTicket", "Beneficiary");
-
-
-                }
-            }
-        }
+        public static string baseUrl = "https://localhost:16982/api/Beneficiary/";
 
         public IActionResult SignOut()
         {
@@ -93,19 +31,21 @@ namespace BeneficiaryPortal.Controllers
             return RedirectToAction("Login", "Beneficiary");
         }
 
-        [HttpGet]
-        public async Task<List<Building>> ListBuildings()
+        public async Task<IActionResult> NewTicket()
         {
-            var url = baseUrl + "ListBuildings";
-            HttpClient client = new HttpClient();
-            string jsonStr = await client.GetStringAsync(url);
-            var res = JsonConvert.DeserializeObject<List<Building>>(jsonStr).ToList();
-            return res;
+            var maintenanceTypes = await ListMaintenanceTypes();
+            ViewBag.MaintenanceTypesList = maintenanceTypes;
+            return View();
         }
 
-        public IActionResult NewTicket()
+        [HttpGet]
+        public async Task<List<MaintenanceType>> ListMaintenanceTypes()
         {
-            return View();
+            var url = baseUrl + "ListMaintenanceTypes";
+            HttpClient client = new HttpClient();
+            string jsonStr = await client.GetStringAsync(url);
+            var res = JsonConvert.DeserializeObject<List<MaintenanceType>>(jsonStr).ToList();
+            return res;
         }
         //------------------------------------------------------------------------------------------------------------------
         public IActionResult UpdateUser()
@@ -141,7 +81,7 @@ namespace BeneficiaryPortal.Controllers
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
-        /*public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
+        public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
         {
             using (var httpClient = new HttpClient())
             {
@@ -184,7 +124,7 @@ namespace BeneficiaryPortal.Controllers
 
             TempData["NewTicketConfirmation"] = "Your ticket has been sent successfully";
             return RedirectToAction("NewTicket");
-        }*/
+        }
 
 
     }
