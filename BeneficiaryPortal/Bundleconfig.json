@@ -10,5 +10,17 @@
       "renameLocals": true
     }
 
+  },
+  {
+    "outputFileName": "wwwroot/js/Beneficiary/signup.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/Beneficiary/signup.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
   }
 ]

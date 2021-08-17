@@ -91,9 +91,9 @@ namespace BeneficiaryPortal.Controllers
         }
 
         
-        public async Task<JsonResult> ListFloors(int buildingID)
+        public async Task<JsonResult> ListFloors(int BuildingNumber)
         {
-            var url = baseUrl + "ListFloors/" + buildingID.ToString();
+            var url = baseUrl + "ListFloors/" + BuildingNumber.ToString();
             HttpClient client = new HttpClient();
             string jsonStr = await client.GetStringAsync(url);
             var res = JsonConvert.DeserializeObject<List<Floor>>(jsonStr).ToList();
