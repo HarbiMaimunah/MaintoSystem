@@ -9,10 +9,15 @@ namespace BeneficiaryPortal.Models
 {
     public class NewTicket
     {
-        public Ticket Ticket { get; set; }
+        public TicketRequest Ticket { get; set; }
 
         [BindProperty]
         public IFormFile Attachment { get; set; }
+
+        public NewTicket()
+        {
+            Ticket = new TicketRequest();
+        }
 
     }
 }
