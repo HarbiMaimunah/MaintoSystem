@@ -36,7 +36,15 @@
                         <li class="nav-item">
                             <a class="nav-link navbar-link" href="#">التنبيهات</a>
                         </li>
-                        <li class="border-bottom d-fixed d-lg-none m-2"></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                اللغة
+                            </a>
+                            <ul class="dropdown-menu language" aria-labelledby="navbarDropdown">
+                                <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ar-SA" class="dropdown-item">العربية</a></li>
+                                <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="dropdown-item">الإنكليزية</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <div>
                         <button class="bg-white btn-logout btn me-5 d-flex justify-content-center align-items-center">
