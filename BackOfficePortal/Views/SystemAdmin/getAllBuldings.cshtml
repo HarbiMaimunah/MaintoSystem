@@ -4,12 +4,13 @@
     Layout = "~/Views/Shared/_dashbords.cshtml";
 }
 
-<div class="container-lg rounded shadow bg-white p-0 mb-5">
-    <div class="bg-dark text-center text-light m-0 rounded-top">
-        <h1 class="p-3 m-0">المباني</h1>
+<div class="container-lg rounded shadow bg-white p-0 mt-5">
+    <div class="mx-5 px-5 text-base m-0 rounded-top  ">
+        <h1 class="p-3 m-0 float-end">المباني</h1>
+        <button class="btn btn-outline-danger rounded-pill fw-bold align-items-center float-start my-4" asp-action="">   اضافة     +     </button>
     </div>
-    <div class="">
-        <table id="myTable" class="table table-striped">
+    <div class="p-4 text-center mt-4">
+        <table id="myTable" class="table table-striped mt-2">
             <thead class="">
                 <tr class="table-dark">
                     <th>رقم المبنى</th>
@@ -20,42 +21,36 @@
                     <th>مدير المبنى</th>
                     <th>بريد مدير المبنى</th>
                     <th>ملكية المبنى</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var x in Model)
                 {
-                    <tr>
-                        <td>@x.BuildingNumber</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    الطوابق
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    @foreach (var u in x.FloorTables)
-                                    {
-                                        <li><a class="dropdown-item" href="#"> @u.FloorNumber </a></li>
-                                    }
-                                </ul>
-                            </div>
-                        </td>
-                        <td>@x.Country</td>
-                        <td>@x.City</td>
-                        <td>@x.Street</td>
-                        <td>@x.BuildingManagerName</td>
-                        <td>@x.BuildingManagerEmail</td>
-                        <td>@x.IsOwned</td>
-                    </tr>
+                <tr>
+                    <td>@x.BuildingNumber</td>
+                    <td>
+                        @foreach (var u in x.FloorTables)
+                        { <span>@u.FloorNumber,</span>}
+                    </td>
+                    <td>@x.Country</td>
+                    <td>@x.City</td>
+                    <td>@x.Street</td>
+                    <td>@x.BuildingManagerName</td>
+                    <td>@x.BuildingManagerEmail</td>
+                    <td>@x.IsOwned</td>
+                    <td></td>
+                </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
-<script>
 
-    $(document).ready(function () {
-        $('#myTable').DataTable();
-    });
-
-</script>
+@section scripts{ 
+    <script>
+        $(document).ready(function () {
+            $("#myTable").dataTable();
+        });
+    </script>
+}

@@ -33,6 +33,29 @@ namespace BackOfficePortal.Controllers
             }
             return View(building);
         }
+        [HttpPost]
+        public async Task<IActionResult> AddBuildingAsync(char BuildingNumber, bool IsOwned, int CityId, string Street = null , int BuildingManagerId = 0)
+        {
+            Building buildingAdded = new Building() 
+            { Number = BuildingNumber, IsOwned = IsOwned, CityId = CityId, Street = Street, BuildingManagerId = BuildingManagerId };
+
+            using (client)
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                client.BaseAddress = new Uri(baseUrl+ "/AddBulding");
+
+                //HTTP POST
+                var postTask = await client.PostAsJsonAsync<Building>("AddBulding", buildingAdded);
+
+                if (postTask.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("getAllBuldings");
+                }
+            }
+
+            return View();
+        }
         [HttpGet]
         public IActionResult GetCountries()
         {

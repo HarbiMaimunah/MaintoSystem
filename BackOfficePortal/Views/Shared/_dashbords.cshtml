@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BackOfficePortal</title>
+    <link rel="stylesheet" href="~/DataTable/DataTables-1.10.25/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/js/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -61,10 +62,10 @@
                 &copy; 2021 - BackOfficePortal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/DataTable/datatables.js"></script>
+        <script src ="~/lib/jquery/jquery-3.6.0.min.js"></script>
+        <script src="~/DataTable/DataTables-1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="~/js/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.js"></script>
         @await RenderSectionAsync("Scripts", required: false)
 
         @section Scripts2 {
