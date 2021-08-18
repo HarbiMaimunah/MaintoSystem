@@ -37,6 +37,7 @@
             <br />
             <label>@language.Getkey("Building")</label>
             <select id="buildingsList" asp-for="@Model.BuildingNumber" onchange="GetFloor('@Url.Action("ListFloors", "BeneficiaryEntry")')">
+                <option disabled selected>Select Building</option>
                 @foreach (var building in ViewBag.BuildingsList)
                 {
                     <option value="@building.Id">@building.Number</option>
@@ -45,6 +46,7 @@
             <br />
             <label>@language.Getkey("Floor")</label>
             <select id="floorsList" asp-for="@Model.FloorNumber">
+                <option disabled selected>Select Floor</option>
             </select>
             <br />
             <div class="form-group">
