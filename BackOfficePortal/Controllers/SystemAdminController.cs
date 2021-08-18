@@ -33,6 +33,11 @@ namespace BackOfficePortal.Controllers
             }
             return View(building);
         }
+        [HttpPost]
+        public IActionResult AddBuilding(char BuildingNumber, bool IsOwned, int CityId, string Street = null )
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult GetCountries()
         {

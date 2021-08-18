@@ -116,7 +116,7 @@ namespace BackOfficePortal
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=SystemAdmin}/{action=BuildingsTable}/{id?}");
+                    pattern: "{controller=SystemAdmin}/{action=GetAllTable}/{id?}");
             });
             
         }
