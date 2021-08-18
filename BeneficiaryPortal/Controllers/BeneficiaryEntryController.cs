@@ -15,10 +15,10 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
-    /*[ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]*/
+    [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryEntryController : Controller
     {
         public static string baseUrl = "https://localhost:44307/api/BeneficiaryEntry/";
@@ -74,7 +74,7 @@ namespace BeneficiaryPortal.Controllers
 
                     HttpContext.Session.SetString("Token", token);
 
-                    return RedirectToAction("NewTicket", "Beneficiary");
+                    return RedirectToAction("TicketsList", "Beneficiary");
 
                 }
             }
@@ -90,7 +90,7 @@ namespace BeneficiaryPortal.Controllers
             return res;
         }
 
-        
+        [HttpGet]
         public async Task<JsonResult> ListFloors(int BuildingNumber)
         {
             var url = baseUrl + "ListFloors/" + BuildingNumber.ToString();
