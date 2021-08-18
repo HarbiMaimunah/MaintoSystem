@@ -155,7 +155,7 @@ namespace BackOfficePortal.Controllers
                     {
                         return RedirectToAction("ViewTickets", "MaintenanceManager");
                     }
-                     else
+                     else 
                     {
                         return RedirectToAction("ListTickets", "MaintenanceWorker");
                     }

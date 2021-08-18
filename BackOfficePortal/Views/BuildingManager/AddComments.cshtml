@@ -1,20 +1,21 @@
 ﻿@using BackOfficePortal.ModelsLanguage;
+@model BackOfficePortal.Models.Comment;
 @inject LanguageService language
 
 <h1> @language.Getkey("Comments")</h1>
 
-@section Scripts2{
-    <script src="~/js/BuildingManager/bundle.min.js"></script>
     <body>
-        
+        @TempData["Confirmation"]
+        <form asp-controller="BuildingManager" method="post">
+            <label>@language.Getkey("AddComment")</label>
+            
+            <input type="text" id="comments" name="comments" placeholder=@language.Getkey("Comments") asp-for="@Model.comment" />
 
-        <label>@language.Getkey("AddComment")</label>
-        <input type="text" id="comments" name="comments" placeholder=@language.Getkey("Comments") />
+            <input formaction="PostComment" type="submit"/>
+        </form>
+        
 
 
         <button type="button" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" onclick="AddComments()">@language.Getkey("Submit")</button>
     </body>
 
-
-
-}

@@ -2,10 +2,12 @@
         debugger
 
         $.ajax({
-            url: 'https://localhost:44370/BuildingManager/GetTickets',
+            url: '/BuildingManager/GetTickets',
             type: 'GET',
             dataType: 'JSON',
-            success: OnSuccess
+            success: function () {
+                console.log("success")
+            }
         });
     }
 
