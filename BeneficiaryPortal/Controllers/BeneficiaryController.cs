@@ -85,54 +85,85 @@ namespace BeneficiaryPortal.Controllers
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
-        
-        public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
+        public ActionResult TicketsList()
         {
+            IEnumerable<Ticket> students = null;
+
             using (var httpClient = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
-                var url = baseUrl + "SubmitRequest";
+                var url = baseUrl + "ListTickets";
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var responseTask = httpClient.GetAsync(url);
+                responseTask.Wait();
 
-                string uniqueFileName = null;
-
-                if (ticket.Attachment != null)
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
                 {
-                    var dirPath = Assembly.GetExecutingAssembly().Location;
-                    dirPath = Path.GetDirectoryName(dirPath);
-                    var path = Path.GetFullPath(Path.Combine(dirPath, @"C:\Users\maimu\Source\Repos\NWcodeart\MaintenanceMagementSystems\MaintenanceMagementSystems.Database\TicketRequestsAttachments"));
+                    var readTask = result.Content.ReadAsAsync<IList<Ticket>>();
+                    readTask.Wait();
 
-                    string uploadsFolder = Path.Combine(path);
-
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + ticket.Attachment.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        ticket.Attachment.CopyTo(fileStream);
-                    }
+                    students = readTask.Result;
                 }
-
-                ticket.Ticket.Picture = uniqueFileName;
-
-                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(ticket.Ticket), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync(url, stringContent))
+                else //web api sent error response 
                 {
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        string error = await response.Content.ReadAsStringAsync();
-                        TempData["NewTicketError"] = error;
-                        return RedirectToAction("NewTicket");
-                    }
+                    //log response status here..
 
+                    students = Enumerable.Empty<Ticket>();
+
+                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
                 }
             }
-
-            TempData["NewTicketConfirmation"] = "Your ticket has been sent successfully";
-            return RedirectToAction("NewTicket");
+            return View(students);
         }
 
+        public async Task<IActionResult> RequestNewTicket(TicketRequest ticket)
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var accessToken = HttpContext.Session.GetString("Token");
+                    var url = baseUrl + "SubmitRequest";
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                    /*string uniqueFileName = null;
+
+                    if (ticket.Attachment != null)
+                    {
+                        var dirPath = Assembly.GetExecutingAssembly().Location;
+                        dirPath = Path.GetDirectoryName(dirPath);
+                        var path = Path.GetFullPath(Path.Combine(dirPath, @"C:\Users\maimu\Source\Repos\NWcodeart\MaintenanceMagementSystems\MaintenanceMagementSystems.Database\TicketRequestsAttachments"));
+
+                        string uploadsFolder = Path.Combine(path);
+
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticket.Attachment.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            ticket.Attachment.CopyTo(fileStream);
+                        }
+                    }
+
+                    ticket.Ticket.Picture = uniqueFileName;*/
+
+                    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(ticket), Encoding.UTF8, "application/json");
+                    using (var response = await httpClient.PostAsync(url, stringContent))
+                    {
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            string error = await response.Content.ReadAsStringAsync();
+                            TempData["NewTicketError"] = error;
+                            return RedirectToAction("NewTicket");
+                        }
+
+                    }
+                }
+
+                TempData["NewTicketConfirmation"] = "Your ticket has been sent successfully";
+                return RedirectToAction("NewTicket");
+            }
+
         //download file
-        public FileResult DownloadAttachment(string fileDownloadName)
+        /*public FileResult DownloadAttachment(string fileDownloadName)
         {
             var dirPath = Assembly.GetExecutingAssembly().Location;
             dirPath = Path.GetDirectoryName(dirPath);
@@ -145,7 +176,7 @@ namespace BeneficiaryPortal.Controllers
             byte[] fileBytes = System.IO.File.ReadAllBytes(file);
 
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Image.Jpeg, fileDownloadName);
-        }
+        }*/
 
         //-------------------------------------------------------------------------------------------------------------------------------------
         public IActionResult ForgetPassword()
