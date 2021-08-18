@@ -7,7 +7,7 @@
 <h1> @language.Getkey("UpdateUser")</h1>
 @section Scripts2{
     <script src="~/js/Beneficiary/updateUser.bundle.min.js"></script>
-    <body>
+    <form>
         <label> @language.Getkey("Name"):</label>
         <input type="text" id="updateName" name="updateName" placeholder=@language.Getkey("Name") />
 
@@ -32,7 +32,7 @@
 
 
         <button type="button" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" onclick="UpdateUser()"> @language.Getkey("Submit") </button>
-    </body>
+    </form>
 
 
 }
