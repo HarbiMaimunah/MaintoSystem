@@ -10,6 +10,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using BackOfficePortal.ModelsLanguage;
 using BackOfficePortal.Filters;
+using System.Net.Http.Headers;
 
 namespace BackOfficePortal.Controllers
 {
@@ -34,7 +35,7 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
-                var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments" , comment);
+                var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments" , comment).ConfigureAwait(false);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
@@ -71,11 +72,12 @@ namespace BackOfficePortal.Controllers
         [HttpGet]
         public async Task<ActionResult> GetTickets()
         {
-            HttpClient client = new HttpClient();
 
             List<Ticket> TicketList = new List<Ticket>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync(baseUrl + "ViewTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {
