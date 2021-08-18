@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] </title>
-    <link rel="stylesheet" href="~/lib/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/js/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     </head>
 <body>
@@ -36,15 +36,6 @@
                         <li class="nav-item">
                             <a class="nav-link navbar-link" href="#">التنبيهات</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                اللغة
-                            </a>
-                            <ul class="dropdown-menu language" aria-labelledby="navbarDropdown">
-                                <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ar-SA" class="dropdown-item">العربية</a></li>
-                                <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="dropdown-item">الإنكليزية</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <div>
                         <button class="bg-white btn-logout btn me-5 d-flex justify-content-center align-items-center">
@@ -63,7 +54,7 @@
 
     @RenderSection("Scripts2", required: false)
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
+    <script src="~/js/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     @section Scripts2 {
