@@ -1,6 +1,10 @@
 ﻿@using BackOfficePortal.ModelsLanguage;
 @inject LanguageService language
 
+@{ 
+    Layout = "~/Views/Shared/_dashbords.cshtml";
+}
+
 <h1> @language.Getkey("View") @language.Getkey("Tickets")</h1>
 @section Scripts2{
     <script src="~/js/BuildingManager/view-tickets.bundle.min.js"></script>

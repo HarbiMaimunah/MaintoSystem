@@ -1,7 +1,9 @@
 ﻿@using BeneficiaryPortal.ModelsLanguage;
 @inject LanguageService language
 
-
+@{ 
+    Layout = "~/Views/Shared/_dashBords.cshtml";
+}
 <h1> @language.Getkey("UpdateUser")</h1>
 @section Scripts2{
     <script src="~/js/Beneficiary/updateUser.bundle.min.js"></script>
