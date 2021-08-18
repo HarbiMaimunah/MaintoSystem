@@ -156,6 +156,9 @@
   <data name="EnterId" xml:space="preserve">
     <value>Enter Ticket ID to add comments:</value>
   </data>
+  <data name="EnterYourEmail" xml:space="preserve">
+    <value>Enter Your Email</value>
+  </data>
   <data name="Floor" xml:space="preserve">
     <value>Floor</value>
   </data>
@@ -225,6 +228,9 @@
   <data name="Respond" xml:space="preserve">
     <value>Respond</value>
   </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
   <data name="SignUp" xml:space="preserve">
     <value>Sign Up</value>
   </data>
@@ -233,6 +239,9 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
+  </data>
+  <data name="TempPassword" xml:space="preserve">
+    <value>Temporarily Password</value>
   </data>
   <data name="Ticket" xml:space="preserve">
     <value>Ticket</value>

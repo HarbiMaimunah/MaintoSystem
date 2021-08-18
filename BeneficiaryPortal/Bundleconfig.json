@@ -22,5 +22,29 @@
       "renameLocals": true
     }
 
+  },
+  {
+    "outputFileName": "wwwroot/js/Beneficiary/sendEmail.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/Beneficiary/send-email.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
+  },
+  {
+    "outputFileName": "wwwroot/js/Beneficiary/resetPassword.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/Beneficiary/reset-password.js"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
   }
 ]

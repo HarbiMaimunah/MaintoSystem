@@ -156,6 +156,9 @@
   <data name="EnterId" xml:space="preserve">
     <value>من فضلك ادخل رقم التذكرة</value>
   </data>
+  <data name="EnterYourEmail" xml:space="preserve">
+    <value>ادخل بريدك الالكتروني</value>
+  </data>
   <data name="Floor" xml:space="preserve">
     <value>الطابق</value>
   </data>
@@ -225,6 +228,9 @@
   <data name="Respond" xml:space="preserve">
     <value>الرد</value>
   </data>
+  <data name="Send" xml:space="preserve">
+    <value>ارسال</value>
+  </data>
   <data name="SignUp" xml:space="preserve">
     <value>مستخدم جديد</value>
   </data>
@@ -233,6 +239,9 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>ارسال</value>
+  </data>
+  <data name="TempPassword" xml:space="preserve">
+    <value>كلمة المرور المؤقته</value>
   </data>
   <data name="Ticket" xml:space="preserve">
     <value>التذكرة</value>
@@ -244,7 +253,7 @@
     <value>الوقت</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>على</value>
+    <value>الى</value>
   </data>
   <data name="UpdateUser" xml:space="preserve">
     <value>تحديث البيانات</value>
