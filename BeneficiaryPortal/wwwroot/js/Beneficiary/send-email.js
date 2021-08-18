@@ -2,7 +2,7 @@
     var Email = $('#email').val();
 
     $.ajax({
-        url: 'https://localhost:44370/Beneficiary/SendEmail',
+        url: 'https://localhost:44370/Beneficiary/PostEmail',
         type: 'POST',
         data: Email,
         success: function (data) {
