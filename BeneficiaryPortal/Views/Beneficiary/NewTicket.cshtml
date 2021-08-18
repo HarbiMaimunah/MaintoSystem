@@ -4,6 +4,7 @@
 @model BeneficiaryPortal.Models.NewTicket
 @{
     ViewData["Title"] = "New Ticket";
+    Layout = "~/View/Shared/_dashbords.cshtml";
 }
 <div id="newRequestPage">
 
@@ -27,10 +28,10 @@
                 <label>Maintenance Type</label>
                 <div class="col-md-5">
                     <select asp-for="@Model.Ticket.MaintenanceTypeID">
-                        @foreach (var type in ViewBag.MaintenanceTypesList)
-                        {
-                            <option value="@type.Id">@type.MaintenanceTypeNameEn</option>
-                        }
+                            @foreach (var type in ViewBag.MaintenanceTypesList)
+                            {
+                                <option value="@type.Id">@type.MaintenanceTypeNameEn</option>
+                            }
                     </select>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                 @*@Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })*@
                 <label>@language.Getkey("Attachment")</label>
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control col-md-5", @accept = "image/*" } })
+                    @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control col-md-5", @accept = "image/jpeg" } })
                 </div>
             </div>
             <br />

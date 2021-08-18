@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BeneficiaryPortal.Models
 {
     public class BeneficiaryRegistration
     {
+
         [Required]
         [RegularExpression(@"^[a-zA-z\s]+$", ErrorMessage = "Accepted characters are alphabets and spaces only")] //Alpha and spaces
         public string Name { get; set; }
@@ -26,10 +28,10 @@ namespace BeneficiaryPortal.Models
         public string Password { get; set; }
 
         [Required]
-        public char BuildingNumber { get; set; }
+        public int BuildingNumber { get; set; }
 
         [Required]
-        public char FloorNumber { get; set; }
+        public int FloorNumber { get; set; }
 
         public List<Building> Buildings { get; set; }
 

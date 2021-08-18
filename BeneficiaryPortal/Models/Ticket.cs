@@ -31,9 +31,8 @@ namespace BeneficiaryPortal.Models
         public DateTime Date { get; set; }
 
         //Picture section
-#nullable enable
         [RegularExpression(@"([0-9a-zA-Z\._-]+.(png|PNG|gif|GIF|jp[e]?g|JP[E]?G))", ErrorMessage = "Accepted file type is image only")] //Image file names
-        public string? Picture { get; set; }
+        public string Picture { get; set; }
 
         //Maintenance type section
         [Required]
