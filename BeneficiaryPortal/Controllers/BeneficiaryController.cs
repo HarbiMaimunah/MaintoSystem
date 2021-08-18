@@ -23,12 +23,12 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]*/
     public class BeneficiaryController : Controller
     {
-        public static string baseUrl = "https://localhost:16982/api/Beneficiary/";
+        public static string baseUrl = "https://localhost:44307/api/Beneficiary/";
 
         public IActionResult SignOut()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login", "Beneficiary");
+            return RedirectToAction("Signin", "BeneficiaryEntry");
         }
 
         public async Task<IActionResult> NewTicket()
@@ -41,11 +41,15 @@ namespace BeneficiaryPortal.Controllers
         [HttpGet]
         public async Task<List<MaintenanceType>> ListMaintenanceTypes()
         {
-            var url = baseUrl + "ListMaintenanceTypes";
-            HttpClient client = new HttpClient();
-            string jsonStr = await client.GetStringAsync(url);
-            var res = JsonConvert.DeserializeObject<List<MaintenanceType>>(jsonStr).ToList();
-            return res;
+            using (HttpClient client = new HttpClient())
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                var url = baseUrl + "ListMaintenanceTypes";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                string jsonStr = await client.GetStringAsync(url);
+                var res = JsonConvert.DeserializeObject<List<MaintenanceType>>(jsonStr).ToList();
+                return res;
+            }    
         }
         //------------------------------------------------------------------------------------------------------------------
         public IActionResult UpdateUser()
@@ -81,6 +85,7 @@ namespace BeneficiaryPortal.Controllers
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
+        
         public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
         {
             using (var httpClient = new HttpClient())
@@ -126,6 +131,21 @@ namespace BeneficiaryPortal.Controllers
             return RedirectToAction("NewTicket");
         }
 
+        //download file
+        public FileResult DownloadAttachment(string fileDownloadName)
+        {
+            var dirPath = Assembly.GetExecutingAssembly().Location;
+            dirPath = Path.GetDirectoryName(dirPath);
+            var path = Path.GetFullPath(Path.Combine(dirPath, "\\Users\\maimu\\OneDrive\\سطح المكتب\\C-Sharp\\HR_System\\DataAccess\\Attachments"));
+
+            string uploadsFolder = Path.Combine(path);
+
+            var file = uploadsFolder + "\\" + fileDownloadName;
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(file);
+
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Image.Jpeg, fileDownloadName);
+        }
 
     }
 }

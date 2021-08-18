@@ -139,8 +139,8 @@ namespace BackOfficePortal.Controllers
 
                      var url = baseUrl + "GetRole";
                      httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                     string roleTypeString = await httpClient.GetStringAsync(url);
-                     HttpContext.Session.SetString("Role", roleTypeString);
+                     var roleTypeString = await httpClient.GetAsync(url);
+                     HttpContext.Session.SetString("Role", roleTypeString.Content.ToString());
                      var Role = HttpContext.Session.GetString("Role");
 
                     if (Role == "SystemAdmin")
