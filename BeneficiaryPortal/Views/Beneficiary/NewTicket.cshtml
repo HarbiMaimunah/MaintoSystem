@@ -1,4 +1,7 @@
-﻿@model BeneficiaryPortal.Models.NewTicket
+﻿@using BeneficiaryPortal.ModelsLanguage;
+@inject LanguageService language
+
+@model BeneficiaryPortal.Models.NewTicket
 @{
     ViewData["Title"] = "New Ticket";
 }
@@ -8,12 +11,13 @@
 
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
-            <h2>New Request</h2>
+            <h2>@language.Getkey("NewTicket")</h2>
             <hr />
             <p class="text-danger">@TempData["NewTicketError"]</p>
             <p class="text-success">@TempData["NewTicketConfirmation"]</p>
             <div class="form-group">
-                @Html.LabelFor(model => model.Ticket.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                @*@Html.LabelFor(model => model.Ticket.Date, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label>@language.Getkey("Date")</label>
                 <div class="col-md-5">
                     @Html.EditorFor(model => model.Ticket.Date, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                 </div>
@@ -32,14 +36,16 @@
             </div>
             <br />
             <div class="form-group">
-                @Html.LabelFor(model => model.Ticket.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                @*@Html.LabelFor(model => model.Ticket.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label> @language.Getkey("Description") </label>
                 <div class="col-md-5">
                     @Html.TextAreaFor(model => model.Ticket.Description, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                 </div>
             </div>
             <br />
             <div class="form-group">
-                @Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })
+                @*@Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label>@language.Getkey("Attachment")</label>
                 <div class="col-md-5">
                     @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control col-md-5", @accept = "image/jpeg" } })
                 </div>
