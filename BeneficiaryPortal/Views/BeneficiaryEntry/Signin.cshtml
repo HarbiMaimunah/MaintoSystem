@@ -15,8 +15,8 @@
         <div class="col-md-5 col-lg-4 col-xl-3 boder border-dark p-4 text-center ">
             <!--Logo-->
             <div class="mt-3 mt-md-5">
-                <img class=" icon-img d-md-none position-relative" src="\images\computer-cleaner.png" alt="image">
-                <img class="logo-logIn my-4" src="\images\logo.png" alt="minto logo">
+                <img class=" icon-img d-md-none position-relative" src="~/images/computer-cleaner.png" alt="image">
+                <img class="logo-logIn my-4" src="~/images/logo.png" alt="minto logo">
             </div>
             <!--input in div-->
             <p class="text-danger">@TempData["LoginError"]</p>
@@ -25,12 +25,12 @@
                 <div class="mt-3 mt-xl-5">
                     <div class="input my-3 ">
                         <i class=" position-absolute  ">
-                            <img class="email-icon" src="\images\mail.png" alt="email icon">
+                            <img class="email-icon" src="~/images/mail.png" alt="email icon">
                         </i>
                         @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "text", @placeholder = @language.Getkey("Email") } })
                     </div>
                     <div class="input my-3">
-                        <i class="position-absolute "><img class="lock-icon" src="\images\padlock.png" alt="lock icon"></i>
+                        <i class="position-absolute "><img class="lock-icon" src="~/images/padlock.png" alt="lock icon"></i>
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "password", @placeholder = @language.Getkey("Password") } })
                     </div>
                 </div>
@@ -47,8 +47,8 @@
         <!--image side of page card-->
         <div class="col-md-7 col-lg-8 col-xl-9 rounded-10-start p-0">
             <div class="d-none d-md-flex bg-gray position-relative">
-                <img class=" card-img position-relative" src="\images\computer-cleaner.png" alt="image">
-                <img class="d-none d-xl-inline employee-img-log-card position-absolute" src="\images\employee.png" alt="persons">
+                <img class=" card-img position-relative" src="~/images/computer-cleaner.png" alt="image">
+                <img class="d-none d-xl-inline employee-img-log-card position-absolute" src="~/images/employee.png" alt="persons">
             </div>
 
         </div>

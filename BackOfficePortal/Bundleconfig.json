@@ -120,5 +120,19 @@
       "renameLocals": true
     }
 
+  },
+  {
+    "outputFileName": "wwwroot/js/password.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/send-email.js",
+      "wwwroot/js/reset-password.js"
+
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+
   }
 ]
