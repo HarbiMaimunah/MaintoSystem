@@ -11,16 +11,14 @@ using System.Threading.Tasks;
 using BackOfficePortal.ModelsLanguage;
 using BackOfficePortal.Filters;
 using System.Net.Http.Headers;
-using System.Text;
-using Newtonsoft.Json;
 
 namespace BackOfficePortal.Controllers
 {
 
-   /* [ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]*/
+    [ServiceFilter(typeof(ResultFilter))]
     public class BuildingManagerController : Controller
     {
         HttpClient client = new HttpClient();
@@ -32,26 +30,18 @@ namespace BackOfficePortal.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> PostComment(Comment comment)
+        public async Task<JsonResult> PostComment( string comment)
         {
             string response;
             using (client)
             {
-                var accessToken = HttpContext.Session.GetString("Token");
-                var url = baseUrl + "AddComments";
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(comment), Encoding.UTF8, "application/json");
-                var httpResponse = await client.PostAsync(url, stringContent);
+                var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments" , comment).ConfigureAwait(false);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
-                    TempData["Confirmation"] = "you added the comment";
-                    return RedirectToAction("AddComments");
                 }
             }
-
-            return RedirectToAction("AddComments");
-
+            return Json("Success", System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -82,11 +72,12 @@ namespace BackOfficePortal.Controllers
         [HttpGet]
         public async Task<ActionResult> GetTickets()
         {
-            HttpClient client = new HttpClient();
 
             List<Ticket> TicketList = new List<Ticket>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync(baseUrl + "ViewTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {

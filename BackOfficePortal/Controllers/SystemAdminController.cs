@@ -33,8 +33,7 @@ namespace BackOfficePortal.Controllers
             }
             return View(building);
         }
-        [HttpPost]
-        public async Task<IActionResult> AddBuildingAsync(char BuildingNumber, bool IsOwned, int CityId, string Street = null , int BuildingManagerId = 0)
+        public async Task<IActionResult> AddBuilding(char BuildingNumber, bool IsOwned, int CityId, string Street = null , int BuildingManagerId = 0)
         {
             Building buildingAdded = new Building() 
             { Number = BuildingNumber, IsOwned = IsOwned, CityId = CityId, Street = Street, BuildingManagerId = BuildingManagerId };

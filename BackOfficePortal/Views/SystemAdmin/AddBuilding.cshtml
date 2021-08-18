@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_dashbords.cshtml";
+}
+<form method="post" asp-controller="SystemAdmin" asp-action="AddBuilding" class="bg-white shadow mt-4 container rounded-4   ">
+    <label>رقم المبنى</label>
+    <input type="text" name="BuildingNumber" />
+    <br />
+    <label>ملكية المبنى</label>
+    <input type="checkbox" name="IsOwned" />
+    <br />
+    <label> المدينة</label>
+    <input type="number" name="CityId" />
+    <br />
+    <label> الشارع</label>
+    <input type="text" name="Street"/>
+    <br />
+    <label> مدير المبنى</label>
+    <input type="number" name="CityId" />
+    <br />
+
+    <button class="btn btn-success">حفظ</button>
+</form>
