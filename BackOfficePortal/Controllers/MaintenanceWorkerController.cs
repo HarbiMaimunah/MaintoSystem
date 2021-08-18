@@ -1,10 +1,12 @@
 ﻿using BackOfficePortal.Filters;
 using BackOfficePortal.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace BackOfficePortal.Controllers
@@ -28,6 +30,8 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.PostAsJsonAsync("AcceptingTicket", TicketId);
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -49,6 +53,8 @@ namespace BackOfficePortal.Controllers
             List<Ticket> TicketList = new List<Ticket>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("ListTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -70,6 +76,8 @@ namespace BackOfficePortal.Controllers
             Ticket ticket = new Ticket();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("GetTicket" + TicketId);
                 if (httpResponse.IsSuccessStatusCode)
                 {

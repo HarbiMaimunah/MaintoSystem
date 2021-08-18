@@ -103,6 +103,8 @@ namespace BackOfficePortal.Controllers
             string response;
             using (HttpClient client = new HttpClient())
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.PutAsJsonAsync("http://localhost:16982/api/SystemUser/" + "UpdateUser", user);
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -182,6 +184,7 @@ namespace BackOfficePortal.Controllers
             string response;
             using (HttpClient client = new HttpClient())
             {
+
                 var httpResponse = await client.PostAsJsonAsync("http://localhost:16982/api/SystemUser/" + "SendEmail", email);
                 if (httpResponse.IsSuccessStatusCode)
                 {

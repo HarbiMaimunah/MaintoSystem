@@ -1,11 +1,13 @@
 ﻿using BackOfficePortal.Filters;
 using BackOfficePortal.Lookup;
 using BackOfficePortal.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace BackOfficePortal.Controllers
@@ -29,6 +31,8 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.PostAsJsonAsync("RespondToTicket" + TicketId, respond);
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -50,6 +54,8 @@ namespace BackOfficePortal.Controllers
             List<Ticket> TicketList = new List<Ticket>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("ViewTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -71,6 +77,8 @@ namespace BackOfficePortal.Controllers
             List<Ticket> TicketList = new List<Ticket>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("ListNewTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -90,6 +98,8 @@ namespace BackOfficePortal.Controllers
             Ticket ticket = new Ticket();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("GetTicket");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -110,6 +120,8 @@ namespace BackOfficePortal.Controllers
             User user = new User();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("GetWorker");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -131,6 +143,8 @@ namespace BackOfficePortal.Controllers
             List<User> UsersList = new List<User>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("ListOfWorkers");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -152,6 +166,8 @@ namespace BackOfficePortal.Controllers
             List<Ticket> TicketList = new List<Ticket>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("ViewUnderReviewTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -172,6 +188,8 @@ namespace BackOfficePortal.Controllers
             List<MaintenanceType> TypeList = new List<MaintenanceType>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("ViewMainteneceType");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -191,6 +209,8 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.PostAsJsonAsync("AddMainteneceType", NewType);
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -210,6 +230,8 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("UpdateMainteneceType");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -229,6 +251,8 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync("DeleteMainteneceType");
                 if (httpResponse.IsSuccessStatusCode)
                 {
