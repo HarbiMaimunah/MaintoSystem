@@ -17,10 +17,10 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
-    /*[ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]*/
+    [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryController : Controller
     {
         public static string baseUrl = "https://localhost:44307/api/Beneficiary/";
