@@ -16,7 +16,9 @@ namespace BeneficiaryPortal.Models
 
         public NewTicket()
         {
-            Ticket = new TicketRequest();
+            Ticket = new TicketRequest() {
+                Description = ""
+            };
         }
 
     }

@@ -1,10 +1,10 @@
 ﻿@using BeneficiaryPortal.ModelsLanguage;
 @inject LanguageService language
 
-@model BeneficiaryPortal.Models.NewTicket
+@model BeneficiaryPortal.Models.TicketRequest
 @{
     ViewData["Title"] = "New Ticket";
-    Layout = "~/View/Shared/_dashbords.cshtml";
+    //Layout = "~/View/Shared/_dashbords.cshtml";
 }
 <div id="newRequestPage">
 
@@ -20,14 +20,14 @@
                 @*@Html.LabelFor(model => model.Ticket.Date, htmlAttributes: new { @class = "control-label col-md-2" })*@
                 <label>@language.Getkey("Date")</label>
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.Ticket.Date, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                 </div>
             </div>
             <br />
             <div class="form-group">
                 <label>Maintenance Type</label>
                 <div class="col-md-5">
-                    <select asp-for="@Model.Ticket.MaintenanceTypeID">
+                    <select asp-for="@Model.MaintenanceTypeID">
                             @foreach (var type in ViewBag.MaintenanceTypesList)
                             {
                                 <option value="@type.Id">@type.MaintenanceTypeNameEn</option>
@@ -40,15 +40,7 @@
                 @*@Html.LabelFor(model => model.Ticket.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
                 <label>@language.Getkey("Description")</label>
                 <div class="col-md-5">
-                    @Html.TextAreaFor(model => model.Ticket.Description, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-                </div>
-            </div>
-            <br />
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label>@language.Getkey("Attachment")</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control col-md-5", @accept = "image/jpeg" } })
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                 </div>
             </div>
             <br />

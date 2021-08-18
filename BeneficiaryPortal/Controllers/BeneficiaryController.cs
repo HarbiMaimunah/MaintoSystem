@@ -86,7 +86,7 @@ namespace BeneficiaryPortal.Controllers
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
         
-        public async Task<IActionResult> RequestNewTicket(NewTicket ticket)
+        public async Task<IActionResult> RequestNewTicket(TicketRequest ticket)
         {
             using (var httpClient = new HttpClient())
             {
@@ -94,7 +94,7 @@ namespace BeneficiaryPortal.Controllers
                 var url = baseUrl + "SubmitRequest";
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-                string uniqueFileName = null;
+                /*string uniqueFileName = null;
 
                 if (ticket.Attachment != null)
                 {
@@ -104,7 +104,7 @@ namespace BeneficiaryPortal.Controllers
 
                     string uploadsFolder = Path.Combine(path);
 
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + ticket.Attachment.FileName;
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + ticket.Attachment.ToString();
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
@@ -112,9 +112,9 @@ namespace BeneficiaryPortal.Controllers
                     }
                 }
 
-                ticket.Ticket.Picture = uniqueFileName;
+                ticket.Ticket.Picture = uniqueFileName;*/
 
-                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(ticket.Ticket), Encoding.UTF8, "application/json");
+                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(ticket), Encoding.UTF8, "application/json");
                 using (var response = await httpClient.PostAsync(url, stringContent))
                 {
                     if (!response.IsSuccessStatusCode)
@@ -145,6 +145,38 @@ namespace BeneficiaryPortal.Controllers
             byte[] fileBytes = System.IO.File.ReadAllBytes(file);
 
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Image.Jpeg, fileDownloadName);
+        }
+
+        public ActionResult TicketsList()
+        {
+            IEnumerable<Ticket> students = null;
+
+            using (var httpClient = new HttpClient())
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                var url = baseUrl + "ListTickets";
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var responseTask = httpClient.GetAsync(url);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<Ticket>>();
+                    readTask.Wait();
+
+                    students = readTask.Result;
+                }
+                else //web api sent error response 
+                {
+                    //log response status here..
+
+                    students = Enumerable.Empty<Ticket>();
+
+                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                }
+            }
+            return View(students);
         }
 
     }

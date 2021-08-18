@@ -1,0 +1,22 @@
+﻿@model IEnumerable<BeneficiaryPortal.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Tickets List";
+}
+
+<h2>Tickets</h2>
+
+<p>
+    @Html.ActionLink("New Request", "NewTicket")
+</p>
+
+    @foreach (var item in Model)
+    {
+        <div>
+            @Html.DisplayFor(modelItem => item.Date)
+            @Html.DisplayFor(modelItem => item.maintenanceType.MaintenanceTypeNameAr)
+            @Html.DisplayFor(modelItem => item.status.StatusTypeAr)
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+        </div>
+    }
+
