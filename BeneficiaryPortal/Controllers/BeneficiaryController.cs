@@ -87,15 +87,15 @@ namespace BeneficiaryPortal.Controllers
 
         public ActionResult TicketsList()
         {
-            IEnumerable<Ticket> students = null;
+            IEnumerable<Ticket> tickets = null;
 
             using (var httpClient = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 var url = baseUrl + "ListTickets";
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer_", accessToken);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var responseTask = httpClient.GetAsync(url);
-                //responseTask.Wait();
+                responseTask.Wait();
 
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
@@ -103,18 +103,23 @@ namespace BeneficiaryPortal.Controllers
                     var readTask = result.Content.ReadAsAsync<IList<Ticket>>();
                     readTask.Wait();
 
-                    students = readTask.Result;
+                    tickets = readTask.Result;
                 }
                 else //web api sent error response 
                 {
                     //log response status here..
 
-                    students = Enumerable.Empty<Ticket>();
+                    tickets = Enumerable.Empty<Ticket>();
 
                     ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
                 }
             }
-            return View(students);
+            return View(tickets);
+        }
+
+        public ActionResult Details(int id)
+        {
+            return View();
         }
 
         public async Task<IActionResult> RequestNewTicket(TicketRequest ticket)
@@ -123,7 +128,7 @@ namespace BeneficiaryPortal.Controllers
                 {
                     var accessToken = HttpContext.Session.GetString("Token");
                     var url = baseUrl + "SubmitRequest";
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer_", accessToken);
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
                     /*string uniqueFileName = null;
 

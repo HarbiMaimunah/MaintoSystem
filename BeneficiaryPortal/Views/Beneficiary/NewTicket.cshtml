@@ -4,7 +4,7 @@
 @model BeneficiaryPortal.Models.TicketRequest
 @{
     ViewData["Title"] = "New Ticket";
-    //Layout = "~/View/Shared/_dashbords.cshtml";
+    Layout = "~/Views/Shared/_dashBords.cshtml";
 }
 <div id="newRequestPage">
 
@@ -30,7 +30,7 @@
                     <select asp-for="@Model.MaintenanceTypeID">
                             @foreach (var type in ViewBag.MaintenanceTypesList)
                             {
-                                <option value="@type.Id">@type.MaintenanceTypeNameEn</option>
+                                <option value="@type.Id">@type.MaintenanceTypeNameAr</option>
                             }
                     </select>
                 </div>
@@ -50,7 +50,9 @@
                 </div>
             </div>
         </div>
-
+        <div>
+            @Html.ActionLink("Back to List", "TicketsList")
+        </div>
     </form>
 
 </div>

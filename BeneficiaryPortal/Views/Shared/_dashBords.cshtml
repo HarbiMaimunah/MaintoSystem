@@ -34,16 +34,16 @@
                             <a class="nav-link navbar-link " aria-current="page" href="#"> @language.Getkey("MyAccount") </a>
                         </li>
                         <li class="nav-item">
-                            
+
                             <a class="nav-link navbar-link active" href="#">@language.Getkey("Order")</a>
                         </li>
                         <li class="nav-item">
-                            
+
                             <a class="nav-link navbar-link" href="#">@language.Getkey("Notification")</a>
                         </li>
                     </ul>
                     <div>
-                        <button class="bg-white btn-logout btn me-5 d-flex justify-content-center align-items-center">
+                        <button class="bg-white btn-logout btn me-5 d-flex justify-content-center align-items-center" onclick="location.href='@Url.Action("SignOut", "Beneficiary")'">
                             <img src="~/images/logout.png" alt="" class="logout-logo">
                         </button>
                     </div>
