@@ -118,8 +118,9 @@ namespace BeneficiaryPortal.Controllers
             return View();
         }
 
-        public async Task<IActionResult> RequestNewTicket(TicketRequest ticket)
+        public async Task<IActionResult> RequestNewTicket(TicketRequest ticket, int MaintenanceTypeId)
             {
+            ticket.MaintenanceTypeID = MaintenanceTypeId;
                 using (var httpClient = new HttpClient())
                 {
                     var accessToken = HttpContext.Session.GetString("Token");

@@ -8,6 +8,7 @@ namespace BeneficiaryPortal.Models
 {
     public class TicketRequest
     {
+        
         [Required(ErrorMessage = "Please enter a description of the problem")]
         [RegularExpression(@"^[a-zA-z\s]+$", ErrorMessage = "Accepted characters are alphabets and spaces only")] //Alpha and spaces
         public string Description { get; set; }
@@ -24,5 +25,10 @@ namespace BeneficiaryPortal.Models
 #nullable enable
         [RegularExpression(@"([0-9a-zA-Z\._-]+.(png|PNG|gif|GIF|jp[e]?g|JP[E]?G))", ErrorMessage = "Accepted file type is image only")] //Image file names
         public string? Picture { get; set; }
+
+        public TicketRequest()
+        {
+            MaintenanceTypeID = 0;
+        }
     }
 }

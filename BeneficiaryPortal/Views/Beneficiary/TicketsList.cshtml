@@ -8,12 +8,12 @@
 
 <!--content-->
 <div class="container">
-    <div class="mt-5 mb-2 row border-bottom">
-        <div class="col-8 col-lg-3">
+    <div class="mt-5 mb-2 row border-bottom ">
+        <div class="col-8 ">
             <h1 class="title">الطلبات</h1>
         </div>
-        <div class="col-4 col=lg-3">
-            <button class="btn btn-outline-success rounded-pill mt-2">+ اضافة</button>
+        <div class="col-4 ">
+            <button class="btn btn-outline-success rounded-pill mt-2" onclick="location.href='@Url.Action("NewTicket", "Beneficiary")'">+ اضافة</button>
         </div>
     </div>
 </div>
@@ -32,16 +32,16 @@
                     <div class="card-body">
 
                         <div class="row p-2 ">
-                            <div class="col-6 p-1">
-                                <img src="image/calendar.png" alt="" class="ticket-img">
+                            <div class="col-12 p-1">
+                                <img src="~/images/calendar.png" alt="" class="ticket-img">
                                 <span class="p-1">@Ticket.Date.Year / @Ticket.Date.Month / @Ticket.Date.Day</span>
                             </div>
                             <div class="col-6 p-1">
-                                <img src="image/repair.png" alt="" class="ticket-img">
+                                <img src="~/images/repair.png" alt="" class="ticket-img">
                                 <span class="p-1">@Ticket.MaintenanceTypeNameAr</span>
                             </div>
                             <div class="col-6 p-1">
-                                <img src="image/charging-circle.png " alt="" class="ticket-img">
+                                <img src="~/images/charging-circle.png" alt="" class="ticket-img">
                                 <span class="p-1">@Ticket.StatusTypeAr</span>
                             </div>
                         </div>
