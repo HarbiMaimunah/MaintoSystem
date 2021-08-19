@@ -55,7 +55,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync("ListTickets");
+                var httpResponse = await client.GetAsync(baseUrl + "ListTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     TicketList = await httpResponse.Content.ReadAsAsync<List<Ticket>>();

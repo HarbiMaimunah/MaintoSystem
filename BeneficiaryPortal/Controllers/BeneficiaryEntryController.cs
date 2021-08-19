@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +72,7 @@ namespace BeneficiaryPortal.Controllers
                         TempData["LoginError"] = error;
                         return RedirectToAction("Signin");
                     }
-
+                 
                     HttpContext.Session.SetString("Token", token);
 
                     return RedirectToAction("TicketsList", "Beneficiary");

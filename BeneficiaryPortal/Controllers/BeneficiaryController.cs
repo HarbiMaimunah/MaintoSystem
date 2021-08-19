@@ -93,9 +93,9 @@ namespace BeneficiaryPortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 var url = baseUrl + "ListTickets";
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer_", accessToken);
                 var responseTask = httpClient.GetAsync(url);
-                responseTask.Wait();
+                //responseTask.Wait();
 
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
@@ -123,7 +123,7 @@ namespace BeneficiaryPortal.Controllers
                 {
                     var accessToken = HttpContext.Session.GetString("Token");
                     var url = baseUrl + "SubmitRequest";
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer_", accessToken);
 
                     /*string uniqueFileName = null;
 

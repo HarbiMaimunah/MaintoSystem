@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BackOfficePortal
@@ -64,6 +65,11 @@ namespace BackOfficePortal
 
                 });
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
+
             services.Configure<RequestLocalizationOptions>(
                 options =>
                 {
@@ -84,10 +90,7 @@ namespace BackOfficePortal
             
             services.AddControllersWithViews();
 
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
-            });
+           
 
         }
 
