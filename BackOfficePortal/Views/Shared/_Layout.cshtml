@@ -12,55 +12,10 @@
     @inject LanguageService language
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BackOfficePortal</a>
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> @language.Getkey("Home") </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@language.Getkey("Privacy")</a>
-                        </li>
-
-
-
-
-                        <li>
-                            <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            <div class="triangle"></div>
-                            <ul class="language">
-
-                                <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"> English</a></li>
-
-                                <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ar-SA" class="nav-link"> Arabic</a></li>
-
-
-                            </ul>
-
-                        </li>
-
-
-
-
-
-
-
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <ul class="language ">
+            <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"> English</a></li>
+            <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ar-SA" class="nav-link"> Arabic</a></li>
+        </ul>
     </header>
     <div class="container">
         <main role="main" class="pb-3">

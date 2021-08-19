@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace BackOfficePortal.Models
 {
-    public class Country
+    public class CountryDto
     {
         public int Id { get; set; }
 
         public string CountryNameAr { get; set; }
 
         public string CountryNameEn { get; set; }
-        public ICollection<City> Cities { get; set; }
+        public List<CityDto> Cities { get; set; }
 
     }
 }

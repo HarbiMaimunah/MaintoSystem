@@ -35,8 +35,8 @@ namespace BackOfficePortal.Controllers
         }
         public async Task<IActionResult> AddBuilding(char BuildingNumber, bool IsOwned, int CityId, string Street = null , int BuildingManagerId = 0)
         {
-            Building buildingAdded = new Building() 
-            { Number = 'f', IsOwned = true, CityId = 1, Street = "الريان", BuildingManagerId = 5 };
+            BuildingAdd buildingAdded = new BuildingAdd() 
+            { BuildingNumber = BuildingNumber, IsOwned = IsOwned, CityId = CityId, Street = Street, BuildingManagerId = BuildingManagerId };
 
             using (client)
             {
@@ -45,20 +45,27 @@ namespace BackOfficePortal.Controllers
                 client.BaseAddress = new Uri(baseUrl+ "AddBuilding");
 
                 //HTTP POST
-                var postTask = await client.PostAsJsonAsync<Building>("AddBuilding", buildingAdded);
+                var post = await client.PostAsJsonAsync<BuildingAdd>("AddBuilding", buildingAdded);
 
-                if (postTask.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("getAllBuildings");
-                }
             }
 
             return View();
         }
         [HttpGet]
-        public IActionResult GetCountries()
+        public async Task<IActionResult> GetCountries()
         {
-            return View();
+            List<CountryDto> countries = new List<CountryDto>();
+            using (client)
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var httpResponse = await client.GetAsync(baseUrl + "GetCountries");
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    countries = await httpResponse.Content.ReadAsAsync<List<CountryDto>>();
+                }
+                }
+            return View(countries);
         }
         [HttpPost]
         public IActionResult AddCountry()
