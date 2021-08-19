@@ -1,5 +1,5 @@
-﻿using BeneficiaryPortal.Filters;
-using BeneficiaryPortal.Models;
+﻿using BeneficiaryPortal.Models;
+using BeneficiaryPortal.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -85,31 +85,27 @@ namespace BeneficiaryPortal.Controllers
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult TicketsList()
+        public async Task<ActionResult> TicketsList()
         {
-            IEnumerable<Ticket> tickets = null;
+            //IEnumerable<Ticket> tickets = null;
+            List<TicketsDto> tickets = new List<TicketsDto>();
 
-            using (var httpClient = new HttpClient())
+            using (HttpClient httpClient = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
-                var url = baseUrl + "ListTickets";
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var responseTask = httpClient.GetAsync(url);
-                responseTask.Wait();
 
-                var result = responseTask.Result;
-                if (result.IsSuccessStatusCode)
+                var url = baseUrl + "ListTickets";
+                var responseTask = await httpClient.GetAsync(url);
+
+                if (responseTask.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<IList<Ticket>>();
-                    readTask.Wait();
+                    tickets = await responseTask.Content.ReadAsAsync<List<TicketsDto>>();
 
-                    tickets = readTask.Result;
                 }
                 else //web api sent error response 
                 {
                     //log response status here..
-
-                    tickets = Enumerable.Empty<Ticket>();
 
                     ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
                 }

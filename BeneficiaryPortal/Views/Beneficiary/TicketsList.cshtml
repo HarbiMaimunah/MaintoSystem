@@ -1,23 +1,59 @@
-﻿@model IEnumerable<BeneficiaryPortal.Models.Ticket>
+﻿@model List<TicketsDto>
 
 @{
     ViewData["Title"] = "Tickets List";
     Layout = "~/Views/Shared/_dashBords.cshtml";
 }
 
-<h2>Tickets</h2>
 
-<p>
-    @Html.ActionLink("New Request", "NewTicket")
-</p>
-
-    @foreach (var item in Model)
-    {
-        <div>
-            @Html.DisplayFor(modelItem => item.Date)
-            @Html.DisplayFor(modelItem => item.status.StatusTypeAr)
-            @Html.DisplayFor(modelItem => item.maintenanceType.MaintenanceTypeNameAr)
-            @Html.ActionLink("Details", "Details", new { id = item.Id })
+<!--content-->
+<div class="container">
+    <div class="mt-5 mb-2 row border-bottom">
+        <div class="col-8 col-lg-3">
+            <h1 class="title">الطلبات</h1>
         </div>
-    }
+        <div class="col-4 col=lg-3">
+            <button class="btn btn-outline-success rounded-pill mt-2">+ اضافة</button>
+        </div>
+    </div>
+</div>
 
+<div class="container-fluid bg-trasparent my-3 p-3 position-relative">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-md-3  row-cols-lg-4 row-cols-xl-5 g-3">
+
+        @foreach (var Ticket in Model)
+        {
+
+            <!--ticket start-->
+            <div class="col">
+                <div class="card h-100 shadow-sm p-2 border-0 rounded-4">
+
+                    <img src="" class="card-img-top rounded-4" alt="">
+                    <div class="card-body">
+
+                        <div class="row p-2 ">
+                            <div class="col-6 p-1">
+                                <img src="image/calendar.png" alt="" class="ticket-img">
+                                <span class="p-1">@Ticket.Date.Year / @Ticket.Date.Month / @Ticket.Date.Day</span>
+                            </div>
+                            <div class="col-6 p-1">
+                                <img src="image/repair.png" alt="" class="ticket-img">
+                                <span class="p-1">@Ticket.MaintenanceTypeNameAr</span>
+                            </div>
+                            <div class="col-6 p-1">
+                                <img src="image/charging-circle.png " alt="" class="ticket-img">
+                                <span class="p-1">@Ticket.StatusTypeAr</span>
+                            </div>
+                        </div>
+                        <p class="card-text pt-2 border-top border-secondray">وصف المشكلة وصف المشكلة وصف المشكلة وصف المشكلة وصف المشكلة وصف المشكلة وصف المشكلة وصف المشكلة وصف المشكلة وصف المشكلة</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-danger rounded-pill mt-2">- الغاء</button>
+                    </div>
+                </div>
+            </div>
+            <!--Tickets end-->
+        }
+
+    </div>
+</div>
