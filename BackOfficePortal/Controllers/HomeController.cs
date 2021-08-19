@@ -33,7 +33,7 @@ namespace BackOfficePortal.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
-        public static string baseUrl = "http://localhost:16982/api/BackOfficeEntry/";
+        public static string baseUrl = "https://localhost:44307/api/BackOfficeEntry/";
 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
@@ -104,7 +104,7 @@ namespace BackOfficePortal.Controllers
             using (HttpClient client = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer_", accessToken);
                 var httpResponse = await client.PutAsJsonAsync("http://localhost:16982/api/SystemUser/" + "UpdateUser", user);
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -138,31 +138,45 @@ namespace BackOfficePortal.Controllers
                     }
 
                     HttpContext.Session.SetString("Token", token);
-
-                     var url = baseUrl + "GetRole";
-                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                     var roleTypeString = await httpClient.GetAsync(url);
-                     HttpContext.Session.SetString("Role", roleTypeString.Content.ToString());
-                     var Role = HttpContext.Session.GetString("Role");
-
-                    if (Role == "SystemAdmin")
-                    {
-                        return RedirectToAction();
-                    }
-                    else if (Role == "BuildingManager")
-                    {
-                        return RedirectToAction("ViewTickets", "BuildingManager");
-                    }
-                     else if(Role == "MaintenanceManager")
-                    {
-                        return RedirectToAction("ViewTickets", "MaintenanceManager");
-                    }
-                     else 
-                    {
-                        return RedirectToAction("ListTickets", "MaintenanceWorker");
-                    }
-                     
                 }
+
+                return RedirectToAction("Redirect");
+            }
+        }
+
+        public async Task<IActionResult> Redirect()
+        {
+            using (var client = new HttpClient())
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                var url = baseUrl + "GetRole";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var roleTypeResponse = await client.GetAsync(url);
+                if (roleTypeResponse.IsSuccessStatusCode)
+                {
+                    string roleType = await roleTypeResponse.Content.ReadAsStringAsync();
+                    HttpContext.Session.SetString("Role", roleType);
+                }
+
+                var Role = HttpContext.Session.GetString("Role");
+
+                if (Role == "SystemAdmin")
+                {
+                    return RedirectToAction();
+                }
+                else if (Role == "BuildingManager")
+                {
+                    return RedirectToAction("ViewTickets", "BuildingManager");
+                }
+                else if (Role == "MaintenanceManager")
+                {
+                    return RedirectToAction("ViewTickets", "MaintenanceManager");
+                }
+                else
+                {
+                    return RedirectToAction("ListTickets", "MaintenanceWorker");
+                }
+
             }
         }
 

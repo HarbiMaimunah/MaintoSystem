@@ -24,7 +24,7 @@ namespace BackOfficePortal.Controllers
     public class BuildingManagerController : Controller
     {
         HttpClient client = new HttpClient();
-        public static string baseUrl = "http://localhost:16982/api/BuildingManagerAPI/";
+        public static string baseUrl = "http://localhost:44307/api/BuildingManagerAPI/";
 
 
         public ActionResult AddComments()

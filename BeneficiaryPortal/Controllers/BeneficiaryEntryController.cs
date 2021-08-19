@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,10 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
-    /*[ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]*/
+    [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryEntryController : Controller
     {
         public static string baseUrl = "https://localhost:44307/api/BeneficiaryEntry/";
@@ -71,7 +72,7 @@ namespace BeneficiaryPortal.Controllers
                         TempData["LoginError"] = error;
                         return RedirectToAction("Signin");
                     }
-
+                 
                     HttpContext.Session.SetString("Token", token);
 
                     return RedirectToAction("TicketsList", "Beneficiary");
