@@ -1,0 +1,44 @@
+﻿@model List<CountryDto>
+@{
+    Layout = "~/Views/Shared/_dashbords.cshtml";
+}
+
+<div class="container-lg rounded shadow bg-white p-0 mt-5">
+    <div class="mx-5 px-5 text-base m-0 rounded-top  ">
+        <h1 class="p-3 m-0 float-end">البلدان</h1>
+        <button class="btn btn-outline-danger rounded-pill fw-bold align-items-center float-start my-4" asp-action="">   اضافة     +     </button>
+    </div>
+    <div class="p-4 text-center mt-4">
+        <table id="myTable" class="table table-striped mt-2">
+            <thead class="">
+                <tr class="table-dark">
+                    <th>الرقم التسلسلي</th>
+                    <th>المدينة</th>
+                    <th>المدن</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                <tr>
+                    <td>@x.Id</td>
+
+                    <td>@x.CountryNameAr</td>
+                    <td>
+                        @foreach (var u in x.Cities)
+                        {<span>@u.CityNameAr,</span>}
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#myTable").dataTable();
+        });
+    </script>
+}

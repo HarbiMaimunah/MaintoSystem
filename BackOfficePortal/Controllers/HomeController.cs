@@ -21,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace BackOfficePortal.Controllers
 {
@@ -129,6 +130,12 @@ namespace BackOfficePortal.Controllers
                 using (var response = await httpClient.PostAsync(baseUrl + "Login", stringContent))
                 {
                     string token = await response.Content.ReadAsStringAsync();
+
+                    var handler = new JwtSecurityTokenHandler();
+                    var jsonToken = handler.ReadToken(token);
+                    var tokenS = jsonToken as JwtSecurityToken;
+                    var jti = tokenS.Claims;
+
 
                     if (!response.IsSuccessStatusCode)
                     {
