@@ -58,6 +58,7 @@
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.0" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="itext7" Version="7.1.16" />
     <PackageReference Include="jQuery" Version="3.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Npgsql" Version="5.0.0" />
