@@ -171,6 +171,9 @@
   <data name="MaintenanceType" xml:space="preserve">
     <value>Maintenance Type</value>
   </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>My Account</value>
+  </data>
   <data name="MyRequests" xml:space="preserve">
     <value>My Requests</value>
   </data>
@@ -182,6 +185,12 @@
   </data>
   <data name="NewRequest" xml:space="preserve">
     <value>Order New Request</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Orders</value>
   </data>
   <data name="Owned" xml:space="preserve">
     <value>Owned</value>

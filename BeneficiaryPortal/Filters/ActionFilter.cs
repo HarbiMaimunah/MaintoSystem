@@ -20,11 +20,11 @@ namespace BeneficiaryPortal.Filters
         {
             string path = _config.GetValue<string>("ActionPath");
 
-            File.AppendAllText(path, "===================================Action Type===================================\n"
+            /*File.AppendAllText(path, "===================================Action Type===================================\n"
                + "Start Date :   " + DateTime.Now + "\n" +
                  actionContext.ActionDescriptor.RouteValues + "\n" +
                  actionContext.ActionDescriptor.DisplayName + "\n" +
-                  "\n\n");
+                  "\n\n");*/
         }
 
         public void OnActionExecuted(ActionExecutedContext actionExecutedContext)
