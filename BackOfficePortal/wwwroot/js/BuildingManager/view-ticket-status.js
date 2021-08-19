@@ -1,7 +1,7 @@
 ﻿function ViewTicketStatus() {
                    debugger
                            $.ajax({
-                               url: 'https://localhost:44370/BuildingManager/GetTicketsStatus' ,
+                               url: 'https://localhost:44370/BuildingManager/GetTicketStatus' ,
                                type: 'GET',
                                success: OnSuccess
                });

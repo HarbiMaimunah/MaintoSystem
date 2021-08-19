@@ -6,7 +6,7 @@
         Id: $('#reason').val()
     }
     $.ajax({
-        url: 'https://localhost:44370/BuildingManager/PostRespond',
+        url: 'https://localhost:44370/MaintenanceManager/PostRespond',
         type: 'POST',
         data: Id, TicketRespond,
         success: function (data) {

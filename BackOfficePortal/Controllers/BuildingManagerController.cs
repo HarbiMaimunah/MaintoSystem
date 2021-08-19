@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using BackOfficePortal.ModelsLanguage;
 using BackOfficePortal.Filters;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace BackOfficePortal.Controllers
 {
@@ -30,22 +32,27 @@ namespace BackOfficePortal.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<JsonResult> PostComment( string comment)
+        public async Task<IActionResult> PostComment(Comment comment)
         {
             string response;
             using (client)
             {
-                var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments" , comment).ConfigureAwait(false);
+                var accessToken = HttpContext.Session.GetString("Token");
+                var url = baseUrl + "AddComments";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(comment), Encoding.UTF8, "application/json");
+                var httpResponse = await client.PostAsync(url, stringContent);
+                //var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments", comment).ConfigureAwait(false);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
+                    TempData["Confirmation"] = "you added the comment";
                 }
+                return RedirectToAction("AddComments");
             }
-            return Json("Success", System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
-
-        //------------------------------------------------------------------------------------------------------------------------------------------------
-        public ActionResult EditBuilding()
+            //------------------------------------------------------------------------------------------------------------------------------------------------
+            public ActionResult EditBuilding()
         {
             return View();
         }
@@ -55,6 +62,8 @@ namespace BackOfficePortal.Controllers
             string response;
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.PutAsJsonAsync(baseUrl + "EditBuilding" + buildingID,  Updatedbuilding);
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -98,6 +107,8 @@ namespace BackOfficePortal.Controllers
             Building building = new Building();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync(baseUrl + "ViewBuilding");
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -118,6 +129,8 @@ namespace BackOfficePortal.Controllers
             List<string> StatusList = new List<string>();
             using (client)
             {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var httpResponse = await client.GetAsync(baseUrl + "ViewTicketsStatus");
                 if (httpResponse.IsSuccessStatusCode)
                 {
