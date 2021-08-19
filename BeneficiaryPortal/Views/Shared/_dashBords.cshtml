@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using BeneficiaryPortal.ModelsLanguage;
+@inject LanguageService language
+
+<!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
     <meta charset="utf-8" />
@@ -6,7 +9,7 @@
     <title>@ViewData["Title"] </title>
     <link rel="stylesheet" href="~/js/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    </head>
+</head>
 <body>
     <header>
         <!-- Bootstrap 5 Navbar -->
@@ -28,13 +31,15 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-3 mb-lg-0 ">
                         <li class="nav-item">
-                            <a class="nav-link navbar-link " aria-current="page" href="#">حسابي  </a>
+                            <a class="nav-link navbar-link " aria-current="page" href="#"> @language.Getkey("MyAccount") </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link navbar-link active" href="#">الطلبات</a>
+                            
+                            <a class="nav-link navbar-link active" href="#">@language.Getkey("Order")</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link navbar-link" href="#">التنبيهات</a>
+                            
+                            <a class="nav-link navbar-link" href="#">@language.Getkey("Notification")</a>
                         </li>
                     </ul>
                     <div>

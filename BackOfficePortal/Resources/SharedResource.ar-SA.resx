@@ -171,6 +171,9 @@
   <data name="MaintenanceType" xml:space="preserve">
     <value>نوع الصيانة</value>
   </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>حسابي</value>
+  </data>
   <data name="MyRequests" xml:space="preserve">
     <value>طلباتي</value>
   </data>
@@ -182,6 +185,12 @@
   </data>
   <data name="NewRequest" xml:space="preserve">
     <value>طلب صيانة جديد</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>التنبيهات</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>الطلبات</value>
   </data>
   <data name="Owned" xml:space="preserve">
     <value>مملوك</value>
