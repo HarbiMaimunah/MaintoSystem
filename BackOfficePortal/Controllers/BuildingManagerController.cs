@@ -13,6 +13,7 @@ using BackOfficePortal.Filters;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
+using BackOfficePortal.Lookup;
 
 namespace BackOfficePortal.Controllers
 {
@@ -23,7 +24,7 @@ namespace BackOfficePortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BuildingManagerController : Controller
     {
-        public static string baseUrl = "https://localhost:44307/api/BuildingManagerAPI/";
+        public static string baseUrl = "http://10.6.8.91:44307/api/BuildingManagerAPI/";
 
 
         public ActionResult AddComments()
@@ -92,12 +93,7 @@ namespace BackOfficePortal.Controllers
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
-        public ActionResult ViewBuilding()
-        {
-            return View();
-        }
-        [HttpGet]
-        public async Task<ActionResult> GetBuilding()
+        public async Task<ActionResult> ViewBuilding()
         {
             Building building = new Building();
             using (HttpClient client = new HttpClient())
@@ -110,15 +106,32 @@ namespace BackOfficePortal.Controllers
                     building = await httpResponse.Content.ReadAsAsync<Building>();
                 }
             }
-            return Json(building, System.Web.Mvc.JsonRequestBehavior.AllowGet);
-        }
-
-        //------------------------------------------------------------------------------------------------------------------------------------------------
-        public ActionResult ViewTicketStatus()
-        {
-            return View();
+            return View(building);
         }
         [HttpGet]
+      /*  public async Task<ActionResult> GetBuilding()
+        {
+            return Json(building, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+
+        }*/
+
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+       /* public async Task<ActionResult> ViewTicketStatus()
+        {
+            List<Status> StatusList = new List<Status>();
+            using (HttpClient client = new HttpClient())
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var httpResponse = await client.GetAsync(baseUrl + "ViewTicketsStatus");
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    StatusList = await httpResponse.Content.ReadAsAsync<List<Status>>();
+                }
+            }
+            return View(StatusList);
+        }*/
+       /* [HttpGet]
         public async Task<ActionResult> GetTicketStatus()
         {
             List<string> StatusList = new List<string>();
@@ -134,7 +147,7 @@ namespace BackOfficePortal.Controllers
             }
             return Json(StatusList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
-
+       */
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
         public IActionResult ChangeLanguage(string culture)

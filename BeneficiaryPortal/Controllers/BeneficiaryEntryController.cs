@@ -22,7 +22,7 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryEntryController : Controller
     {
-        public static string baseUrl = "https://localhost:44307/api/BeneficiaryEntry/";
+        public static string baseUrl = "http://10.6.8.91:44307/api/BeneficiaryEntry/";
 
         public async Task<IActionResult> Signup()
         {
@@ -30,25 +30,33 @@ namespace BeneficiaryPortal.Controllers
             ViewBag.BuildingsList = buildings;
             return View();
         }
-
-        public async Task<IActionResult> Register(BeneficiaryRegistration RegisterInfo)
+        [HttpPost]
+        public async Task<IActionResult> Register(BeneficiaryRegistration RegisterInfo, string ConfirmPass )
         {
-            using (var httpClient = new HttpClient())
+            if(ConfirmPass == RegisterInfo.Password) 
             {
-                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(RegisterInfo), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync(baseUrl + "Register", stringContent))
+                using (var httpClient = new HttpClient())
                 {
-                    if (!response.IsSuccessStatusCode)
+                    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(RegisterInfo), Encoding.UTF8, "application/json");
+                    using (var response = await httpClient.PostAsync(baseUrl + "Register", stringContent))
                     {
-                        string error = await response.Content.ReadAsStringAsync();
-                        TempData["SignupError"] = error;
-                        return RedirectToAction("Signup");
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            string error = await response.Content.ReadAsStringAsync();
+                            TempData["SignupError"] = error;
+                            return RedirectToAction("Signup");
+                        }
+
                     }
 
+                    return RedirectToAction("Signin");
+
                 }
-
-                return RedirectToAction("Signin");
-
+            }
+            else
+            {
+                ViewBag.UnCorrectConfirm = "Password Confirm UnCorrect";
+                return View();
             }
         }
 

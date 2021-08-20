@@ -66,7 +66,7 @@ namespace BeneficiaryPortal.Controllers
             
             using (HttpClient client = new HttpClient())
             {
-                var httpResponse = await client.PutAsJsonAsync("http://localhost:16982/api/SystemUser/" + "UpdateUser", user);
+                var httpResponse = await client.PutAsJsonAsync("http://10.6.8.91:44307/api/SystemUser/" + "UpdateUser", user);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();

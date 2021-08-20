@@ -20,11 +20,11 @@ namespace BeneficiaryPortal.Filters
         {
             string path = _config.GetValue<string>("ExceptionPath");
 
-            File.AppendAllText(path, "=====================================Error Logging ===================================\n\n" +
-            "Start Date :   " + DateTime.Now +
-            "\nError Message: \n" + context.Exception +
-            "\n\nEnd Date :   " + DateTime.Now + "\n\n\n"
-             );
+            //File.AppendAllText(path, "=====================================Error Logging ===================================\n\n" +
+            //"Start Date :   " + DateTime.Now +
+            //"\nError Message: \n" + context.Exception +
+            //"\n\nEnd Date :   " + DateTime.Now + "\n\n\n"
+            // );
         }
     }
 }
