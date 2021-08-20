@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -22,7 +23,7 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryEntryController : Controller
     {
-        public static string baseUrl = "http://10.6.8.91:44307/api/BeneficiaryEntry/";
+        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryEntryLocalhost"].ToString();
 
         public async Task<IActionResult> Signup()
         {

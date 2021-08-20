@@ -2,7 +2,7 @@
 @inject LanguageService language
 @model BeneficiaryPortal.Models.BeneficiaryRegistration
 @{
-    ViewData["Title"] = "تسجيل الدخول";
+    ViewData["Title"] = "تسجيل";
 }
 
 @section Scripts2{
@@ -39,7 +39,7 @@
                         </div>
                         <div class="input py-1 px-2 col-md-6">
                             <i class=" position-absolute "><img class="Building-icon" src="~/images/building.png" alt="email icon"></i>
-                            <select class="input-field bg-white rounded-pill p-Input " id="buildingsList" asp-for="@Model.BuildingNumber" onchange="GetFloor('@Url.Action("ListFloors", "BeneficiaryEntry")')">
+                            <select class="input-field bg-white rounded-pill p-Input " id="buildingsList" name="BuildingNumber" onchange="GetFloor('@Url.Action("ListFloors", "BeneficiaryEntry")')">
                                 <option disabled selected>@language.Getkey("Building")</option>
                                 @foreach (var building in ViewBag.BuildingsList)
                                 {
@@ -50,7 +50,7 @@
                         </div>
                         <div class="input py-1 px-2 col-md-6">
                             <i class=" position-absolute "><img class="Building-icon" src="~/images/layer-group.png" alt="email icon"></i>
-                            <select class="input-field bg-white rounded-pill p-Input " type="text" id="floorsList" asp-for="@Model.FloorNumber">
+                            <select class="input-field bg-white rounded-pill p-Input " type="text" id="floorsList" name="FloorNumber">
                                 <option disabled selected>@language.Getkey("Floor")</option>
                             </select>
                         </div>
@@ -68,11 +68,12 @@
                         </div>
                     </div>
 
+                    <!--register in button-->
+                    <div class="btn-m-logIn btn-register position-inline top-50 start-50 translate-middle">
+                        <input type="submit" class="btn btn-color text-white  rounded-pill mt-5" placeholder=@language.Getkey("Register")>
+                    </div>
                 }
-                <!--register in button-->
-                <div class="btn-m-logIn btn-register position-inline top-50 start-50 translate-middle">
-                    <input type="submit" class="btn btn-color text-white  rounded-pill mt-5" placeholder=@language.Getkey("Register")>
-                </div>
+
                 <div class="text-secondary mt-sm-0 mt-md-5 q-lable">
                     <label class=" float-start px-sm-0 px-xl-3"><a class=" fw-bolder log-link px-2 text-decoration-none " onclick="location.href='@Url.Action("Signin", "BeneficiaryEntry")'">@language.Getkey("Login") </a></label>
                 </div>
