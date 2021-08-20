@@ -11,6 +11,7 @@
     <div class="mt-5 mb-2 row border-bottom ">
         <div class="col-8 ">
             <h1 class="title">الطلبات</h1>
+            <p class="text-danger">@TempData["ConfirmationError"]</p>
         </div>
         <div class="col-4 ">
             <button class="btn btn-outline-success rounded-pill mt-2" onclick="location.href='@Url.Action("NewTicket", "Beneficiary")'">+ اضافة</button>
@@ -47,8 +48,9 @@
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-outline-danger rounded-pill mt-2">- الغاء</button>
-                        <button class="btn btn-outline-success rounded-pill mt-2" onclick="location.href='@Url.Action()'">تفاصيل اضافية</button>
+                        <button class="btn btn-outline-danger rounded-pill mt-2" onclick="location.href='@Url.Action("Cancel", "Beneficiary", new { id = Ticket.Id })'">- الغاء</button>
+                        <button class="btn btn-outline-success rounded-pill mt-2" onclick="location.href='@Url.Action("Details", "Beneficiary", new { id = Ticket.Id })'">تفاصيل اضافية</button>
+                        <button class="btn btn-outline-primary rounded-pill mt-2" onclick="location.href='@Url.Action("ConfirmTicket", "Beneficiary", new { id = Ticket.Id })'">تأكيد</button>
                     </div>
                 </div>
             </div>
