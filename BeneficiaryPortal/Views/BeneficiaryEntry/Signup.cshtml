@@ -30,12 +30,12 @@
                         <div class="input py-1 px-2 col-md-6">
                             <i class=" position-absolute  "><img class="person-icon" src="~/images/user.png" alt="email icon"></i>
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "text", @placeholder = @language.Getkey("Name") } })
-                            
+
                         </div>
                         <div class="input py-1 px-2 col-md-6">
                             <i class="position-absolute "><img class="mobile-icon" src="~/images/mobile.png" alt="lock icon"></i>
                             @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "number", @placeholder = @language.Getkey("Phone") } })
-                            
+
                         </div>
                         <div class="input py-1 px-2 col-md-6">
                             <i class=" position-absolute "><img class="Building-icon" src="~/images/building.png" alt="email icon"></i>
@@ -60,21 +60,21 @@
                         </div>
                         <div class="input py-1 px-2 col-md-6">
                             <i class="position-absolute "><img class="lock-icon" src="~/images/padlock.png" alt="lock icon"></i>
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "password", @placeholder = "تأكيد كلمة المرور" } })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "password", @placeholder = @language.Getkey("Password") } })
                         </div>
                         <div class="input py-1 px-2 col-md-6">
                             <i class="position-absolute "><img class="lock-icon" src="~/images/padlock.png" alt="lock icon"></i>
-                            <input class="input-field bg-white rounded-pill p-Input" name="ConfirmPass" type="password" placeholder="تأكيد كلمة المرور">
+                            <input class="input-field bg-white rounded-pill p-Input" name="ConfirmPass" type="password" placeholder=@language.Getkey("Confirmation")>
                         </div>
                     </div>
 
                 }
                 <!--register in button-->
                 <div class="btn-m-logIn btn-register position-inline top-50 start-50 translate-middle">
-                    <button type="submit" class="btn btn-color text-white  rounded-pill mt-5">تسجيل</button>
+                    <input type="submit" class="btn btn-color text-white  rounded-pill mt-5" placeholder=@language.Getkey("Register")>
                 </div>
                 <div class="text-secondary mt-sm-0 mt-md-5 q-lable">
-                    <label class=" float-start px-sm-0 px-xl-3"><a class=" fw-bolder log-link px-2 text-decoration-none " href=""> تسجيل الدخول</a></label>
+                    <label class=" float-start px-sm-0 px-xl-3"><a class=" fw-bolder log-link px-2 text-decoration-none " onclick="location.href='@Url.Action("Signin", "BeneficiaryEntry")'">@language.Getkey("Login") </a></label>
                 </div>
             </div>
             <!--image side of page card-->

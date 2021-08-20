@@ -18,7 +18,7 @@ namespace BackOfficePortal.Controllers
     public class MaintenanceWorkerController : Controller
     {
         HttpClient client = new HttpClient();
-        public static string baseUrl = "http://localhost:16982/api/MaintenanceWorker/";
+        public static string baseUrl = "http://10.6.8.91:44307/api/MaintenanceWorker/";
 
         public ActionResult AcceptingTicket()
         {

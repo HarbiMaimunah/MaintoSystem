@@ -22,7 +22,7 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryEntryController : Controller
     {
-        public static string baseUrl = "https://localhost:44307/api/BeneficiaryEntry/";
+        public static string baseUrl = "http://10.6.8.91:44307/api/BeneficiaryEntry/";
 
         public async Task<IActionResult> Signup()
         {

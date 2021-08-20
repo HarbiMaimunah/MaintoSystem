@@ -34,7 +34,7 @@ namespace BackOfficePortal.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
-        public static string baseUrl = "https://localhost:44307/api/BackOfficeEntry/";
+        public static string baseUrl = "http://10.6.8.91:44307/api/BackOfficeEntry/";
 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
