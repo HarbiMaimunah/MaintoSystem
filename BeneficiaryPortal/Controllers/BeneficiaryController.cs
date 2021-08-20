@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace BeneficiaryPortal.Controllers
 {
@@ -23,7 +24,7 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryController : Controller
     {
-        public static string baseUrl = "https://localhost:44307/api/Beneficiary/";
+        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryLocalhost"].ToString();
         HttpClient httpClient = new HttpClient();
 
         public IActionResult SignOut()
