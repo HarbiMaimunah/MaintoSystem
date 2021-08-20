@@ -1,17 +1,22 @@
 ﻿@using BackOfficePortal.ModelsLanguage;
 @inject LanguageService language
-
+@model Building
 
 <h1> @language.Getkey("View") @language.Getkey("Building"):</h1>
 @section Scripts2{
     <script src="~/js/BuildingManager/view-building.bundle.min.js"></script>
     <body>
 
-        <button type="button" id="btnView" name="btnView" data-name="ViewButton" onclick="ViewBuilding()"> @language.Getkey("View") @language.Getkey("Building") </button>
+        @*<button type="button" id="btnView" name="btnView" data-name="ViewButton" onclick="ViewBuilding()"> @language.Getkey("View") @language.Getkey("Building") </button>*@
 
-        <label id="BuildingId" name="BuildingId">  </label>
-        <label id="BuildingNumber" name="BuildingNumber">  </label>
-        <label id="BuildingCity" name="BuildingCity">  </label>
+        <label >  Building Id</label>
+        <label id="BuildingId" name="BuildingId">  @Model.Id</label>
+
+        <label > Building Number </label>
+        <label id="BuildingNumber" name="BuildingNumber"> @Model.Number </label>
+
+        <label> Building Floor </label>
+        <label id="BuildingFloor" name="BuildingFloor"> @Model.floors </label>
 
 
     </body>
