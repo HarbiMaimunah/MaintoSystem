@@ -1,4 +1,4 @@
-﻿    function ViewBuilding() {
+﻿function ViewBuilding() {
         debugger
         $.ajax({
             url: 'https://localhost:44370/BuildingManager/GetBuilding',

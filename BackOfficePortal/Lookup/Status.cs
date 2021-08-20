@@ -16,6 +16,6 @@ namespace BackOfficePortal.Lookup
         [RegularExpression(@"^[[:alpha:]\s]+$", ErrorMessage = "Accepted characters are alphabets and spaces only")] //Alpha and spaces
         public string StatusTypeEn { get; set; }
 
-        public ICollection<Ticket> ticket { get; set; }
+        //public ICollection<Ticket> ticket { get; set; }
     }
 }

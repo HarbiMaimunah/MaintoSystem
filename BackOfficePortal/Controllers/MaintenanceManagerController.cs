@@ -19,7 +19,7 @@ namespace BackOfficePortal.Controllers
     public class MaintenanceManagerController : Controller
     {
         HttpClient client = new HttpClient();
-        public static string baseUrl = "http://localhost:16982/api/MaintenanceManager/";
+        public static string baseUrl = "https://localhost:44307/api/MaintenanceManager/";
 
         public ActionResult RespondToTicket()
         {
@@ -44,11 +44,22 @@ namespace BackOfficePortal.Controllers
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult ViewTickets()
+        public async Task<ActionResult> ViewTickets()
         {
-            return View();
+            List<TicketsDto> TicketList = new List<TicketsDto>();
+            using (client)
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var httpResponse = await client.GetAsync(baseUrl + "ViewTickets");
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    TicketList = await httpResponse.Content.ReadAsAsync<List<TicketsDto>>();
+                }
+            }
+            return View(TicketList);
         }
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult> GetTickets()
         {
             List<Ticket> TicketList = new List<Ticket>();
@@ -63,7 +74,7 @@ namespace BackOfficePortal.Controllers
                 }
             }
             return Json(TicketList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
-        }
+        }*/
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +90,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync("ListNewTickets");
+                var httpResponse = await client.GetAsync(baseUrl + "ListNewTickets");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     TicketList = await httpResponse.Content.ReadAsAsync<List<Ticket>>();
@@ -100,7 +111,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync("GetTicket");
+                var httpResponse = await client.GetAsync(baseUrl + "GetTicket");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     ticket = await httpResponse.Content.ReadAsAsync<Ticket>();
@@ -122,7 +133,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync("GetWorker");
+                var httpResponse = await client.GetAsync(baseUrl + "GetWorker");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     user = await httpResponse.Content.ReadAsAsync<User>();
@@ -145,7 +156,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync("ListOfWorkers");
+                var httpResponse = await client.GetAsync(baseUrl + "ListOfWorkers");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     UsersList = await httpResponse.Content.ReadAsAsync<List<User>>();
@@ -156,11 +167,22 @@ namespace BackOfficePortal.Controllers
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult ViewUnderReviewTickets()
+        public async Task<ActionResult> ViewUnderReviewTickets()
         {
-            return View();
+            List<TicketsDto> TicketList = new List<TicketsDto>();
+            using (client)
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var httpResponse = await client.GetAsync(baseUrl + "ViewUnderReviewTickets");
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    TicketList = await httpResponse.Content.ReadAsAsync<List<TicketsDto>>();
+                }
+            }
+            return View(TicketList);
         }
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult> GetUnderReviewTickets()
         {
             List<Ticket> TicketList = new List<Ticket>();
@@ -175,7 +197,7 @@ namespace BackOfficePortal.Controllers
                 }
             }
             return Json(TicketList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
-        }
+        }*/
         //------------------------------------------------------------------------------------------------------------------------------------------------
         //------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult ViewMainteneceType()
@@ -190,7 +212,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync("ViewMainteneceType");
+                var httpResponse = await client.GetAsync(baseUrl + "ViewMainteneceType");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     TypeList = await httpResponse.Content.ReadAsAsync<List<MaintenanceType>>();
@@ -211,7 +233,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.PostAsJsonAsync("AddMainteneceType", NewType);
+                var httpResponse = await client.PostAsJsonAsync(baseUrl + "AddMainteneceType", NewType);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
@@ -232,7 +254,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync("UpdateMainteneceType");
+                var httpResponse = await client.GetAsync(baseUrl + "UpdateMainteneceType");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
@@ -253,7 +275,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync("DeleteMainteneceType");
+                var httpResponse = await client.GetAsync(baseUrl + "DeleteMainteneceType");
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
