@@ -72,10 +72,10 @@
     <None Include="wwwroot\images\employee.png" />
     <None Include="wwwroot\images\girle.png" />
     <None Include="wwwroot\images\Group 42.png" />
-    <None Include="wwwroot\images\Icon awesome-building.png" />
-    <None Include="wwwroot\images\Icon awesome-layer-group.png" />
-    <None Include="wwwroot\images\Icon awesome-mobile.png" />
-    <None Include="wwwroot\images\Icon awesome-user.png" />
+    <None Include="wwwroot\images\building.png" />
+    <None Include="wwwroot\images\layer-group.png" />
+    <None Include="wwwroot\images\mobile.png" />
+    <None Include="wwwroot\images\user.png" />
     <None Include="wwwroot\images\logo.png" />
     <None Include="wwwroot\images\mail.png" />
     <None Include="wwwroot\images\padlock.png" />

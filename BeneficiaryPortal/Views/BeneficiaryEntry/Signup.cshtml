@@ -15,8 +15,8 @@
             <div class="col-md-8 col-lg-6  boder border-dark p-4 text-center ">
                 <!--Logo-->
                 <div class="mt-3">
-                    <img class=" icon-img d-md-none position-relative" src="image\Group 30@2x.png" alt="image">
-                    <img class="logo-register my-4" src="image\logo.png" alt="minto logo">
+                    <img class=" icon-img d-md-none position-relative" src="~/images/computer-cleaner.png" alt="image">
+                    <img class="logo-register my-4" src="~/images/logo.png" alt="minto logo">
                 </div>
                 <!--register in div-->
                 <p class="text-danger">@TempData["SignupError"]</p>
@@ -27,18 +27,18 @@
                     @Html.AntiForgeryToken()
 
                     <div class="mt-3 my-3 px-3 row">
-                        <div class="input py-1 px-2 col-md-6">
-                            <i class=" position-absolute  "><img class="person-icon" src="~/images/Icon awesome-user.png alt="email icon"></i>
+                        <div class="input my-3 py-1 px-2 col-md-6">
+                            <i class=" position-absolute  "><img class="person-icon" src="~/images/user.png" alt="email icon"></i>
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "text", @placeholder = @language.Getkey("Name") } })
-                            <input class="input-field bg-white rounded-pill p-Input" type="text" placeholder="الاسم">
+                            
                         </div>
                         <div class="input py-1 px-2 col-md-6">
-                            <i class="position-absolute "><img class="mobile-icon" src="~/images/Icon awesome-mobile.png" alt="lock icon"></i>
+                            <i class="position-absolute "><img class="mobile-icon" src="~/images/mobile.png" alt="lock icon"></i>
                             @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "number", @placeholder = @language.Getkey("Phone") } })
-                            <input class="input-field bg-white rounded-pill p-Input" type="number" placeholder="رقم الجوال">
+                            
                         </div>
                         <div class="input py-1 px-2 col-md-6">
-                            <i class=" position-absolute "><img class="Building-icon" src="~/images/Icon awesome-building.png" alt="email icon"></i>
+                            <i class=" position-absolute "><img class="Building-icon" src="~/images/building.png" alt="email icon"></i>
                             <select class="input-field bg-white rounded-pill p-Input " id="buildingsList" asp-for="@Model.BuildingNumber" onchange="GetFloor('@Url.Action("ListFloors", "BeneficiaryEntry")')">
                                 <option disabled selected>@language.Getkey("Building")</option>
                                 @foreach (var building in ViewBag.BuildingsList)
@@ -49,7 +49,7 @@
 
                         </div>
                         <div class="input py-1 px-2 col-md-6">
-                            <i class=" position-absolute "><img class="Building-icon" src="~/images/Icon awesome-layer-group.png" alt="email icon"></i>
+                            <i class=" position-absolute "><img class="Building-icon" src="~/images/layer-group.png" alt="email icon"></i>
                             <select class="input-field bg-white rounded-pill p-Input " type="text" id="floorsList" asp-for="@Model.FloorNumber">
                                 <option disabled selected>@language.Getkey("Floor")</option>
                             </select>
