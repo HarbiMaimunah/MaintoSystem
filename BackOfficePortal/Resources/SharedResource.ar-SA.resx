@@ -163,7 +163,7 @@
     <value>الصفحة الرئيسية</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>الرقم </value>
+    <value>الرقم المرجعي </value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>تسجيل دخول</value>
