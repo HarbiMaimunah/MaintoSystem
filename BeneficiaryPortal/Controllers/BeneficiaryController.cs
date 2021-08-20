@@ -24,6 +24,7 @@ namespace BeneficiaryPortal.Controllers
     public class BeneficiaryController : Controller
     {
         public static string baseUrl = "https://localhost:44307/api/Beneficiary/";
+        HttpClient httpClient = new HttpClient();
 
         public IActionResult SignOut()
         {
@@ -54,6 +55,7 @@ namespace BeneficiaryPortal.Controllers
         //------------------------------------------------------------------------------------------------------------------
         public IActionResult UpdateUser()
         {
+
             return View();
         }
         [HttpPost]
@@ -71,7 +73,29 @@ namespace BeneficiaryPortal.Controllers
             }
             return View();
         }
+        public async Task<IActionResult> GetUserInfo()
+        {
 
+            UserInfoBeneficiary user = new UserInfoBeneficiary();
+            var accessToken = HttpContext.Session.GetString("Token");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var url = baseUrl + "GetUserInfo";
+            var responseTask = await httpClient.GetAsync(url);
+
+            if (responseTask.IsSuccessStatusCode)
+            {
+                user = await responseTask.Content.ReadAsAsync<UserInfoBeneficiary>();
+
+            }
+            else //web api sent error response 
+            {
+                //log response status here..
+
+                ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+            }
+            return View(user);
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
         public IActionResult ChangeLanguage(string culture)
@@ -90,7 +114,7 @@ namespace BeneficiaryPortal.Controllers
             //IEnumerable<Ticket> tickets = null;
             List<TicketsDto> tickets = new List<TicketsDto>();
 
-            using (HttpClient httpClient = new HttpClient())
+            using (httpClient)
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
