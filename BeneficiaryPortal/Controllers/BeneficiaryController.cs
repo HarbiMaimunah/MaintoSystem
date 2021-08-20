@@ -111,7 +111,7 @@ namespace BeneficiaryPortal.Controllers
 
         public async Task<ActionResult> TicketsList()
         {
-            //IEnumerable<Ticket> tickets = null;
+
             List<TicketsDto> tickets = new List<TicketsDto>();
 
             using (httpClient)
@@ -137,39 +137,95 @@ namespace BeneficiaryPortal.Controllers
             return View(tickets);
         }
 
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
             return View();
         }
 
-        public async Task<IActionResult> RequestNewTicket(TicketRequest ticket, int MaintenanceTypeId)
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var cancellationReasons = await ListCancellationReasons();
+            ViewBag.CancellationReasonsList = cancellationReasons;
+            var canceledTicket = new CanceledTicket
             {
+                requestID = id
+            };
+            return View(canceledTicket);
+        }
+
+        [HttpGet]
+        public async Task<List<CancellationReason>> ListCancellationReasons()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                var url = baseUrl + "ListCancellationReasons";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                string jsonStr = await client.GetStringAsync(url);
+                var res = JsonConvert.DeserializeObject<List<CancellationReason>>(jsonStr).ToList();
+                return res;
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelTicket(CanceledTicket canceledTicket)
+        {
+            using (var client = new HttpClient())
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                var url = baseUrl + "CancelRequest/" + (canceledTicket.requestID).ToString();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(canceledTicket.cancellationReason), Encoding.UTF8, "application/json");
+                var response = await client.PatchAsync(url, stringContent);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    string error = await response.Content.ReadAsStringAsync();
+                    TempData["CancelError"] = error;
+                    return RedirectToAction("Cancel");
+                }
+
+                return RedirectToAction("TicketsList");
+            }
+        }
+
+        public async Task<IActionResult> ConfirmTicket(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                var url = baseUrl + "ConfirmRequest/" + id.ToString();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var response = await client.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    string error = await response.Content.ReadAsStringAsync();
+                    TempData["ConfirmationError"] = error;
+                    return RedirectToAction("TicketsList");
+                }
+
+                return RedirectToAction("TicketsList");
+            }
+        }
+
+        public async Task<IActionResult> RequestNewTicket(TicketRequest ticket, int MaintenanceTypeId)
+        {
             ticket.MaintenanceTypeID = MaintenanceTypeId;
+
+
+
                 using (var httpClient = new HttpClient())
                 {
                     var accessToken = HttpContext.Session.GetString("Token");
                     var url = baseUrl + "SubmitRequest";
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-                    /*string uniqueFileName = null;
-
-                    if (ticket.Attachment != null)
+                    if(ticket.Date == null || ticket.Description == null)
                     {
-                        var dirPath = Assembly.GetExecutingAssembly().Location;
-                        dirPath = Path.GetDirectoryName(dirPath);
-                        var path = Path.GetFullPath(Path.Combine(dirPath, @"C:\Users\maimu\Source\Repos\NWcodeart\MaintenanceMagementSystems\MaintenanceMagementSystems.Database\TicketRequestsAttachments"));
-
-                        string uploadsFolder = Path.Combine(path);
-
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticket.Attachment.FileName;
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            ticket.Attachment.CopyTo(fileStream);
-                        }
+                        TempData["NewTicketError"] = "Please complete the form";
+                        return RedirectToAction("NewTicket");
                     }
-
-                    ticket.Ticket.Picture = uniqueFileName;*/
 
                     StringContent stringContent = new StringContent(JsonConvert.SerializeObject(ticket), Encoding.UTF8, "application/json");
                     using (var response = await httpClient.PostAsync(url, stringContent))
@@ -186,23 +242,7 @@ namespace BeneficiaryPortal.Controllers
 
                 TempData["NewTicketConfirmation"] = "Your ticket has been sent successfully";
                 return RedirectToAction("NewTicket");
-            }
-
-        //download file
-        /*public FileResult DownloadAttachment(string fileDownloadName)
-        {
-            var dirPath = Assembly.GetExecutingAssembly().Location;
-            dirPath = Path.GetDirectoryName(dirPath);
-            var path = Path.GetFullPath(Path.Combine(dirPath, "\\Users\\maimu\\OneDrive\\سطح المكتب\\C-Sharp\\HR_System\\DataAccess\\Attachments"));
-
-            string uploadsFolder = Path.Combine(path);
-
-            var file = uploadsFolder + "\\" + fileDownloadName;
-
-            byte[] fileBytes = System.IO.File.ReadAllBytes(file);
-
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Image.Jpeg, fileDownloadName);
-        }*/
+        }
 
         //-------------------------------------------------------------------------------------------------------------------------------------
         public IActionResult ForgetPassword()
