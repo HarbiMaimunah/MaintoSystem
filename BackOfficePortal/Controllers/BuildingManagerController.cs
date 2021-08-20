@@ -23,8 +23,7 @@ namespace BackOfficePortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BuildingManagerController : Controller
     {
-        HttpClient client = new HttpClient();
-        public static string baseUrl = "http://localhost:44307/api/BuildingManagerAPI/";
+        public static string baseUrl = "https://localhost:44307/api/BuildingManagerAPI/";
 
 
         public ActionResult AddComments()
@@ -35,7 +34,7 @@ namespace BackOfficePortal.Controllers
         public async Task<IActionResult> PostComment(Comment comment)
         {
             string response;
-            using (client)
+            using (HttpClient client = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 var url = baseUrl + "AddComments";
@@ -60,7 +59,7 @@ namespace BackOfficePortal.Controllers
         public async Task<ActionResult> PutBuilding(int buildingID, Building Updatedbuilding)
         {
             string response;
-            using (client)
+            using (HttpClient client = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
@@ -74,26 +73,22 @@ namespace BackOfficePortal.Controllers
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
-        public ActionResult ViewTickets()
+        public async Task<ActionResult> ViewTickets()
         {
-            return View();
-        }
-        [HttpGet]
-        public async Task<ActionResult> GetTickets()
-        {
-
-            List<Ticket> TicketList = new List<Ticket>();
-            using (client)
+            List<TicketsDto> TicketList = new List<TicketsDto>();
+            using (HttpClient client = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var httpResponse = await client.GetAsync(baseUrl + "ViewTickets");
-                if (httpResponse.IsSuccessStatusCode)
+                var url = baseUrl + "ViewTickets";
+                var httpResponse = await client.GetAsync(url);
+                var response = httpResponse;
+                if (response.IsSuccessStatusCode)
                 {
-                    TicketList = await httpResponse.Content.ReadAsAsync<List<Ticket>>();
+                    TicketList = await response.Content.ReadAsAsync<List<TicketsDto>>();
                 }
             }
-            return Json(TicketList, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+            return View(TicketList);
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +100,7 @@ namespace BackOfficePortal.Controllers
         public async Task<ActionResult> GetBuilding()
         {
             Building building = new Building();
-            using (client)
+            using (HttpClient client = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
@@ -127,7 +122,7 @@ namespace BackOfficePortal.Controllers
         public async Task<ActionResult> GetTicketStatus()
         {
             List<string> StatusList = new List<string>();
-            using (client)
+            using (HttpClient client = new HttpClient())
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);

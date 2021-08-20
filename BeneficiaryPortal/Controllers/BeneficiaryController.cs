@@ -23,27 +23,8 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryController : Controller
     {
-        private readonly string baseUrl = "https://localhost:44307/api/Beneficiary/";
-
-        public async Task<IActionResult> MyAccount()
-        {
-            var userInfo = await GetAccount();
-            return View(userInfo);
-        }
-
-        [HttpGet]
-        public async Task<UserInfo> GetAccount()
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                var accessToken = HttpContext.Session.GetString("Token");
-                var url = baseUrl + "GetUserInfo";
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                string jsonStr = await client.GetStringAsync(url);
-                var res = JsonConvert.DeserializeObject<UserInfo>(jsonStr);
-                return res;
-            }
-        }
+        public static string baseUrl = "https://localhost:44307/api/Beneficiary/";
+        HttpClient httpClient = new HttpClient();
 
         public IActionResult SignOut()
         {
@@ -74,6 +55,7 @@ namespace BeneficiaryPortal.Controllers
         //------------------------------------------------------------------------------------------------------------------
         public IActionResult UpdateUser()
         {
+
             return View();
         }
         [HttpPost]
@@ -91,7 +73,29 @@ namespace BeneficiaryPortal.Controllers
             }
             return View();
         }
+        public async Task<IActionResult> GetUserInfo()
+        {
 
+            UserInfoBeneficiary user = new UserInfoBeneficiary();
+            var accessToken = HttpContext.Session.GetString("Token");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var url = baseUrl + "GetUserInfo";
+            var responseTask = await httpClient.GetAsync(url);
+
+            if (responseTask.IsSuccessStatusCode)
+            {
+                user = await responseTask.Content.ReadAsAsync<UserInfoBeneficiary>();
+
+            }
+            else //web api sent error response 
+            {
+                //log response status here..
+
+                ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+            }
+            return View(user);
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------------
 
         public IActionResult ChangeLanguage(string culture)
@@ -110,7 +114,7 @@ namespace BeneficiaryPortal.Controllers
             //IEnumerable<Ticket> tickets = null;
             List<TicketsDto> tickets = new List<TicketsDto>();
 
-            using (HttpClient httpClient = new HttpClient())
+            using (httpClient)
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
@@ -147,12 +151,25 @@ namespace BeneficiaryPortal.Controllers
                     var url = baseUrl + "SubmitRequest";
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-                if (ticket.Date == null || ticket.Description == null)
-                {
-                    TempData["NewTicketError"] = "Please complete the form";
-                    return RedirectToAction("NewTicket");
-                }
-               
+                    /*string uniqueFileName = null;
+
+                    if (ticket.Attachment != null)
+                    {
+                        var dirPath = Assembly.GetExecutingAssembly().Location;
+                        dirPath = Path.GetDirectoryName(dirPath);
+                        var path = Path.GetFullPath(Path.Combine(dirPath, @"C:\Users\maimu\Source\Repos\NWcodeart\MaintenanceMagementSystems\MaintenanceMagementSystems.Database\TicketRequestsAttachments"));
+
+                        string uploadsFolder = Path.Combine(path);
+
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticket.Attachment.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            ticket.Attachment.CopyTo(fileStream);
+                        }
+                    }
+
+                    ticket.Ticket.Picture = uniqueFileName;*/
 
                     StringContent stringContent = new StringContent(JsonConvert.SerializeObject(ticket), Encoding.UTF8, "application/json");
                     using (var response = await httpClient.PostAsync(url, stringContent))
@@ -170,6 +187,22 @@ namespace BeneficiaryPortal.Controllers
                 TempData["NewTicketConfirmation"] = "Your ticket has been sent successfully";
                 return RedirectToAction("NewTicket");
             }
+
+        //download file
+        /*public FileResult DownloadAttachment(string fileDownloadName)
+        {
+            var dirPath = Assembly.GetExecutingAssembly().Location;
+            dirPath = Path.GetDirectoryName(dirPath);
+            var path = Path.GetFullPath(Path.Combine(dirPath, "\\Users\\maimu\\OneDrive\\سطح المكتب\\C-Sharp\\HR_System\\DataAccess\\Attachments"));
+
+            string uploadsFolder = Path.Combine(path);
+
+            var file = uploadsFolder + "\\" + fileDownloadName;
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(file);
+
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Image.Jpeg, fileDownloadName);
+        }*/
 
         //-------------------------------------------------------------------------------------------------------------------------------------
         public IActionResult ForgetPassword()
