@@ -138,6 +138,9 @@
   <data name="Comments" xml:space="preserve">
     <value>توصياتك</value>
   </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>التاريخ</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="ReEnter" xml:space="preserve">
     <value>اعد ادخال</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>تسجيل</value>
   </data>
   <data name="Rejected" xml:space="preserve">
     <value>مرفوضة</value>
