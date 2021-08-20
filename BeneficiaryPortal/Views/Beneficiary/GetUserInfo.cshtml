@@ -1,0 +1,43 @@
+﻿@model UserInfoBeneficiary
+@{ 
+    ViewData["Title"] = "User Account";
+    Layout = "~/Views/Shared/_dashBords.cshtml";
+}
+
+<div class="bg-white rounded-4 shadow mt-3 mt-lg-5 p-3 p-lg-5 container " >
+    <form method="get">
+        <div class="card mb-3 border-0">
+            <div class="card-body">
+                <h5 class="card-title border-secondary border-bottom  ">مرحبا @Model.Name</h5>
+                <div class="row mt-4">
+                    <div class="col-12 mb-3 col-md-6">
+                        <label>رقم الهاتف</label>
+                        <div class="input-field bg-white rounded-pill p-Input">
+                            <label>@Model.Phone</label>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3 col-md-6">
+                        <label>البريد الإلكتروني</label>
+                        <div class="input-field bg-white rounded-pill p-Input">
+                            <label>@Model.Email</label>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3 col-md-6">
+                        <label>رقم المبنى</label>
+                        <div class="input-field bg-white rounded-pill p-Input">
+                            <label>@Model.buildingNumber</label>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3 col-md-6">
+                        <label>رقم الطابق</label>
+                        <div class="input-field bg-white rounded-pill p-Input">
+                            <label>@Model.floorNumber</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="mx-3 btn btn-success w-50 w-md-25 text-white rounded-pill">تعديل حسابي</button>
+        <button class="mx-3 btn btn-danger text-white rounded-pill p-2">تغيير رقمي السري</button>
+    </form>
+</div>
