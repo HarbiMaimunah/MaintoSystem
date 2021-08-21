@@ -34,7 +34,8 @@ namespace BackOfficePortal.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
-        public static string baseUrl = "http://10.6.8.91:44307/api/BackOfficeEntry/";
+        public static string baseUrl = ConfigurationManager.AppSettings["BackOfficeEntryLocalhost"].ToString();
+
 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
@@ -169,7 +170,7 @@ namespace BackOfficePortal.Controllers
 
                 if (Role == "SystemAdmin")
                 {
-                    return RedirectToAction();
+                    return RedirectToAction("getAllBuildings", "SystemAdmin");
                 }
                 else if (Role == "BuildingManager")
                 {
