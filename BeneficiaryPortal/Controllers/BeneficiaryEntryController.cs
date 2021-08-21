@@ -17,13 +17,13 @@ using System.Threading.Tasks;
 
 namespace BeneficiaryPortal.Controllers
 {
-    [ServiceFilter(typeof(AuthorizeFilter))]
+    /*[ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]
+    [ServiceFilter(typeof(ResultFilter))]*/
     public class BeneficiaryEntryController : Controller
     {
-        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryEntryLocalhost"].ToString();
+        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryEntryIP"].ToString();
 
         public async Task<IActionResult> Signup()
         {
@@ -32,12 +32,29 @@ namespace BeneficiaryPortal.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(BeneficiaryRegistration RegisterInfo, string ConfirmPass )
+        public async Task<IActionResult> Register(BeneficiaryRegistration RegisterInfo, string ConfirmPass)
         {
-            if(ConfirmPass == RegisterInfo.Password) 
-            {
+
                 using (var httpClient = new HttpClient())
                 {
+                    if(RegisterInfo.Name == null || 
+                    RegisterInfo.Phone == null || 
+                    RegisterInfo.Email == null ||
+                    RegisterInfo.BuildingNumber == 0 ||
+                    RegisterInfo.FloorNumber == 0 ||
+                    RegisterInfo.Password == null||
+                    ConfirmPass == null)
+                    {
+                        TempData["SignupError"] = "Please complete the form";
+                        return RedirectToAction("Signup");
+                    }
+                    else if (ConfirmPass != RegisterInfo.Password)
+                    {
+                        TempData["SignupError"] = "Password confirmation is incorrect";
+                        return RedirectToAction("Signup");
+                    }
+                    
+
                     StringContent stringContent = new StringContent(JsonConvert.SerializeObject(RegisterInfo), Encoding.UTF8, "application/json");
                     using (var response = await httpClient.PostAsync(baseUrl + "Register", stringContent))
                     {
@@ -53,14 +70,9 @@ namespace BeneficiaryPortal.Controllers
                     return RedirectToAction("Signin");
 
                 }
-            }
-            else
-            {
-                ViewBag.UnCorrectConfirm = "Password Confirm UnCorrect";
-                return RedirectToAction("Signup");
-            }
         }
-
+     
+        
         public IActionResult Signin()
         {
             return View();
