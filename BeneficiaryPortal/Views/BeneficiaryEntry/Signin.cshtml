@@ -22,26 +22,29 @@
             <p class="text-danger">@TempData["LoginError"]</p>
             @using (Html.BeginForm("Login", "BeneficiaryEntry", FormMethod.Post))
             {
-                <div class="mt-3 mt-xl-5">
-                    <div class="input my-3 ">
-                        <i class=" position-absolute  ">
-                            <img class="email-icon" src="~/images/mail.png" alt="email icon">
-                        </i>
-                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "text", @placeholder = @language.Getkey("Email") } })
-                    </div>
-                    <div class="input my-3">
-                        <i class="position-absolute "><img class="lock-icon" src="~/images/padlock.png" alt="lock icon"></i>
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "password", @placeholder = @language.Getkey("Password") } })
-                    </div>
+
+            @Html.AntiForgeryToken()
+
+            <div class="mt-3 mt-xl-5">
+                <div class="input my-3 ">
+                    <i class=" position-absolute  ">
+                        <img class="email-icon" src="~/images/mail.png" alt="email icon">
+                    </i>
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "text", @placeholder = @language.Getkey("Email") } })
                 </div>
-                <!--Log in button-->
-                <div class="btn-m-logIn">
-                    <input type="submit" class="btn btn-color text-white rounded-pill" value= @language.Getkey("Login") >
-                    <label class="forget-pass-lable float-right px-3"><a class="text-decoration-none log-link " href=""> @language.Getkey("ForgotPassword") </a></label>
+                <div class="input my-3">
+                    <i class="position-absolute "><img class="lock-icon" src="~/images/padlock.png" alt="lock icon"></i>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "password", @placeholder = @language.Getkey("Password") } })
                 </div>
-                <div class="text-secondary q-lable mt-lg-10">
-                    <label class=" float-end px-sm-1 px-xl-0">  @language.Getkey("DoNotHaveAccount")  <a class="log-link-reg f-bold px-2 text-decoration-none " href="@Url.Action("Signup", "BeneficiaryEntry")">  @language.Getkey("SignUp")  </a></label>
-                </div>
+            </div>
+ <!--Log in button-->
+            <div class="btn-m-logIn">
+                <input type="submit" class="btn btn-color text-white rounded-pill" value=@language.Getkey("Login")>
+                <label class="forget-pass-lable float-right px-3"><a class="text-decoration-none log-link " href=""> @language.Getkey("ForgotPassword") </a></label>
+            </div>
+            <div class="text-secondary q-lable mt-lg-10">
+                <label class=" float-end px-sm-1 px-xl-0">  @language.Getkey("DoNotHaveAccount")  <a class="log-link-reg f-bold px-2 text-decoration-none " href="@Url.Action("Signup", "BeneficiaryEntry")">  @language.Getkey("SignUp")  </a></label>
+            </div>
             }
         </div>
         <!--image side of page card-->
