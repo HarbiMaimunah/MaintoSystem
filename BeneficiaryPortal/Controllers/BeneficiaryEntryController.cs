@@ -57,7 +57,7 @@ namespace BeneficiaryPortal.Controllers
             else
             {
                 ViewBag.UnCorrectConfirm = "Password Confirm UnCorrect";
-                return View();
+                return RedirectToAction("Signup");
             }
         }
 
