@@ -1,8 +1,24 @@
 ﻿@using BeneficiaryPortal.ModelsLanguage;
 @inject LanguageService language
-
+@model TicketsDto
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_dashBords.cshtml";
 }
 <h2>تفاصيل الطلب</h2>
+<p><b>التاريخ: </b>@Html.DisplayFor(model => model.Date)</p>
+<p><b>حالة الطلب: </b>@Html.DisplayFor(model => model.StatusTypeAr)</p>
+<p><b>نوع الصيانة: </b>@Html.DisplayFor(model => model.MaintenanceTypeNameAr)</p>
+<p><b>الوصف: </b>@Html.DisplayFor(model => model.Description)</p>
+@if (Model.BuildingManagerComment != null)
+{
+    <p><b>تعليق مسؤول المبنى: </b>@Html.DisplayFor(model => model.BuildingManagerComment)</p>
+}
+@if (Model.ReasonTypeAr != null)
+{
+    <p><b>سبب الإلغاء: </b>@Html.DisplayFor(model => model.ReasonTypeAr)</p>
+}
+@if (Model.RejectionReason != null)
+{
+    <p><b>سبب الرفض: </b>@Html.DisplayFor(model => model.RejectionReason)</p>
+}

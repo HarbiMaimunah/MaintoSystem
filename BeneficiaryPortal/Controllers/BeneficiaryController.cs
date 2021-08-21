@@ -138,9 +138,18 @@ namespace BeneficiaryPortal.Controllers
             return View(tickets);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            using (HttpClient client = new HttpClient())
+            {
+                var accessToken = HttpContext.Session.GetString("Token");
+                var url = baseUrl + "GetTicket/" + id.ToString();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                string jsonStr = await client.GetStringAsync(url);
+                var res = JsonConvert.DeserializeObject<TicketsDto>(jsonStr);
+                return View(res);
+            }
+            
         }
 
         public async Task<IActionResult> Cancel(int id)
