@@ -24,6 +24,7 @@ namespace BeneficiaryPortal.Controllers
     public class BeneficiaryEntryController : Controller
     {
         public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryEntryLocalhost"].ToString();
+        public static string sysUserUrl = ConfigurationManager.AppSettings["SystemUserLocalhost"].ToString();
 
         public async Task<IActionResult> Signup()
         {
@@ -120,6 +121,46 @@ namespace BeneficiaryPortal.Controllers
             string jsonStr = await client.GetStringAsync(url);
             var res = JsonConvert.DeserializeObject<List<Floor>>(jsonStr).ToList();
             return Json(new SelectList(res, "Id", "Number"));
+        }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendEmail(string email)
+        {
+            string response;
+            using (HttpClient client = new HttpClient())
+            {
+                var httpResponse = await client.PostAsJsonAsync(sysUserUrl + "SendEmail", email);
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
+            return RedirectToAction("ResetPassword");
+        }
+
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostPassword(Guid tempPassword, string newPassword)
+        {
+            string response;
+            using (HttpClient client = new HttpClient())
+            {
+                var httpResponse = await client.PostAsJsonAsync(sysUserUrl + "ResetPassword", tempPassword + newPassword);
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
+            return RedirectToAction("Signin");
         }
     }
 }
