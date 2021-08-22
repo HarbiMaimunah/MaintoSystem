@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -22,7 +23,7 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryEntryController : Controller
     {
-        public static string baseUrl = "https://localhost:44307/api/BeneficiaryEntry/";
+        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryEntryLocalhost"].ToString();
 
         public async Task<IActionResult> Signup()
         {
@@ -30,28 +31,48 @@ namespace BeneficiaryPortal.Controllers
             ViewBag.BuildingsList = buildings;
             return View();
         }
-
-        public async Task<IActionResult> Register(BeneficiaryRegistration RegisterInfo)
+        [HttpPost]
+        public async Task<IActionResult> Register(BeneficiaryRegistration RegisterInfo, string ConfirmPass)
         {
-            using (var httpClient = new HttpClient())
-            {
-                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(RegisterInfo), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync(baseUrl + "Register", stringContent))
+
+                using (var httpClient = new HttpClient())
                 {
-                    if (!response.IsSuccessStatusCode)
+                    if(RegisterInfo.Name == null || 
+                    RegisterInfo.Phone == null || 
+                    RegisterInfo.Email == null ||
+                    RegisterInfo.BuildingNumber == 0 ||
+                    RegisterInfo.FloorNumber == 0 ||
+                    RegisterInfo.Password == null||
+                    ConfirmPass == null)
                     {
-                        string error = await response.Content.ReadAsStringAsync();
-                        TempData["SignupError"] = error;
+                        TempData["SignupError"] = "Please complete the form";
                         return RedirectToAction("Signup");
                     }
+                    else if (ConfirmPass != RegisterInfo.Password)
+                    {
+                        TempData["SignupError"] = "Password confirmation is incorrect";
+                        return RedirectToAction("Signup");
+                    }
+                    
+
+                    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(RegisterInfo), Encoding.UTF8, "application/json");
+                    using (var response = await httpClient.PostAsync(baseUrl + "Register", stringContent))
+                    {
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            string error = await response.Content.ReadAsStringAsync();
+                            TempData["SignupError"] = error;
+                            return RedirectToAction("Signup");
+                        }
+
+                    }
+
+                    return RedirectToAction("Signin");
 
                 }
-
-                return RedirectToAction("Signin");
-
-            }
         }
-
+     
+        
         public IActionResult Signin()
         {
             return View();

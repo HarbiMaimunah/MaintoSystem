@@ -9,6 +9,7 @@ using BackOfficePortal.Models;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using System.Collections;
+using System.Configuration;
 
 namespace BackOfficePortal.Controllers
 {
@@ -16,7 +17,7 @@ namespace BackOfficePortal.Controllers
     {
 
         HttpClient client = new HttpClient();
-        public static string baseUrl = "http://localhost:16982/api/SystemAdmin/";
+        public static string baseUrl = ConfigurationManager.AppSettings["SystemAdminLocalhost"].ToString();
         [HttpGet]
         public async Task<IActionResult> getAllBuildings()
         {

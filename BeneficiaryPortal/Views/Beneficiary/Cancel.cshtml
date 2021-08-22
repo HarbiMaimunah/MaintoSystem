@@ -1,0 +1,29 @@
+﻿@using BeneficiaryPortal.ModelsLanguage;
+@inject LanguageService language
+@model BeneficiaryPortal.Models.CanceledTicket
+@{
+    ViewData["Title"] = "Cancel";
+    Layout = "~/Views/Shared/_dashBords.cshtml";
+}
+@using (Html.BeginForm("CancelTicket", "Beneficiary", FormMethod.Post, new { cancanceledTicket = Model }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <h2>إلغاء الطلب</h2>
+    <hr />
+    <p class="text-danger">@TempData["CancelError"]</p>
+    @Html.HiddenFor(model => model.requestID)
+    <label>سبب الإلغاء</label>
+    <select name="cancellationReason">
+        @foreach (var reason in ViewBag.CancellationReasonsList)
+        {
+            <option value="@reason.Id">@reason.ReasonTypeAr</option>
+        }
+    </select>
+    <br />
+    <input type="submit" value="إرسال" class="btn btn-success m-3" />
+</div>
+}
+
+@Html.ActionLink("Back to List", "TicketsList")
+

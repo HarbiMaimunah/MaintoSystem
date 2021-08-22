@@ -11,6 +11,7 @@
     <form asp-controller="Beneficiary"  method="post" enctype="multipart/form-data">
 
         @Html.AntiForgeryToken()
+
         <div class="form-horizontal">
             <h2>@language.Getkey("NewTicket")</h2>
             <hr />
@@ -28,7 +29,7 @@
                 <br />
 
                 <div class=" col-12 col-lg-6 px-2 ">
-                    <label>Maintenance Type</label>
+                    <label>نوع الصيانة</label>
                     <div class="col-md-5">
                         <select name="MaintenanceTypeId">
                             @foreach (var type in ViewBag.MaintenanceTypesList)

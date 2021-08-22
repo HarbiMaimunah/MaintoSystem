@@ -1,76 +1,97 @@
-﻿@using BeneficiaryPortal.ModelsLanguage;
+﻿@using BeneficiaryPortal.ModelsLanguage
 @inject LanguageService language
-
 @model BeneficiaryPortal.Models.BeneficiaryRegistration
-@{
-    ViewData["Title"] = "Sign up";
-}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>تسجيل</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="~/js/Beneficiary/signup.js"></script>
 
-@section Scripts2{
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    @*<script src="~/js/Beneficiary/signup.bundle.min.js"></script>*@
-    <script src="~/js/Beneficiary/signup.js"></script>
-    <h1> @language.Getkey("SignUp")</h1>
+        <div class=" card-log-m ">
+            <div class="row bg-white rounded-4 shadow center">
+                <div class="col-md-8 col-lg-6  boder border-dark p-4 text-center ">
+                    <!--Logo-->
+                    <div class="mt-3">
+                        <img class=" icon-img d-md-none position-relative" src="~/images/computer-cleaner.png" alt="image">
+                        <img class="logo-register my-4" src="~/images/logo.png" alt="minto logo">
+                    </div>
+                    <!--register in div-->
+                    <p class="text-danger">@TempData["SignupError"]</p>
+                    @using (Html.BeginForm("Register", "BeneficiaryEntry", FormMethod.Post))
+                    {
 
-    <p class="text-danger">@TempData["SignupError"]</p>
-    @using (Html.BeginForm("Register", "BeneficiaryEntry", FormMethod.Post))
-    {
+                        @Html.AntiForgeryToken()
 
-        @Html.AntiForgeryToken()
+                        <div class="mt-3 my-3 px-3 row">
+                            <div class="input py-1 px-2 col-md-6">
+                                <i class=" position-absolute  "><img class="person-icon" src="~/images/user.png" alt="email icon"></i>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "text", @placeholder = @language.Getkey("Name") } })
 
-        <div class="form-horizontal">
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label> @language.Getkey("Name") </label>
-                <div class="col-sm-3">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <div class="input py-1 px-2 col-md-6">
+                                <i class="position-absolute "><img class="mobile-icon" src="~/images/mobile.png" alt="lock icon"></i>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "number", @placeholder = @language.Getkey("Phone") } })
+
+                            </div>
+                            <div class="input py-1 px-2 col-md-6">
+                                <i class=" position-absolute "><img class="Building-icon" src="~/images/building.png" alt="email icon"></i>
+                                <select class="input-field bg-white rounded-pill p-Input " id="buildingsList" name="BuildingNumber" onchange="GetFloor('@Url.Action("ListFloors", "BeneficiaryEntry")')">
+                                    <option disabled selected>@language.Getkey("Building")</option>
+                                    @foreach (var building in ViewBag.BuildingsList)
+                                    {
+                                        <option value="@building.Id">@building.Number</option>
+                                    }
+                                </select>
+
+                            </div>
+                            <div class="input py-1 px-2 col-md-6">
+                                <i class=" position-absolute "><img class="Building-icon" src="~/images/layer-group.png" alt="email icon"></i>
+                                <select class="input-field bg-white rounded-pill p-Input " type="text" id="floorsList" name="FloorNumber">
+                                    <option disabled selected>@language.Getkey("Floor")</option>
+                                </select>
+                            </div>
+                            <div class="input py-1 px-2 col-md-12">
+                                <i class=" position-absolute  "><img class="email-icon" src="~/images/mail.png" alt="email icon"></i>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "text", @placeholder = @language.Getkey("Email") } })
+                            </div>
+                            <div class="input py-1 px-2 col-md-6">
+                                <i class="position-absolute "><img class="lock-icon" src="~/images/padlock.png" alt="lock icon"></i>
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "password", @placeholder = @language.Getkey("Password") } })
+                            </div>
+                            <div class="input py-1 px-2 col-md-6">
+                                <i class="position-absolute "><img class="lock-icon" src="~/images/padlock.png" alt="lock icon"></i>
+                                <input class="input-field bg-white rounded-pill p-Input" name="ConfirmPass" type="password" placeholder=@language.Getkey("Confirmation")>
+                            </div>
+                        </div>
+
+                        <!--register in button-->
+                        <div class="btn-m-logIn btn-register position-inline top-50 start-50 translate-middle">
+                            <input type="submit" class="btn btn-color text-white  rounded-pill mt-5" placeholder=@language.Getkey("Register")>
+                        </div>
+                    }
+
+                    <div class="text-secondary mt-sm-0 mt-md-5 q-lable">
+                        <label class=" float-start px-sm-0 px-xl-3"><a class=" fw-bolder log-link px-2 text-decoration-none " onclick="location.href='@Url.Action("Signin", "BeneficiaryEntry")'">@language.Getkey("Login") </a></label>
+                    </div>
+                </div>
+                <!--image side of page card-->
+                <div class="d-none d-md-inline col-md-4 col-lg-6 rounded-10-start p-0">
+                    <div class="d-none d-md-flex bg-gray position-relative">
+                        <img class=" card-img-registration position-absolute bottom-0 end-0" src="~/images/Group 42.png" alt="image">
+                        <img class="d-none d-md-inline boy-img-reg-card position-absolute" src="~/images/boy.png" alt="persons">
+                        <img class="d-none d-md-inline girl-img-reg-card position-absolute" src="~/images/girle.png" alt="persons">
+                    </div>
+
                 </div>
             </div>
-            <br />
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label> @language.Getkey("Phone") </label>
-                <div class="col-sm-3">
-                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-            <br />
-            <label>@language.Getkey("Building")</label>
-            <select id="buildingsList" asp-for="@Model.BuildingNumber" onchange="GetFloor('@Url.Action("ListFloors", "BeneficiaryEntry")')">
-                <option disabled selected>Select Building</option>
-                @foreach (var building in ViewBag.BuildingsList)
-                {
-                    <option value="@building.Id">@building.Number</option>
-                }
-            </select>
-            <br />
-            <label>@language.Getkey("Floor")</label>
-            <select id="floorsList" asp-for="@Model.FloorNumber">
-                <option disabled selected>Select Floor</option>
-            </select>
-            <br />
-            <div class="form-group">
-                @* @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                @language.Getkey("Email")
-                <div class="col-sm-3">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-            <br />
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                @language.Getkey("Password")
-                <div class="col-sm-3">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Sign up" class="btn btn-primary" />
-                </div>
-            </div>
+
         </div>
-
     }
-}
-
+</>
+    </body>
+</html>
