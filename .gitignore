@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BeneficiaryPortal/app3.zip
+/BeneficiaryPortal/App2.zip
+/BeneficiaryPortal/App1.zip
