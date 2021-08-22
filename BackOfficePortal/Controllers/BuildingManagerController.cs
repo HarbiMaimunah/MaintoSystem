@@ -28,12 +28,16 @@ namespace BackOfficePortal.Controllers
         public static string baseUrl = ConfigurationManager.AppSettings["BuildingManagerLocalhost"].ToString();
 
 
-        public ActionResult AddComments()
+        public ActionResult AddComments(int TicketId)
         {
-            return View();
+            var comments = new Comment()
+            {
+                id = TicketId
+            };
+            return View(comments);
         }
         [HttpPost]
-        public async Task<IActionResult> PostComment(Comment comment)
+        public async Task<IActionResult> PostComment(Comment comments)
         {
             string response;
             using (HttpClient client = new HttpClient())
@@ -41,8 +45,8 @@ namespace BackOfficePortal.Controllers
                 var accessToken = HttpContext.Session.GetString("Token");
                 var url = baseUrl + "AddComments";
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(comment), Encoding.UTF8, "application/json");
-                var httpResponse = await client.PostAsync(url, stringContent);
+                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(comments), Encoding.UTF8, "application/json");
+                var httpResponse = await client.PatchAsync(url, stringContent);
                 //var httpResponse = await client.PostAsJsonAsync(baseUrl + $"AddComments", comment).ConfigureAwait(false);
                 if (httpResponse.IsSuccessStatusCode)
                 {
