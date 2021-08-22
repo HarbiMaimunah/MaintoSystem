@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
 using BackOfficePortal.Lookup;
+using System.Configuration;
 
 namespace BackOfficePortal.Controllers
 {
@@ -24,7 +25,7 @@ namespace BackOfficePortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BuildingManagerController : Controller
     {
-        public static string baseUrl = "https://localhost:44307/api/BuildingManagerAPI/";
+        public static string baseUrl = ConfigurationManager.AppSettings["BuildingManagerLocalhost"].ToString();
 
 
         public ActionResult AddComments()

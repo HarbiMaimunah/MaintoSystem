@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -19,7 +20,7 @@ namespace BackOfficePortal.Controllers
     public class MaintenanceManagerController : Controller
     {
         HttpClient client = new HttpClient();
-        public static string baseUrl = "https://localhost:44307/api/MaintenanceManager/";
+        public static string baseUrl = ConfigurationManager.AppSettings["MaintenanceManagerLocalhost"].ToString();
 
         public ActionResult RespondToTicket()
         {
