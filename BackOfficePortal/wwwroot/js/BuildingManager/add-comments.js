@@ -1,8 +1,6 @@
 ﻿function AddComments() {
     debugger
-    //var BuildingManagerComment = { BuildingManagerComment: $('#comments').val() }
     var BuildingManagerComment = $('#comments').val();
-    //var comment = JSON.stringify(BuildingManagerComment);
        $.ajax({
            url: 'https://localhost:44370/BuildingManager/PostComment',
            type: 'POST',
