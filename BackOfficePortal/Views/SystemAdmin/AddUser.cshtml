@@ -1,7 +1,7 @@
-﻿@using BeneficiaryPortal.ModelsLanguage;
+﻿@using BackOfficePortal.ModelsLanguage;
 @inject LanguageService language
 @model UserInfoBeneficiary
-@{ 
+@{
     Layout = "~/Views/Shared/_dashBords.cshtml";
 }
 <h1> @language.Getkey("UpdateUser")</h1>
@@ -35,9 +35,17 @@
                     <option disabled selected>@language.Getkey("Floor")</option>
                 </select>
             </div>
+            <div class="col-12 mb-3 col-md-6">
+                <label> @language.Getkey("Password"):</label>
+                <input type="password" class="input-field bg-white rounded-pill p-Input" id="updatePassword" name="updatePassword" placeholder=@language.Getkey("Password") />
+            </div>
+            <div class="col-12 mb-3 col-md-6">
+                <label> @language.Getkey("ReEnter")@language.Getkey("Password"):</label>
+                <input type="password" class="input-field bg-white rounded-pill p-Input" id="RewritePassword" name="RewritePassword" placeholder=@language.Getkey("Password") />
+            </div>
         </div>
         <div class="row">
             <p class="text-danger">@ViewBag.error</p>
         </div>
-        <input type="submit" class="btn btn-success" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" value="@language.Getkey("Submit") "> 
+        <input type="submit" class="btn btn-success" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" value="@language.Getkey("Submit") ">
     </form>

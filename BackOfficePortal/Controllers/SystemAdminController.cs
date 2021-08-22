@@ -88,5 +88,9 @@ namespace BackOfficePortal.Controllers
         {
             return View();
         }
+        public IActionResult AddUser()
+        {
+            return View();
+        }
     }
 }
