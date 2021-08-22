@@ -23,7 +23,7 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]*/
     public class BeneficiaryEntryController : Controller
     {
-        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryEntryIP"].ToString();
+        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryEntryLocalhost"].ToString();
 
         public async Task<IActionResult> Signup()
         {

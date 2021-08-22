@@ -24,8 +24,11 @@ namespace BeneficiaryPortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]*/
     public class BeneficiaryController : Controller
     {
-        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryIP"].ToString();
+        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryLocalhost"].ToString();
+        public static string BeneficiaryEntryUrl = ConfigurationManager.AppSettings["BeneficiaryEntryLocalhost"].ToString();
         HttpClient httpClient = new HttpClient();
+
+        UserInfoBeneficiary user = new UserInfoBeneficiary();
 
         public IActionResult SignOut()
         {
@@ -54,30 +57,111 @@ namespace BeneficiaryPortal.Controllers
             }    
         }
         //------------------------------------------------------------------------------------------------------------------
-        public IActionResult UpdateUser()
+        
+        public async Task<IActionResult> UpdateUser()
         {
 
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> PutUser(BackOfficePortal.Models.User user)
-        {
-            string response;
-            
-            using (HttpClient client = new HttpClient())
+            var accessToken = HttpContext.Session.GetString("Token");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var url = baseUrl + "GetUserInfo";
+            var responseTask = await httpClient.GetAsync(url);
+
+            if (responseTask.IsSuccessStatusCode)
             {
-                var httpResponse = await client.PutAsJsonAsync("http://10.6.8.91:44307/api/SystemUser/" + "UpdateUser", user);
-                if (httpResponse.IsSuccessStatusCode)
+                user = await responseTask.Content.ReadAsAsync<UserInfoBeneficiary>();
+
+            }
+            else //web api sent error response 
+            {
+                //log response status here..
+
+                ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+            }
+            List<Building> buildings = await ListBuildings();
+            ViewBag.BuildingsList = buildings;
+            return View(user);
+        }
+        public async Task<IActionResult> PostUser(int id, string updateName, string updatePhone, string updateEmail , int BuildingNumber =0, int updateFloor =0)
+        {
+
+            ViewBag.error = "";
+
+
+            if(updateEmail == null && updateName == null && updatePhone == null && updateFloor == 0 && BuildingNumber == 0)
+            {
+                ViewBag.error = "you didn't add any apdate";
+
+                return RedirectToAction("UpdateUser");
+            }
+            else if(id != 0 )
+            {
+                if (user != null)
                 {
-                    response = await httpResponse.Content.ReadAsStringAsync();
+                    user.Id = id;
+                    if (updateName != null)
+                    {
+                        user.Name = updateName;
+                    }
+                    if (updatePhone != null)
+                    {
+                        user.Phone = updatePhone;
+                    }
+                    if (updateEmail != null)
+                    {
+                        user.Email = updateEmail;
+                    }
+
+                    if (BuildingNumber != 0)
+                    {
+                        user.BuildingId = BuildingNumber;
+                        if (updateFloor != 0)
+                        {
+                            user.FloorId = updateFloor;
+                        }
+                    }
+                    using (httpClient)
+                    {
+
+                        var accessToken = HttpContext.Session.GetString("Token");
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                        httpClient.BaseAddress = new Uri(baseUrl + "UpdateUser");
+
+                        //HTTP POST
+                        var post = await httpClient.PostAsJsonAsync<UserInfoBeneficiary>("UpdateUser", user);
+
+                        return RedirectToAction("GetUserInfo");
+                    }
                 }
             }
-            return View();
+
+
+            return RedirectToAction("UpdateUser");
         }
+
+        [HttpGet]
+        public async Task<List<Building>> ListBuildings()
+        {
+            var url = BeneficiaryEntryUrl + "ListBuildings";
+            HttpClient client = new HttpClient();
+            string jsonStr = await client.GetStringAsync(url);
+            var res = JsonConvert.DeserializeObject<List<Building>>(jsonStr).ToList();
+            return res;
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> ListFloors(int BuildingNumber)
+        {
+            var url = BeneficiaryEntryUrl + "ListFloors/" + BuildingNumber.ToString();
+            HttpClient client = new HttpClient();
+            string jsonStr = await client.GetStringAsync(url);
+            var res = JsonConvert.DeserializeObject<List<Floor>>(jsonStr).ToList();
+            return Json(new SelectList(res, "Id", "Number"));
+        }
+        [HttpGet]
         public async Task<IActionResult> GetUserInfo()
         {
-
-            UserInfoBeneficiary user = new UserInfoBeneficiary();
             var accessToken = HttpContext.Session.GetString("Token");
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
