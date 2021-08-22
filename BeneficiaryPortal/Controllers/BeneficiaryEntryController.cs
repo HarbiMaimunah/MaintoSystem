@@ -123,7 +123,9 @@ namespace BeneficiaryPortal.Controllers
             return Json(new SelectList(res, "Id", "Number"));
         }
 
-        public IActionResult ForgotPassword()
+
+        //----------------------------------------------------------------------------------------------------------------------------------------------------
+        public IActionResult ForgetPassword()
         {
             return View();
         }
@@ -142,7 +144,7 @@ namespace BeneficiaryPortal.Controllers
             }
             return RedirectToAction("ResetPassword");
         }
-
+        //----------------------------------------------------------------------------------------------------------------------------------------------------
         public IActionResult ResetPassword()
         {
             return View();
