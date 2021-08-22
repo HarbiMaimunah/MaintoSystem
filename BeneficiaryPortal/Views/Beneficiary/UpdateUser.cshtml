@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_dashBords.cshtml";
 }
 <h1> @language.Getkey("UpdateUser")</h1>
-    <script src="~/js/Beneficiary/updateUser.bundle.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/Beneficiary/UpdateAccount.js"></script>
     <form method="post" asp-controller="Beneficiary" asp-action="PostUser" class="container bg-white shadow-sm rounded-4">
         <input class="d-none" name="id" value="@Model.Id" />
         <div class="row p-4">
