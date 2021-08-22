@@ -12,7 +12,7 @@ namespace BeneficiaryPortal.Models
         public int Id { get; set; }
 
         [Required]
-        public char Number { get; set; }
+        public int Number { get; set; }
 
         [Required]
         public bool IsOwned { get; set; }

@@ -1,21 +1,36 @@
-﻿@using BackOfficePortal.ModelsLanguage;
-@model BackOfficePortal.Models.Comment;
+﻿@*@using BackOfficePortal.ModelsLanguage;
+    @model BackOfficePortal.Models.Comment;
+    @inject LanguageService language
+
+    <h1> @language.Getkey("Comments")</h1>
+
+
+    <form method="post" asp-controller="BuildingManager" asp-action="PostComment">
+        @TempData["Confirmation"]
+        <label>@language.Getkey("AddComment")</label>
+
+        <input type="text" id="comments" name="comments" placeholder=@language.Getkey("Comments")  />
+
+        <input id="submitButton" formaction="PostComment" type="submit" value="Add Comment" />
+
+    </form>*@
+
+@using BackOfficePortal.ModelsLanguage;
+@model BackOfficePortal.Models.Comment
 @inject LanguageService language
 
 <h1> @language.Getkey("Comments")</h1>
-
-    <body>
-        @TempData["Confirmation"]
-        <form asp-controller="BuildingManager" method="post">
-            <label>@language.Getkey("AddComment")</label>
-            
-            <input type="text" id="comments" name="comments" placeholder=@language.Getkey("Comments") asp-for="@Model.comment" />
-
-            <input formaction="PostComment" type="submit"/>
-        </form>
-        
+@TempData["Confirmation"]
 
 
-        <button type="button" id="btnUpdate" name="btnUpdate" data-name="UpdateButton" onclick="AddComments()">@language.Getkey("Submit")</button>
-    </body>
+@using (Html.BeginForm("PostComment", "BuildingManager", FormMethod.Post, new { comments = Model }))
+{
 
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model=>model.id)
+   @* @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "number", @placeholder = @language.Getkey("Id") } })*@
+    @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "input-field bg-white rounded-pill p-Input", @type = "text", @placeholder = @language.Getkey("Comment") } })
+    <input type="submit" class="btn btn-color text-white  rounded-pill mt-5" placeholder=@language.Getkey("Register")>
+
+
+}

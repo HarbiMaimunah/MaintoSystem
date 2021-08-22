@@ -107,7 +107,7 @@ namespace BackOfficePortal.Controllers
             {
                 var accessToken = HttpContext.Session.GetString("Token");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer_", accessToken);
-                var httpResponse = await client.PutAsJsonAsync("http://localhost:16982/api/SystemUser/" + "UpdateUser", user);
+                var httpResponse = await client.PutAsJsonAsync(ConfigurationManager.AppSettings["SystemUserLocalhost"].ToString() + "UpdateUser", user);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
@@ -191,7 +191,7 @@ namespace BackOfficePortal.Controllers
         public IActionResult SignOut()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login", "Beneficiary");
+            return RedirectToAction("Signin", "Home");
         }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -207,7 +207,7 @@ namespace BackOfficePortal.Controllers
             using (HttpClient client = new HttpClient())
             {
 
-                var httpResponse = await client.PostAsJsonAsync("http://localhost:16982/api/SystemUser/" + "SendEmail", email);
+                var httpResponse = await client.PostAsJsonAsync(ConfigurationManager.AppSettings["SystemUserLocalhost"].ToString() + "SendEmail", email);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
@@ -227,7 +227,7 @@ namespace BackOfficePortal.Controllers
             string response;
             using (HttpClient client = new HttpClient())
             {
-                var httpResponse = await client.PostAsJsonAsync("http://localhost:16982/api/SystemUser/" + "ResetPassword", tempPassword + newPassword);
+                var httpResponse = await client.PostAsJsonAsync(ConfigurationManager.AppSettings["SystemUserLocalhost"].ToString() + "ResetPassword", tempPassword + newPassword);
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     response = await httpResponse.Content.ReadAsStringAsync();
