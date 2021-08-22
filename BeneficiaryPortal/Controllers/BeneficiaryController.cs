@@ -18,13 +18,13 @@ using System.Configuration;
 
 namespace BeneficiaryPortal.Controllers
 {
-    /*[ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]*/
+    [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryController : Controller
     {
-        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryIP"].ToString();
+        public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryLocalhost"].ToString();
         HttpClient httpClient = new HttpClient();
 
         public IActionResult SignOut()

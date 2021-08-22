@@ -24,7 +24,7 @@ namespace BackOfficePortal.Controllers
     [ServiceFilter(typeof(ResultFilter))]
     public class BuildingManagerController : Controller
     {
-        public static string baseUrl = "http://10.6.8.91:44307/api/BuildingManagerAPI/";
+        public static string baseUrl = "https://localhost:44307/api/BuildingManagerAPI/";
 
 
         public ActionResult AddComments()

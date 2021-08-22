@@ -19,7 +19,7 @@ namespace BackOfficePortal.Controllers
     public class MaintenanceManagerController : Controller
     {
         HttpClient client = new HttpClient();
-        public static string baseUrl = "http://10.6.8.91:44307/api/MaintenanceManager/";
+        public static string baseUrl = "https://localhost:44307/api/MaintenanceManager/";
 
         public ActionResult RespondToTicket()
         {

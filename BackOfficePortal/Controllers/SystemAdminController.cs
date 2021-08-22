@@ -16,7 +16,7 @@ namespace BackOfficePortal.Controllers
     {
 
         HttpClient client = new HttpClient();
-        public static string baseUrl = "http://10.6.8.91:44307/api/SystemAdmin/";
+        public static string baseUrl = "https://localhost:44307/api/SystemAdmin/";
         [HttpGet]
         public async Task<IActionResult> getAllBuildings()
         {
