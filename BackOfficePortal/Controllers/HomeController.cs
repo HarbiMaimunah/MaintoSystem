@@ -191,7 +191,7 @@ namespace BackOfficePortal.Controllers
         public IActionResult SignOut()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login", "Beneficiary");
+            return RedirectToAction("Signin", "Home");
         }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
