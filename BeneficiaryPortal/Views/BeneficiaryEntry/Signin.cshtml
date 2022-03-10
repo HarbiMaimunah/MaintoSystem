@@ -40,7 +40,7 @@
  <!--Log in button-->
             <div class="btn-m-logIn">
                 <input type="submit" class="btn btn-color text-white rounded-pill" value=@language.Getkey("Login")>
-                <label class="forget-pass-lable float-right px-3"><a class="text-decoration-none log-link " href=""> @language.Getkey("ForgotPassword") </a></label>
+                <label class="forget-pass-lable float-right px-3"><a class="text-decoration-none log-link " href="@Url.Action("ForgetPassword", "BeneficiaryEntry")"> @language.Getkey("ForgotPassword") </a></label>
             </div>
             <div class="text-secondary q-lable mt-lg-10">
                 <label class=" float-end px-sm-1 px-xl-0">  @language.Getkey("DoNotHaveAccount")  <a class="log-link-reg f-bold px-2 text-decoration-none " href="@Url.Action("Signup", "BeneficiaryEntry")">  @language.Getkey("SignUp")  </a></label>
