@@ -151,15 +151,6 @@ namespace BeneficiaryPortal.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> ListFloors(int BuildingNumber)
-        {
-            var url = BeneficiaryEntryUrl + "ListFloors/" + BuildingNumber.ToString();
-            HttpClient client = new HttpClient();
-            string jsonStr = await client.GetStringAsync(url);
-            var res = JsonConvert.DeserializeObject<List<Floor>>(jsonStr).ToList();
-            return Json(new SelectList(res, "Id", "Number"));
-        }
-        [HttpGet]
         public async Task<IActionResult> GetUserInfo()
         {
             var accessToken = HttpContext.Session.GetString("Token");
