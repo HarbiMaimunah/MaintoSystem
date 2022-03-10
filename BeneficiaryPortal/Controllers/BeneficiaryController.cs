@@ -18,10 +18,10 @@ using System.Configuration;
 
 namespace BeneficiaryPortal.Controllers
 {
-    /*[ServiceFilter(typeof(AuthorizeFilter))]
+    [ServiceFilter(typeof(AuthorizeFilter))]
     [ServiceFilter(typeof(ActionFilter))]
     [ServiceFilter(typeof(ExceptionFilter))]
-    [ServiceFilter(typeof(ResultFilter))]*/
+    [ServiceFilter(typeof(ResultFilter))]
     public class BeneficiaryController : Controller
     {
         public static string baseUrl = ConfigurationManager.AppSettings["BeneficiaryLocalhost"].ToString();
@@ -338,45 +338,7 @@ namespace BeneficiaryPortal.Controllers
                 return RedirectToAction("NewTicket");
         }
 
-        //-------------------------------------------------------------------------------------------------------------------------------------
-        public IActionResult ForgetPassword()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> PostEmail(string email)
-        {
-            string response;
-            using (HttpClient client = new HttpClient())
-            {
-                var httpResponse = await client.PostAsJsonAsync("http://localhost:16982/api/SystemUser/" + "SendEmail", email);
-                if (httpResponse.IsSuccessStatusCode)
-                {
-                    response = await httpResponse.Content.ReadAsStringAsync();
-                }
-            }
-            return View();
-        }
-
-        //-------------------------------------------------------------------------------------------------------------------------------------
-        public IActionResult ResetPassword()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> PostPassword(Guid tempPassword, string newPassword)
-        {
-            string response;
-            using (HttpClient client = new HttpClient())
-            {
-                var httpResponse = await client.PostAsJsonAsync("http://localhost:16982/api/SystemUser/" + "ResetPassword", tempPassword+ newPassword);
-                if (httpResponse.IsSuccessStatusCode)
-                {
-                    response = await httpResponse.Content.ReadAsStringAsync();
-                }
-            }
-            return View();
-        }
+        
 
     }
 }
